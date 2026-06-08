@@ -1,3 +1,12 @@
 spring:
   application:
     name: TheArchivist
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+  ai:
+    vectorstore:
+      qdrant:
+        collection-name: archivist-lore
+        initialize-schema: false

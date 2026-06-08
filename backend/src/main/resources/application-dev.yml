@@ -1,0 +1,27 @@
+app:
+  cors:
+    allowed-origins:
+      - http://localhost:4200
+
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: qwen3:1.7b
+        options:
+          temperature: 0.3
+      embedding:
+        model: qwen3-embedding:0.6b
+
+    openai:
+      chat:
+        enabled: false
+      embedding:
+        enabled: false
+
+    vectorstore:
+      qdrant:
+        host: localhost
+        port: 6334
+        initialize-schema: true

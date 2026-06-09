@@ -3,7 +3,20 @@ app:
     allowed-origins: http://localhost:4200
 
 spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiEmbeddingAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiImageAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioTranscriptionAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiModerationAutoConfiguration
+
   ai:
+    model:
+      chat: ollama
+      embedding: ollama
+
     ollama:
       base-url: http://localhost:11434
       chat:
@@ -12,12 +25,6 @@ spring:
           temperature: 0.3
       embedding:
         model: qwen3-embedding:0.6b
-
-    openai:
-      chat:
-        enabled: false
-      embedding:
-        enabled: false
 
     vectorstore:
       qdrant:

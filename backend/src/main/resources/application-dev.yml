@@ -31,3 +31,10 @@ spring:
         host: localhost
         port: 6334
         initialize-schema: true
+
+springdoc:
+  api-docs:
+    enabled: true
+
+  swagger-ui:
+    enabled: true

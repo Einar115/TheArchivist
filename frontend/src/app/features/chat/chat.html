@@ -1,0 +1,91 @@
+<div class="container-fluid h-100 d-flex flex-column">
+  <div class="row flex-grow-1 g-0">
+    <!-- Chat Messages -->
+    <div class="col-lg-8 d-flex flex-column border-end">
+      <div class="bg-light p-3 border-bottom">
+        <h4 class="mb-0">The Archivist - Consultor de Lore</h4>
+      </div>
+
+      <div #messageContainer class="flex-grow-1 overflow-y-auto p-4" style="min-height: 0;">
+        @for (msg of messages(); track msg.timestamp) {
+          <div class="mb-3">
+            @if (msg.role === 'user') {
+              <div class="text-end">
+                <span class="badge bg-primary p-2 d-inline-block text-start" style="max-width: 70%;">
+                  {{ msg.content }}
+                </span>
+              </div>
+              <small class="text-muted d-block text-end mt-1">
+                {{ msg.timestamp | date: 'short' }}
+              </small>
+            } @else {
+              <div class="text-start">
+                <span class="badge bg-secondary p-2 d-inline-block text-start" style="max-width: 70%;">
+                  {{ msg.content }}
+                </span>
+              </div>
+              <small class="text-muted d-block text-start mt-1">
+                {{ msg.timestamp | date: 'short' }}
+              </small>
+            }
+          </div>
+        }
+
+        @if (loading() && answer()) {
+          <div class="mb-3">
+            <span class="badge bg-secondary p-2 d-inline-block text-start" style="max-width: 70%;">
+              {{ answer() }}
+              <span class="ms-2">
+                <span class="spinner-border spinner-border-sm" role="status"></span>
+              </span>
+            </span>
+          </div>
+        }
+      </div>
+
+      <!-- Input Area -->
+      <div class="p-3 border-top bg-light">
+        <div class="input-group">
+          <textarea
+            [ngModel]="question()"
+            (ngModelChange)="question.set($event)"
+            (keydown)="onKeydown($event)"
+            class="form-control"
+            placeholder="Haz tu pregunta..."
+            rows="3"
+            [disabled]="loading()"
+          ></textarea>
+          <button
+            class="btn btn-primary"
+            (click)="sendMessage()"
+            [disabled]="!question().trim() || loading()"
+          >
+            @if (loading()) {
+              <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+              Enviando...
+            } @else {
+              <i class="bi bi-send"></i> Enviar
+            }
+          </button>
+        </div>
+        <small class="text-muted d-block mt-2">
+          Presiona Shift+Enter para nueva línea
+        </small>
+      </div>
+    </div>
+
+    <!-- Sidebar Info (Optional) -->
+    <div class="col-lg-4 p-4 bg-light">
+      <h5>Información</h5>
+      <p class="text-muted small">
+        Esta es una aplicación RAG que consulta una base de datos de lore de videojuegos.
+      </p>
+      <hr />
+      <h6>Estadísticas</h6>
+      <ul class="small">
+        <li>Mensajes: {{ messages().length }}</li>
+        <li>Estado: {{ loading() ? 'Pensando...' : 'Listo' }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

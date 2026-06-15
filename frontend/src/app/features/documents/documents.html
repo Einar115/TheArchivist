@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <h1 class="mb-4">Gestor de Documentos</h1>
+
+      <!-- Error Alert -->
+      @if (error()) {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ error() }}
+          <button type="button" class="btn-close" (click)="error.set(null)"></button>
+        </div>
+      }
+
+      <!-- Drag & Drop Zone -->
+      <div
+        class="border-3 border-dashed rounded p-5 mb-4 text-center"
+        [ngClass]="{ 'bg-light': dragover() }"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        style="cursor: pointer; border-style: dashed; border-color: #dee2e6; transition: all 0.3s;"
+      >
+        <div class="mb-3">
+          <i class="bi bi-cloud-arrow-up" style="font-size: 3rem; color: #6c757d;"></i>
+        </div>
+        <h5>Arrastra documentos aquí</h5>
+        <p class="text-muted mb-3">o</p>
+        <label for="fileInput" class="btn btn-primary">
+          Selecciona un archivo
+          <input
+            #fileInput
+            type="file"
+            id="fileInput"
+            class="d-none"
+            (change)="onFileSelected($event)"
+            accept=".pdf,.txt,.md,.doc,.docx"
+          />
+        </label>
+        <p class="text-muted mt-3 small">
+          Soportados: PDF, TXT, MD, DOC, DOCX
+        </p>
+      </div>
+
+      <!-- Loading Spinner -->
+      @if (loading()) {
+        <div class="text-center mb-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Subiendo...</span>
+          </div>
+          <p class="mt-2">Procesando documento...</p>
+        </div>
+      }
+
+      <!-- Documents List -->
+      <div>
+        <h5 class="mb-3">Documentos subidos</h5>
+        @if (documents().length === 0) {
+          <p class="text-muted text-center py-4">No hay documentos subidos aún</p>
+        } @else {
+          <div class="list-group">
+            @for (doc of documents(); track doc.id) {
+              <div class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <h6 class="mb-1">{{ doc.name }}</h6>
+                  <small class="text-muted">
+                    Subido: {{ doc.uploadedAt | date: 'short' }}
+                  </small>
+                  @if (doc.game) {
+                    <br />
+                    <small class="badge bg-secondary">{{ doc.game }}</small>
+                  }
+                </div>
+                <button
+                  class="btn btn-sm btn-danger"
+                  (click)="deleteDocument(doc.id)"
+                  [disabled]="loading()"
+                >
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

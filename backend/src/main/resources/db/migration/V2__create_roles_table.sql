@@ -1,0 +1,9 @@
+CREATE TABLE roles(
+    role_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+--- default roles defined
+
+INSERT INTO roles (name) VALUES ('UPLOADER');
+INSERT INTO roles (name) VALUES ('ADMIN_DOCUMENTS');

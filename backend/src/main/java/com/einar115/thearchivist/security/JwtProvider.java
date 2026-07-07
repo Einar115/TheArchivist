@@ -33,12 +33,13 @@ public class JwtProvider {
                 .compact();
     }
 
-    public String generateRefreshToken(String username, String deviceId) throws JwtException {
+    public String generateRefreshToken(Integer userId, String username, String deviceId) throws JwtException {
         UUID jti = UUID.randomUUID();
 
         return Jwts.builder()
-                .subject(username)
+                .subject(userId.toString())
                 .id(jti.toString())
+                .claim("username", username)
                 .claim("deviceId", deviceId)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + refreshTokenExpirationMs))
@@ -54,8 +55,13 @@ public class JwtProvider {
                 .getPayload();
     }
 
+    public Integer extractUserId(String token) throws JwtException {
+        String userId = validateToken(token).getSubject();
+        return Integer.parseInt(userId);
+    }
+
     public String extractUsername(String token) throws JwtException {
-        return validateToken(token).getSubject();
+        return validateToken(token).get("username", String.class);
     }
 
     public UUID extractJti(String token) throws JwtException {

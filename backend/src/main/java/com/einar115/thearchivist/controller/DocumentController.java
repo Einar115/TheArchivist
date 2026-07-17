@@ -1,8 +1,11 @@
 package com.einar115.thearchivist.controller;
 
-import com.einar115.thearchivist.dto.IngestResponse;
+import com.einar115.thearchivist.dto.response.IngestResponse;
+import com.einar115.thearchivist.model.MainUser;
 import com.einar115.thearchivist.service.IngestionService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,12 +22,14 @@ public class DocumentController {
     }
 
     @PostMapping("/ingest")
-    public ResponseEntity<IngestResponse> ingest(@RequestParam("file") MultipartFile file, @RequestParam("game") String game) throws IOException {
-        String documentId = ingestionService.ingest(file, game);
-        return ResponseEntity.ok(new IngestResponse(documentId, file.getOriginalFilename(), game));
+    @PreAuthorize("hasRole('UPLOADER')")
+    public ResponseEntity<IngestResponse> ingest(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal MainUser user) throws IOException {
+        String documentId = ingestionService.uploadPending(file, user.getId());
+        return ResponseEntity.ok(new IngestResponse(documentId, file.getOriginalFilename(), "yes"));
     }
 
     @DeleteMapping("/{documentId}")
+    @PreAuthorize("hasRole('ADMIN_DOCUMENTS')")
     public ResponseEntity<Void> delete(@PathVariable String documentId) {
         ingestionService.delete(documentId);
         return ResponseEntity.noContent().build();

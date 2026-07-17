@@ -1,8 +1,9 @@
 package com.einar115.thearchivist.controller;
 
-import com.einar115.thearchivist.dto.ChatRequest;
+import com.einar115.thearchivist.dto.request.ChatRequest;
 import com.einar115.thearchivist.service.ChatService;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class ChatController {
     }
 
     @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @PreAuthorize("permitAll()")
     public Flux<String> chat(@RequestBody ChatRequest request) {
         return chatService.ask(request);
     }

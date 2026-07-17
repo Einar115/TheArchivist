@@ -1,6 +1,7 @@
 package com.einar115.thearchivist.model;
 
 import com.einar115.thearchivist.entity.UserEntity;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,15 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class MainUser implements UserDetails {
-    private final UserEntity userEntity;
-
-    public MainUser(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
+public record MainUser(UserEntity userEntity) implements UserDetails {
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public @NonNull Collection<? extends GrantedAuthority> getAuthorities() {
         return userEntity.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().name()))
                 .collect(Collectors.toList());
@@ -28,7 +23,7 @@ public class MainUser implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
+    public @NonNull String getUsername() {
         return userEntity.getUsername();
     }
 

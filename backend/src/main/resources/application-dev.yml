@@ -3,7 +3,7 @@ app:
     allowed-origins: http://localhost:4200
 
   jwt:
-    secret: # not defined
+    secret: example-of-a-secret-for-jwt-1234456789 #For example
     access-token-expiration: 900000 # 15 min
     refresh-token-expiration: 604800000 # 7 days
 
@@ -47,11 +47,11 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: qwen3:1.7b
+        model: ${CHAT_MODEL:qwen3:1.7b}
         options:
           temperature: 0.3
       embedding:
-        model: nomic-embed-text
+        model: ${EMBEDDING_MODEL:nomic-embed-text}
 
     vectorstore:
       qdrant:

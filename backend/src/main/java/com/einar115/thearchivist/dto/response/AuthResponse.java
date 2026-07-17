@@ -1,4 +1,4 @@
-package com.einar115.thearchivist.dto;
+package com.einar115.thearchivist.dto.response;
 
 import java.util.List;
 

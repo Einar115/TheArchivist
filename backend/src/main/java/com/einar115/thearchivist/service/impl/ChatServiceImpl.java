@@ -1,6 +1,6 @@
 package com.einar115.thearchivist.service.impl;
 
-import com.einar115.thearchivist.dto.ChatRequest;
+import com.einar115.thearchivist.dto.request.ChatRequest;
 import com.einar115.thearchivist.service.ChatService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;

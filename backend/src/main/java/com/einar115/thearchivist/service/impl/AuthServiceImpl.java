@@ -96,7 +96,7 @@ public class AuthServiceImpl implements AuthService {
             RefreshTokenEntity refreshToken = refreshTokenRepository.findByJti(jti)
                     .orElseThrow(() -> new RuntimeException("Invalid token"));
 
-            if (refreshToken.isActive()) {
+            if (!refreshToken.isActive()) {
                 throw new RuntimeException("Token has been revoked");
             }
 

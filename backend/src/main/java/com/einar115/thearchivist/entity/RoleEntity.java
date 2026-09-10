@@ -18,12 +18,7 @@ public class RoleEntity {
     @Enumerated(EnumType.STRING)
     private RoleEnum name;
 
-    @ManyToMany(cascade =  CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @ManyToMany(mappedBy = "roles", cascade =  CascadeType.PERSIST, fetch = FetchType.EAGER)
     List<UserEntity> users = new ArrayList<>();
 
     public RoleEntity() {}

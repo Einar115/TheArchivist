@@ -1,0 +1,77 @@
+<div class="login-page d-flex align-items-center justify-content-center p-3" data-bs-theme="dark">
+  <div class="card login-card w-100 shadow-lg">
+    <div class="card-body p-4 p-sm-5">
+
+      <div class="d-flex align-items-center justify-content-center gap-2 mb-4">
+        <i class="bi bi-book fs-4 text-primary"></i>
+        <span class="fs-5 fw-semibold">TheArchivist</span>
+      </div>
+
+      <h1 class="h2 fw-semibold text-center mb-2">Iniciar sesión</h1>
+      <p class="text-center text-body-secondary mb-4">Accede con tu usuario y contraseña.</p>
+
+      @if (errorMessage(); as message) {
+        <div class="alert alert-danger d-flex align-items-center gap-2 py-2" role="alert">
+          <i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i>
+          <span>{{ message }}</span>
+        </div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label">Usuario</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input id="username" type="text" class="form-control" formControlName="username"
+                   autocomplete="username" placeholder="tu.usuario" [class.is-invalid]="isInvalid('username')" />
+            <div class="invalid-feedback">Introduce tu usuario.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input id="password" [type]="passwordVisible() ? 'text' : 'password'" class="form-control"
+                   formControlName="password" autocomplete="current-password" placeholder="••••••••"
+                   [class.is-invalid]="isInvalid('password')" />
+            <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()"
+                    [disabled]="loading()"
+                    [attr.aria-label]="passwordVisible() ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+              <i class="bi" [class.bi-eye]="passwordVisible()" [class.bi-eye-slash]="!passwordVisible()"></i>
+            </button>
+            <div class="invalid-feedback">Introduce tu contraseña.</div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
+          <div class="form-check mb-0">
+            <input id="rememberMe" type="checkbox" class="form-check-input" formControlName="rememberMe" />
+            <label for="rememberMe" class="form-check-label text-body-secondary">Recordarme</label>
+          </div>
+          <!-- Password recovery has no route yet: a button keeps it keyboard-reachable without faking a link. -->
+          <button type="button" class="btn btn-link p-0 border-0 align-baseline text-decoration-none small">
+            ¿Olvidaste tu contraseña?
+          </button>
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2"
+                [disabled]="loading()">
+          @if (loading()) {
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          }
+          {{ loading() ? 'Iniciando sesión…' : 'Iniciar sesión' }}
+        </button>
+      </form>
+
+      <p class="text-center text-body-secondary small mb-0 mt-4">
+        ¿No tienes cuenta?
+        <button type="button" class="btn btn-link p-0 border-0 align-baseline text-decoration-none small">
+          Solicita acceso
+        </button>
+      </p>
+
+    </div>
+  </div>
+</div>

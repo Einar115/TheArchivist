@@ -1,0 +1,24 @@
+/* Routed outside the shell, so the page owns the whole viewport. */
+:host {
+  display: block;
+}
+
+.login-page {
+  min-height: 100dvh;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  /* Faint primary glow behind the card; keeps the flat dark background from reading as empty. */
+  background-image: radial-gradient(60% 45% at 50% 0%, rgba(13, 110, 253, 0.18), transparent 70%);
+}
+
+.login-card {
+  /* .card defaults to --bs-body-bg in dark mode, which is the page colour: lift it one step. */
+  --bs-card-bg: var(--bs-tertiary-bg);
+  max-width: 440px;
+  border-radius: 0.75rem;
+}
+
+/* Bootstrap keeps .input-group-text on --bs-tertiary-bg, which now matches the card itself. */
+.login-card .input-group-text {
+  background-color: var(--bs-secondary-bg);
+}

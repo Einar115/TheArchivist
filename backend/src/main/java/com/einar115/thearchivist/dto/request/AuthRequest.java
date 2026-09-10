@@ -1,8 +1,9 @@
 package com.einar115.thearchivist.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record AuthRequest(
-        String username,
-        String password,
-        String deviceId
+        @NotBlank String username,
+        @NotBlank String password
 ) {
 }

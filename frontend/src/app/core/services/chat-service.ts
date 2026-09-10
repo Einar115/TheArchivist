@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChatRequest } from '../models/chat.model';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
+import { readCookie } from '../utils/cookie';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
@@ -11,9 +12,17 @@ export class ChatService {
     return new Observable(subscriber => {
       const request: ChatRequest = { question };
 
+      // Angular's XSRF interceptor does not apply to fetch, so the token goes in by hand.
+      const csrfToken = readCookie('XSRF-TOKEN');
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (csrfToken) {
+        headers['X-XSRF-TOKEN'] = csrfToken;
+      }
+
       fetch(this.apiUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
+        credentials: 'same-origin',
         body: JSON.stringify(request)
       }).then(async response => {
         if (!response.ok) {

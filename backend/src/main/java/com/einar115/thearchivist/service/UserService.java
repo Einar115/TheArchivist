@@ -1,8 +1,11 @@
 package com.einar115.thearchivist.service;
 
-import com.einar115.thearchivist.entity.UserEntity;
+import com.einar115.thearchivist.dto.request.UserRequest;
+import com.einar115.thearchivist.dto.response.UserResponse;
 
 public interface UserService {
-    UserEntity createUser(UserEntity user);
-    UserEntity changePassword(String newPassword);
+
+    UserResponse createUser(UserRequest userRequest);
+
+    void changePassword(Integer userId, String newPassword);
 }

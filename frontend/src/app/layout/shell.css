@@ -1,0 +1,134 @@
+:host {
+  display: block;
+}
+
+.sidebar-panel {
+  /* Below lg this is Bootstrap's offcanvas panel: as wide as the inline sidebar, with the border drawn by .sidebar. */
+  --bs-offcanvas-width: 264px;
+  --bs-offcanvas-border-width: 0;
+}
+
+/* The colours live here and not on the <aside>: from lg up Bootstrap forces .offcanvas-lg to a transparent background. */
+.sidebar {
+  color: var(--bs-body-color);
+  /* One step below --bs-body-bg, so the sidebar reads as its own plane like in AI chat apps. */
+  background-color: #171a1d;
+  border-right: 1px solid var(--bs-tertiary-bg);
+}
+
+/* Collapsing only makes sense for the inline sidebar; the mobile panel always opens at full width. */
+@media (min-width: 992px) {
+  .sidebar {
+    width: 264px;
+    transition: width 0.15s ease;
+  }
+
+  .sidebar.collapsed {
+    width: 72px;
+  }
+
+  .sidebar.collapsed .label,
+  .sidebar.collapsed .sidebar-brand {
+    display: none !important;
+  }
+
+  .sidebar.collapsed .brand-row,
+  .sidebar.collapsed .new-chat,
+  .sidebar.collapsed .sidebar-link {
+    justify-content: center !important;
+  }
+
+  /* Collapsed there is no room for the avatar and the logout button side by side. */
+  .sidebar.collapsed .user-row {
+    flex-direction: column;
+  }
+}
+
+.mobile-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background-color: #171a1d;
+  border-bottom: 1px solid var(--bs-tertiary-bg);
+}
+
+.sidebar-brand {
+  color: var(--bs-emphasis-color);
+}
+
+/* btn-outline-secondary would paint the label #6c757d, too dim on the sidebar background. */
+.new-chat {
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-border-color: var(--bs-border-color);
+  --bs-btn-hover-color: var(--bs-emphasis-color);
+  --bs-btn-hover-bg: rgba(255, 255, 255, 0.05);
+  --bs-btn-hover-border-color: var(--bs-border-color);
+  --bs-btn-active-color: var(--bs-emphasis-color);
+  --bs-btn-active-bg: var(--bs-tertiary-bg);
+  --bs-btn-active-border-color: var(--bs-border-color);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--bs-body-color);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  color: var(--bs-emphasis-color);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-link.active {
+  color: var(--bs-emphasis-color);
+  font-weight: 500;
+  background-color: var(--bs-tertiary-bg);
+}
+
+.sidebar-link .bi {
+  color: var(--bs-secondary-color);
+}
+
+.sidebar-link.active .bi {
+  color: var(--bs-primary-text-emphasis);
+}
+
+.sidebar-section {
+  color: var(--bs-tertiary-color);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.health-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border: 1px solid var(--bs-primary-border-subtle);
+  border-radius: 50%;
+  color: var(--bs-primary-text-emphasis);
+  background-color: var(--bs-primary-bg-subtle);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Lets .text-truncate work inside the flex row instead of pushing the logout button out. */
+.user-text {
+  min-width: 0;
+}

@@ -1,0 +1,198 @@
+<div class="register-page" data-bs-theme="dark">
+  <div class="container-xxl px-3 px-md-4 px-xl-5 py-4 py-lg-5">
+
+    <!-- Plain text for now: there is no users list to link back to yet. -->
+    <nav aria-label="Ruta de navegación">
+      <ol class="breadcrumb small mb-3">
+        <li class="breadcrumb-item">Administración</li>
+        <li class="breadcrumb-item">Usuarios</li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo usuario</li>
+      </ol>
+    </nav>
+
+    <header class="mb-4">
+      <h1 class="h3 fw-semibold text-white mb-1">Registrar usuario</h1>
+      <p class="text-body-secondary mb-0">Crea la cuenta de una persona del equipo y define qué puede hacer en el archivo.</p>
+    </header>
+
+    @if (errorMessage(); as message) {
+      <div class="alert alert-danger d-flex align-items-center gap-2 py-2" role="alert">
+        <i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i>
+        <span>{{ message }}</span>
+      </div>
+    }
+
+    @if (created(); as user) {
+      <div class="alert alert-success d-flex align-items-center gap-2 py-2" role="status">
+        <i class="bi bi-check-circle-fill flex-shrink-0"></i>
+        <span>Usuario «{{ user.username }}» creado con el rol {{ roleTitle(user.role) }}. Ya puede iniciar sesión.</span>
+      </div>
+    }
+
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-8">
+        <form class="card register-card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+          <section class="card-body p-4">
+            <h2 class="h6 fw-semibold text-white mb-1">Credenciales</h2>
+            <p class="small text-body-secondary mb-4">
+              El nombre de usuario debe ser único y la contraseña necesita al menos {{ passwordMinLength }} caracteres.
+            </p>
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Nombre de usuario</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input id="username" type="text" class="form-control" formControlName="username" autocomplete="off"
+                       placeholder="p. ej. maria.lopez" [class.is-invalid]="isInvalid('username')" />
+                <div class="invalid-feedback">
+                  @if (form.controls.username.hasError('taken')) {
+                    Este nombre de usuario ya existe. Elige otro.
+                  } @else {
+                    Introduce un nombre de usuario.
+                  }
+                </div>
+              </div>
+              @if (!isInvalid('username')) {
+                <div class="form-text">Lo usará para iniciar sesión.</div>
+              }
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label for="password" class="form-label">Contraseña</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                  <input id="password" [type]="passwordVisible() ? 'text' : 'password'" class="form-control"
+                         formControlName="password" autocomplete="new-password"
+                         [placeholder]="'Mínimo ' + passwordMinLength + ' caracteres'"
+                         [class.is-invalid]="isInvalid('password')" />
+                  <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()"
+                          [disabled]="loading()"
+                          [attr.aria-label]="passwordVisible() ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+                    <i class="bi" [class.bi-eye]="passwordVisible()" [class.bi-eye-slash]="!passwordVisible()"></i>
+                  </button>
+                  <div class="invalid-feedback">La contraseña necesita al menos {{ passwordMinLength }} caracteres.</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                  <input id="confirmPassword" [type]="confirmVisible() ? 'text' : 'password'" class="form-control"
+                         formControlName="confirmPassword" autocomplete="new-password" placeholder="Repite la contraseña"
+                         [class.is-invalid]="isInvalid('confirmPassword')" />
+                  <button type="button" class="btn btn-outline-secondary" (click)="toggleConfirmVisibility()"
+                          [disabled]="loading()"
+                          [attr.aria-label]="confirmVisible() ? 'Ocultar confirmación' : 'Mostrar confirmación'">
+                    <i class="bi" [class.bi-eye]="confirmVisible()" [class.bi-eye-slash]="!confirmVisible()"></i>
+                  </button>
+                  <div class="invalid-feedback">
+                    @if (form.controls.confirmPassword.hasError('required')) {
+                      Repite la contraseña.
+                    } @else {
+                      Las contraseñas no coinciden.
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ul class="list-unstyled d-flex flex-wrap column-gap-4 row-gap-2 small mb-0" aria-live="polite">
+              <li class="requirement d-flex align-items-center gap-2" [class]="lengthState()">
+                <i class="bi" [class]="requirementIcon(lengthState())"></i>
+                Al menos {{ passwordMinLength }} caracteres
+              </li>
+              <li class="requirement d-flex align-items-center gap-2" [class]="matchState()">
+                <i class="bi" [class]="requirementIcon(matchState())"></i>
+                {{ matchState() === 'failed' ? 'Las contraseñas no coinciden' : 'Las contraseñas coinciden' }}
+              </li>
+            </ul>
+          </section>
+
+          <section class="card-body p-4 border-top">
+            <h2 class="h6 fw-semibold text-white mb-1">Rol</h2>
+            <p class="small text-body-secondary mb-3">Define qué podrá hacer en la aplicación. Cada usuario tiene un único rol.</p>
+
+            <div class="row g-3" role="radiogroup" aria-label="Rol">
+              @for (option of roles; track option.value) {
+                <div class="col-md-6">
+                  <input class="btn-check" type="radio" [id]="'role-' + option.value" formControlName="role"
+                         [value]="option.value" />
+                  <label class="role-option d-flex flex-column gap-3 h-100 p-3" [attr.for]="'role-' + option.value">
+                    <span class="d-flex align-items-center justify-content-between">
+                      <span class="role-icon"><i class="bi" [class]="option.icon"></i></span>
+                      <span class="role-radio" aria-hidden="true"></span>
+                    </span>
+                    <span class="d-flex flex-column align-items-start gap-1">
+                      <span class="fw-semibold text-white">{{ option.title }}</span>
+                      <code class="role-code">{{ option.value }}</code>
+                      <span class="small text-body-secondary">{{ option.description }}</span>
+                    </span>
+                  </label>
+                </div>
+              }
+            </div>
+          </section>
+
+          <div class="card-footer d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 px-4 py-3">
+            <span class="small text-body-secondary">
+              <i class="bi bi-info-circle me-2"></i>La cuenta queda activa y puede iniciar sesión de inmediato.
+            </span>
+            <div class="d-flex gap-2 justify-content-end">
+              <button type="button" class="btn btn-outline-secondary" (click)="clear()" [disabled]="loading()">Limpiar</button>
+              <button type="submit" class="btn btn-primary d-flex align-items-center gap-2" [disabled]="loading()">
+                @if (loading()) {
+                  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  Creando usuario…
+                } @else {
+                  <i class="bi bi-person-plus"></i>
+                  Crear usuario
+                }
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <aside class="col-lg-4" aria-label="Vista previa de la cuenta">
+        <div class="card register-card">
+          <div class="card-body p-4">
+            <div class="eyebrow text-uppercase fw-semibold text-body-secondary mb-3">Vista previa</div>
+
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <span class="preview-avatar">{{ initials() }}</span>
+              <div class="preview-identity">
+                <div class="fw-semibold text-truncate" [class.text-white]="previewName()"
+                     [class.text-body-secondary]="!previewName()">
+                  {{ previewName() || 'Nuevo usuario' }}
+                </div>
+                <span class="badge role-badge mt-1">{{ selectedRole() }}</span>
+              </div>
+            </div>
+
+            <hr class="my-3" />
+
+            <div class="small fw-semibold mb-2">Permisos</div>
+            <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+              @for (permission of permissions(); track permission.label) {
+                <li class="d-flex align-items-center gap-2" [class.text-body-secondary]="!permission.granted">
+                  <i class="bi" [class.bi-check-lg]="permission.granted" [class.text-success]="permission.granted"
+                     [class.bi-x-lg]="!permission.granted" [class.text-secondary]="!permission.granted"></i>
+                  <span>{{ permission.label }}</span>
+                  <span class="visually-hidden">{{ permission.granted ? '(permitido)' : '(no permitido)' }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        <p class="small text-body-secondary d-flex gap-2 mt-3 mb-0 px-1">
+          <i class="bi bi-key"></i>
+          <span>Las contraseñas se guardan cifradas y no se pueden consultar después. Comparte la contraseña inicial por un canal seguro.</span>
+        </p>
+      </aside>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1975 @@
+{
+  "version": "2.17",
+  "children": [
+    {
+      "type": "frame",
+      "id": "JrS2x",
+      "x": 0,
+      "y": 0,
+      "name": "Login Screen",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": [
+        "$bs-body-bg",
+        {
+          "type": "gradient",
+          "gradientType": "radial",
+          "enabled": true,
+          "rotation": 0,
+          "size": {
+            "width": 1.1,
+            "height": 1.4
+          },
+          "colors": [
+            {
+              "color": "#0D6EFD2E",
+              "position": 0
+            },
+            {
+              "color": "#0D6EFD00",
+              "position": 1
+            }
+          ],
+          "center": {
+            "y": 0.1
+          }
+        }
+      ],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "u7GMg",
+          "name": "Login Card",
+          "width": 440,
+          "fill": "$bs-card-bg",
+          "cornerRadius": 12,
+          "stroke": "$bs-border",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000059",
+            "offset": {
+              "x": 0,
+              "y": 16
+            },
+            "blur": 40,
+            "spread": -8
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": 44,
+          "children": [
+            {
+              "type": "frame",
+              "id": "rZ2SO",
+              "name": "Brand",
+              "width": "fill_container",
+              "gap": 10,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "OtB0O",
+                  "name": "Brand Icon",
+                  "width": 26,
+                  "height": 26,
+                  "icon": "library-big",
+                  "library": "lucide",
+                  "fill": "$bs-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "B51bH",
+                  "name": "Brand Name",
+                  "fill": "$bs-body-color",
+                  "content": "TheArchivist",
+                  "fontFamily": "$font-body",
+                  "fontSize": 19,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lrzxa",
+              "name": "Heading",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GdvRJ",
+                  "name": "Title",
+                  "fill": "$bs-white",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Iniciar sesión",
+                  "lineHeight": 1.25,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "g2TKQa",
+                  "name": "Subtitle",
+                  "fill": "$bs-secondary-color",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Accede con tu usuario y contraseña.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gSzKU",
+              "name": "Form",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pqfOh",
+                  "name": "Usuario Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QOorF",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Usuario",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JCKeZ",
+                      "name": "Input Group",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "LEI1U",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "h5oPm",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "user",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aTNsD",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ULzqz",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "einar.archivist",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Jhw3D",
+                  "name": "Contraseña Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "BeNIR",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Contraseña",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YCRUd",
+                      "name": "Input Group",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ZSHWY",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "tyesR",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "lock",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Jxq8y",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "cM484",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "••••••••••",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "cPKfm",
+                          "name": "Toggle Visibility",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "left": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "Y3AYj",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "eye-off",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "r5UxJ",
+                  "name": "Options",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "GCI77",
+                      "name": "Remember Me",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "OmfQU",
+                          "name": "Checkbox",
+                          "fill": "$bs-input-bg",
+                          "width": 16,
+                          "height": 16,
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "Jl4p6",
+                          "name": "Label",
+                          "fill": "$bs-secondary-color",
+                          "content": "Recordarme",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZzVFA",
+                      "name": "Forgot Password",
+                      "fill": "$bs-link",
+                      "content": "¿Olvidaste tu contraseña?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "S4YgWl",
+              "name": "Actions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "enkQg",
+                  "name": "Submit Button",
+                  "width": "fill_container",
+                  "fill": "$bs-primary",
+                  "cornerRadius": "$bs-radius",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    16
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tMetM",
+                      "name": "Label",
+                      "fill": "$bs-white",
+                      "content": "Iniciar sesión",
+                      "fontFamily": "$font-body",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xpIDM",
+                  "name": "Footer",
+                  "width": "fill_container",
+                  "gap": 5,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iZdr7",
+                      "name": "Footer Text",
+                      "fill": "$bs-secondary-color",
+                      "content": "¿No tienes cuenta?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "z23WYM",
+                      "name": "Footer Link",
+                      "fill": "$bs-link",
+                      "content": "Solicita acceso",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "BQdBY",
+      "x": 1520,
+      "y": 0,
+      "name": "Login Screen — Error",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": [
+        "$bs-body-bg",
+        {
+          "type": "gradient",
+          "gradientType": "radial",
+          "enabled": true,
+          "rotation": 0,
+          "size": {
+            "width": 1.1,
+            "height": 1.4
+          },
+          "colors": [
+            {
+              "color": "#0D6EFD2E",
+              "position": 0
+            },
+            {
+              "color": "#0D6EFD00",
+              "position": 1
+            }
+          ],
+          "center": {
+            "y": 0.1
+          }
+        }
+      ],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "qTxNq",
+          "name": "Login Card",
+          "width": 440,
+          "fill": "$bs-card-bg",
+          "cornerRadius": 12,
+          "stroke": "$bs-border",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000059",
+            "offset": {
+              "x": 0,
+              "y": 16
+            },
+            "blur": 40,
+            "spread": -8
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": 44,
+          "children": [
+            {
+              "type": "frame",
+              "id": "s6Hg8",
+              "name": "Brand",
+              "width": "fill_container",
+              "gap": 10,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "YpyJF",
+                  "name": "Brand Icon",
+                  "width": 26,
+                  "height": 26,
+                  "icon": "library-big",
+                  "library": "lucide",
+                  "fill": "$bs-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "BC2mW",
+                  "name": "Brand Name",
+                  "fill": "$bs-body-color",
+                  "content": "TheArchivist",
+                  "fontFamily": "$font-body",
+                  "fontSize": 19,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "J28Tnu",
+              "name": "Heading",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ZN9eH",
+                  "name": "Title",
+                  "fill": "$bs-white",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Iniciar sesión",
+                  "lineHeight": 1.25,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "mzCfF",
+                  "name": "Subtitle",
+                  "fill": "$bs-secondary-color",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Accede con tu usuario y contraseña.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "b6eBf",
+              "name": "Alert Danger",
+              "width": "fill_container",
+              "fill": "#2C0B0E",
+              "cornerRadius": "$bs-radius",
+              "stroke": "#842029",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": [
+                12,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "pjUdd",
+                  "name": "Icon",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "triangle-alert",
+                  "library": "lucide",
+                  "fill": "#EA868F"
+                },
+                {
+                  "type": "text",
+                  "id": "rcDgz",
+                  "name": "Message",
+                  "fill": "#EA868F",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Usuario o contraseña incorrectos.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "BLusp",
+              "name": "Form",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "mzME8",
+                  "name": "Usuario Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "y5NWT",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Usuario",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "W2oXy",
+                      "name": "Input Group",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "s0nTD1",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "W3q2T",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "user",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "qcUUm",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "g0hZrH",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "einar.archivist",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "y1opa",
+                  "name": "Contraseña Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Y7TpaO",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Contraseña",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "e2EQS",
+                      "name": "Input Group",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "#EA868F",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Q2Xrk",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "cz8f8",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "lock",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "dXhis",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "KmYYH",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "••••••••••",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "WMYhO",
+                          "name": "Toggle Visibility",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "left": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "zI5sG",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "eye-off",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "phQFr",
+                      "name": "Invalid Feedback",
+                      "fill": "#EA868F",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "La contraseña no coincide con el usuario indicado.",
+                      "lineHeight": 1.4,
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UY6Bv",
+                  "name": "Options",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "wYJNh",
+                      "name": "Remember Me",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "dEySd",
+                          "name": "Checkbox",
+                          "fill": "$bs-input-bg",
+                          "width": 16,
+                          "height": 16,
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "U09xj",
+                          "name": "Label",
+                          "fill": "$bs-secondary-color",
+                          "content": "Recordarme",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "JMLzO",
+                      "name": "Forgot Password",
+                      "fill": "$bs-link",
+                      "content": "¿Olvidaste tu contraseña?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zpiND",
+              "name": "Actions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "KYgH1",
+                  "name": "Submit Button",
+                  "width": "fill_container",
+                  "fill": "$bs-primary",
+                  "cornerRadius": "$bs-radius",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    16
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ddz4P",
+                      "name": "Label",
+                      "fill": "$bs-white",
+                      "content": "Iniciar sesión",
+                      "fontFamily": "$font-body",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZnMhZ",
+                  "name": "Footer",
+                  "width": "fill_container",
+                  "gap": 5,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MdEwY",
+                      "name": "Footer Text",
+                      "fill": "$bs-secondary-color",
+                      "content": "¿No tienes cuenta?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HHbqw",
+                      "name": "Footer Link",
+                      "fill": "$bs-link",
+                      "content": "Solicita acceso",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "AtKIR",
+      "x": 3040,
+      "y": 0,
+      "name": "Login Screen — Cargando",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": [
+        "$bs-body-bg",
+        {
+          "type": "gradient",
+          "gradientType": "radial",
+          "enabled": true,
+          "rotation": 0,
+          "size": {
+            "width": 1.1,
+            "height": 1.4
+          },
+          "colors": [
+            {
+              "color": "#0D6EFD2E",
+              "position": 0
+            },
+            {
+              "color": "#0D6EFD00",
+              "position": 1
+            }
+          ],
+          "center": {
+            "y": 0.1
+          }
+        }
+      ],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "u4w4sy",
+          "name": "Login Card",
+          "width": 440,
+          "fill": "$bs-card-bg",
+          "cornerRadius": 12,
+          "stroke": "$bs-border",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000059",
+            "offset": {
+              "x": 0,
+              "y": 16
+            },
+            "blur": 40,
+            "spread": -8
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": 44,
+          "children": [
+            {
+              "type": "frame",
+              "id": "qtDyD",
+              "name": "Brand",
+              "width": "fill_container",
+              "gap": 10,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Bk9p2",
+                  "name": "Brand Icon",
+                  "width": 26,
+                  "height": 26,
+                  "icon": "library-big",
+                  "library": "lucide",
+                  "fill": "$bs-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "A84VbK",
+                  "name": "Brand Name",
+                  "fill": "$bs-body-color",
+                  "content": "TheArchivist",
+                  "fontFamily": "$font-body",
+                  "fontSize": 19,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NeOtK",
+              "name": "Heading",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "u2Rqv",
+                  "name": "Title",
+                  "fill": "$bs-white",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Iniciar sesión",
+                  "lineHeight": 1.25,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "dkcyD",
+                  "name": "Subtitle",
+                  "fill": "$bs-secondary-color",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Accede con tu usuario y contraseña.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Aj6wR",
+              "name": "Form",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "JdaTI",
+                  "name": "Usuario Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "g25MqA",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Usuario",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BHU4s",
+                      "name": "Input Group",
+                      "opacity": 0.6,
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "eOE2N",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "LaEXF",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "user",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "WOoMb",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VJ9tS",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "einar.archivist",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bcynq",
+                  "name": "Contraseña Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YOf3L",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Contraseña",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DWni3",
+                      "name": "Input Group",
+                      "opacity": 0.6,
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "OQplJ",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "d1WgD",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "lock",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Xmlzl",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hEcXd",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "••••••••••",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Y5Tz8",
+                          "name": "Toggle Visibility",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "left": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "nmMQp",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "eye-off",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hLrQk",
+                  "name": "Options",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Y6SUw",
+                      "name": "Remember Me",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "Ok6vV",
+                          "name": "Checkbox",
+                          "fill": "$bs-input-bg",
+                          "width": 16,
+                          "height": 16,
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "kUgqs",
+                          "name": "Label",
+                          "fill": "$bs-secondary-color",
+                          "content": "Recordarme",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "fyyx2",
+                      "name": "Forgot Password",
+                      "opacity": 0.6,
+                      "fill": "$bs-link",
+                      "content": "¿Olvidaste tu contraseña?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u0lQF4",
+              "name": "Actions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "odx87",
+                  "name": "Submit Button",
+                  "opacity": 0.65,
+                  "width": "fill_container",
+                  "fill": "$bs-primary",
+                  "cornerRadius": "$bs-radius",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    16
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "k1Kqn",
+                      "name": "Spinner",
+                      "innerRadius": 0.78,
+                      "startAngle": 90,
+                      "sweepAngle": -270,
+                      "fill": "$bs-white",
+                      "width": 16,
+                      "height": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "YkdUK",
+                      "name": "Label",
+                      "fill": "$bs-white",
+                      "content": "Iniciando sesión…",
+                      "fontFamily": "$font-body",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "J7JE9",
+                  "name": "Footer",
+                  "width": "fill_container",
+                  "gap": 5,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WnETz",
+                      "name": "Footer Text",
+                      "fill": "$bs-secondary-color",
+                      "content": "¿No tienes cuenta?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c8RX0t",
+                      "name": "Footer Link",
+                      "opacity": 0.6,
+                      "fill": "$bs-link",
+                      "content": "Solicita acceso",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "yiMjP",
+      "x": 4560,
+      "y": 0,
+      "name": "Login Screen — Móvil",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": [
+        "$bs-body-bg",
+        {
+          "type": "gradient",
+          "gradientType": "radial",
+          "enabled": true,
+          "rotation": 0,
+          "size": {
+            "width": 1.1,
+            "height": 1.4
+          },
+          "colors": [
+            {
+              "color": "#0D6EFD2E",
+              "position": 0
+            },
+            {
+              "color": "#0D6EFD00",
+              "position": 1
+            }
+          ],
+          "center": {
+            "y": 0.1
+          }
+        }
+      ],
+      "layout": "vertical",
+      "padding": 20,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "rVisa",
+          "name": "Login Card",
+          "width": "fill_container",
+          "fill": "$bs-card-bg",
+          "cornerRadius": 12,
+          "stroke": "$bs-border",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000059",
+            "offset": {
+              "x": 0,
+              "y": 16
+            },
+            "blur": 40,
+            "spread": -8
+          },
+          "layout": "vertical",
+          "gap": 24,
+          "padding": 28,
+          "children": [
+            {
+              "type": "frame",
+              "id": "xeTDR",
+              "name": "Brand",
+              "width": "fill_container",
+              "gap": 10,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "h28mK",
+                  "name": "Brand Icon",
+                  "width": 26,
+                  "height": 26,
+                  "icon": "library-big",
+                  "library": "lucide",
+                  "fill": "$bs-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "Hwypq",
+                  "name": "Brand Name",
+                  "fill": "$bs-body-color",
+                  "content": "TheArchivist",
+                  "fontFamily": "$font-body",
+                  "fontSize": 19,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nqYdS",
+              "name": "Heading",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wYRMX",
+                  "name": "Title",
+                  "fill": "$bs-white",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Iniciar sesión",
+                  "lineHeight": 1.25,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 26,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "zmXjW",
+                  "name": "Subtitle",
+                  "fill": "$bs-secondary-color",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Accede con tu usuario y contraseña.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vAwXk",
+              "name": "Form",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hg6hC",
+                  "name": "Usuario Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UFAT7",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Usuario",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "W2AdB3",
+                      "name": "Input Group",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "VzxDX",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "uRRoO",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "user",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aVPhk",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "i8jZV",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "einar.archivist",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "btx9U",
+                  "name": "Contraseña Field",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YrSfg",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Contraseña",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "p0gjr",
+                      "name": "Input Group",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "$bs-input-bg",
+                      "cornerRadius": "$bs-radius",
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "RBksS",
+                          "name": "Addon",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "right": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "R4cvgG",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "lock",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "f7h1tV",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "z6RVe",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "••••••••••",
+                              "fontFamily": "$font-body",
+                              "fontSize": 16,
+                              "fontWeight": "normal",
+                              "letterSpacing": 0.5
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "x2H5HE",
+                          "name": "Toggle Visibility",
+                          "width": 46,
+                          "height": "fill_container",
+                          "fill": "$bs-addon-bg",
+                          "stroke": "$bs-border",
+                          "strokeWidth": {
+                            "left": 1
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "zl7d9",
+                              "name": "Icon",
+                              "width": 17,
+                              "height": 17,
+                              "icon": "eye-off",
+                              "library": "lucide",
+                              "fill": "$bs-secondary-color"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hXaZE",
+                  "name": "Options",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "AeQmb",
+                      "name": "Remember Me",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "wcmxM",
+                          "name": "Checkbox",
+                          "fill": "$bs-input-bg",
+                          "width": 16,
+                          "height": 16,
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "ixVOg",
+                          "name": "Label",
+                          "fill": "$bs-secondary-color",
+                          "content": "Recordarme",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "JL1Eo",
+                      "name": "Forgot Password",
+                      "fill": "$bs-link",
+                      "content": "¿Olvidaste tu contraseña?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "phxN3",
+              "name": "Actions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "FioDg",
+                  "name": "Submit Button",
+                  "width": "fill_container",
+                  "fill": "$bs-primary",
+                  "cornerRadius": "$bs-radius",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    16
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iE033",
+                      "name": "Label",
+                      "fill": "$bs-white",
+                      "content": "Iniciar sesión",
+                      "fontFamily": "$font-body",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "W1Hc3",
+                  "name": "Footer",
+                  "width": "fill_container",
+                  "gap": 5,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wRbgF",
+                      "name": "Footer Text",
+                      "fill": "$bs-secondary-color",
+                      "content": "¿No tienes cuenta?",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Fzgsk",
+                      "name": "Footer Link",
+                      "fill": "$bs-link",
+                      "content": "Solicita acceso",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "bs-body-bg": {
+      "type": "color",
+      "value": "#212529"
+    },
+    "bs-card-bg": {
+      "type": "color",
+      "value": "#2B3035"
+    },
+    "bs-input-bg": {
+      "type": "color",
+      "value": "#212529"
+    },
+    "bs-addon-bg": {
+      "type": "color",
+      "value": "#343A40"
+    },
+    "bs-border": {
+      "type": "color",
+      "value": "#495057"
+    },
+    "bs-body-color": {
+      "type": "color",
+      "value": "#DEE2E6"
+    },
+    "bs-secondary-color": {
+      "type": "color",
+      "value": "#ADB5BD"
+    },
+    "bs-primary": {
+      "type": "color",
+      "value": "#0D6EFD"
+    },
+    "bs-link": {
+      "type": "color",
+      "value": "#6EA8FE"
+    },
+    "bs-white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "bs-radius": {
+      "type": "number",
+      "value": 6
+    },
+    "font-body": {
+      "type": "string",
+      "value": "Inter"
+    }
+  },
+  "fileToken": "8406731c-4486-4d1b-85d7-f997d474f95c"
+}

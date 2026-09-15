@@ -1,3 +1,8 @@
+app:
+  bootstrap:
+    # Password of the administrator created on a fresh install. Override it in every real deployment.
+    admin-password: ${ADMIN_PASSWORD:admin123}
+
 spring:
   application:
     name: TheArchivist

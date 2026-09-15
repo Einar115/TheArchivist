@@ -1,11 +1,12 @@
-app:
-  cors:
-    allowed-origins: http://localhost:4200
-
-  jwt:
-    secret: example-of-a-secret-for-jwt-1234456789 #For example
-    access-token-expiration: 900000 # 15 min
-    refresh-token-expiration: 604800000 # 7 days
+server:
+  servlet:
+    session:
+      timeout: 30m
+      cookie:
+        name: ARCHIVIST_SESSION
+        http-only: true
+        same-site: lax
+        path: /
 
 spring:
   autoconfigure:
@@ -64,3 +65,7 @@ springdoc:
 
   swagger-ui:
     enabled: true
+    # Makes "Try it out" read the XSRF-TOKEN cookie and send it as X-XSRF-TOKEN.
+    # Without this every POST/DELETE from Swagger is rejected by the CsrfFilter.
+    csrf:
+      enabled: true

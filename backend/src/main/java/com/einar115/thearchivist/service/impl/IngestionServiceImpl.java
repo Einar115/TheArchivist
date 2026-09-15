@@ -59,17 +59,17 @@ public class IngestionServiceImpl implements IngestionService {
         UUID documentId = UUID.randomUUID();
         String filename = file.getOriginalFilename();
 
-        // Procesar archivo con Tika
+        // Process the file with Tika
         var resource = new InputStreamResource(file.getInputStream(), filename);
         List<Document> rawDocs = new TikaDocumentReader(resource).get();
 
-        // Extraer contenido combinado
+        // Extract the combined content
         String content = rawDocs.stream()
                 .map(Document::getText)
                 .reduce("", (a, b) -> a + "\n" + b)
                 .strip();
 
-        // Guardar en BD con status PENDING
+        // Store in the DB with PENDING status
         DocumentHistoryEntity history = new DocumentHistoryEntity();
         history.setDocumentId(documentId);
         history.setFilename(filename);
@@ -87,9 +87,9 @@ public class IngestionServiceImpl implements IngestionService {
     public void approveDocument(UUID documentId) throws IOException {
         DocumentHistoryEntity history = documentHistoryRepository
                 .findByDocumentId(documentId)
-                .orElseThrow(() -> new RuntimeException("Documento no encontrado: " + documentId));
+                .orElseThrow(() -> new RuntimeException("Document not found: " + documentId));
 
-        // Ingesta a Qdrant desde el contenido guardado
+        // Ingest into Qdrant from the stored content
         List<Document> rawDocs = List.of(
                 new Document(history.getContent())
         );
@@ -103,7 +103,7 @@ public class IngestionServiceImpl implements IngestionService {
         List<Document> chunks = splitter.apply(rawDocs);
         vectorStore.add(chunks);
 
-        // Actualizar estado y contar chunks
+        // Update the status and count the chunks
         history.setStatus(DocumentHistoryEntity.DocumentStatusEnum.APPROVED);
         history.setChunkCount(chunks.size());
         documentHistoryRepository.save(history);

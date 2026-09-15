@@ -1,134 +1,68 @@
 package com.einar115.thearchivist.service.impl;
 
 import com.einar115.thearchivist.dto.request.AuthRequest;
-import com.einar115.thearchivist.dto.request.RefreshRequest;
+import com.einar115.thearchivist.dto.request.UserRequest;
 import com.einar115.thearchivist.dto.response.AuthResponse;
-import com.einar115.thearchivist.dto.response.LogoutResponse;
-import com.einar115.thearchivist.dto.response.RefreshResponse;
-import com.einar115.thearchivist.entity.RefreshTokenEntity;
-import com.einar115.thearchivist.entity.UserEntity;
-import com.einar115.thearchivist.repository.RefreshTokenRepository;
-import com.einar115.thearchivist.repository.UserRepository;
-import com.einar115.thearchivist.security.JwtProvider;
+import com.einar115.thearchivist.dto.response.UserResponse;
+import com.einar115.thearchivist.model.MainUser;
 import com.einar115.thearchivist.service.AuthService;
-import io.jsonwebtoken.JwtException;
+import com.einar115.thearchivist.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private final JwtProvider jwtProvider;
-    private final UserRepository userRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
+    // Not a context bean: it is taken from the holder, the same way Spring Security filters do.
+    private final SecurityContextHolderStrategy securityContextHolderStrategy =
+            SecurityContextHolder.getContextHolderStrategy();
+
     private final AuthenticationManager authenticationManager;
+    private final SessionAuthenticationStrategy sessionAuthenticationStrategy;
+    private final SecurityContextRepository securityContextRepository;
+    private final UserService userService;
 
-
-    public AuthServiceImpl(JwtProvider jwtProvider,
-                           UserRepository userRepository,
-                           RefreshTokenRepository refreshTokenRepository,
-                           AuthenticationManager authenticationManager) {
-        this.jwtProvider = jwtProvider;
-        this.userRepository = userRepository;
-        this.refreshTokenRepository = refreshTokenRepository;
+    public AuthServiceImpl(AuthenticationManager authenticationManager,
+                           SessionAuthenticationStrategy sessionAuthenticationStrategy,
+                           SecurityContextRepository securityContextRepository,
+                           UserService userService) {
         this.authenticationManager = authenticationManager;
+        this.sessionAuthenticationStrategy = sessionAuthenticationStrategy;
+        this.securityContextRepository = securityContextRepository;
+        this.userService = userService;
     }
 
     @Override
-    public AuthResponse login(AuthRequest authRequest) {
-        try {
-            // Authenticate with spring security
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            authRequest.username(),
-                            authRequest.password()
-                    )
-            );
+    public AuthResponse login(AuthRequest authRequest, HttpServletRequest req, HttpServletResponse res) {
+        // Throws AuthenticationException on bad credentials; the @RestControllerAdvice maps it.
+        Authentication authentication = authenticationManager.authenticate(
+                UsernamePasswordAuthenticationToken.unauthenticated(
+                        authRequest.username(), authRequest.password()));
 
-            // Extract authenticated user
-            UserEntity user = userRepository.findByUsername(authRequest.username())
-                    .orElseThrow(() -> new RuntimeException("user not found"));
+        // Rotates the session id (fixation) and issues a fresh CSRF token.
+        sessionAuthenticationStrategy.onAuthentication(authentication, req, res);
 
-            // Generate tokens
-            String accessToken = jwtProvider.generateAccessToken(user.getId());
-            String refreshToken = jwtProvider.generateRefreshToken(user.getId(), user.getUsername(), "web"); // 'deviceId' no defined yet, generic 'web' for now
+        SecurityContext context = securityContextHolderStrategy.createEmptyContext();
+        context.setAuthentication(authentication);
+        securityContextHolderStrategy.setContext(context);
+        // SecurityContextHolderFilter only loads the context, it never saves it: persist it here.
+        securityContextRepository.saveContext(context, req, res);
 
-            // Save refreshToken in DB
-            UUID jti = jwtProvider.extractJti(refreshToken);
-            RefreshTokenEntity tokenEntity = new RefreshTokenEntity();
-            tokenEntity.setUser(user);
-            tokenEntity.setJti(jti);
-            tokenEntity.setDeviceId("web");
-            tokenEntity.setExpiresAt(LocalDateTime.now().plusDays(7));
-            tokenEntity.setActive(true);
-            refreshTokenRepository.save(tokenEntity);
-
-            // Extract roles
-            List<String> roles = user.getRoles().stream()
-                    .map(role -> role.getName().name())
-                    .toList();
-
-            return new AuthResponse(
-                    user.getUsername(),
-                    roles,
-                    accessToken,
-                    refreshToken
-            );
-
-        } catch (AuthenticationException e) {
-            throw new RuntimeException("Incorrect credentials: " + e.getMessage());
-        }
+        MainUser principal = (MainUser) authentication.getPrincipal();
+        return new AuthResponse(principal.getUsername(), principal.getRoles());
     }
 
     @Override
-    public RefreshResponse refreshToken(RefreshRequest refreshRequest) {
-        try {
-            Integer userId = jwtProvider.extractUserId(refreshRequest.refreshToken());
-            UUID jti = jwtProvider.extractJti(refreshRequest.refreshToken());
-
-            RefreshTokenEntity refreshToken = refreshTokenRepository.findByJti(jti)
-                    .orElseThrow(() -> new RuntimeException("Invalid token"));
-
-            if (!refreshToken.isActive()) {
-                throw new RuntimeException("Token has been revoked");
-            }
-
-            if (refreshToken.getExpiresAt().isBefore(LocalDateTime.now())) {
-                refreshToken.setActive(false);
-                refreshTokenRepository.save(refreshToken);
-                throw new RuntimeException("Token expired");
-            }
-
-            UserEntity user = userRepository.findById(userId)
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-
-            String newAccessToken = jwtProvider.generateAccessToken(user.getId());
-            return new RefreshResponse(newAccessToken);
-
-        } catch (JwtException e){
-            throw new RuntimeException("Invalid refresh token" + e.getMessage());
-        }
+    public UserResponse register(UserRequest userRequest) {
+        return userService.createUser(userRequest);
     }
-
-    @Override
-    public LogoutResponse logout(RefreshRequest refreshRequest) {
-        try {
-            UUID jti = jwtProvider.extractJti(refreshRequest.refreshToken());
-            RefreshTokenEntity refreshToken = refreshTokenRepository.findByJti(jti)
-                    .orElseThrow(() -> new RuntimeException("Invalid token"));
-            refreshToken.setActive(false);
-            refreshTokenRepository.save(refreshToken);
-            return new LogoutResponse("Session closed successfully");
-        } catch (JwtException e) {
-            throw new RuntimeException("Invalid refresh token" + e.getMessage());
-        }
-    }
-
 }

@@ -30,10 +30,15 @@ public class UserEntity {
     )
     private List<RoleEntity> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RefreshTokenEntity> tokens = new ArrayList<>();
 
     public UserEntity() {
+    }
+
+    public UserEntity(String username, String password, boolean enabled, List<RoleEntity> roles) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.roles = roles;
     }
 
     public Integer getId() {
@@ -74,14 +79,6 @@ public class UserEntity {
 
     public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
-    }
-
-    public List<RefreshTokenEntity> getTokens() {
-        return tokens;
-    }
-
-    public void setTokens(List<RefreshTokenEntity> tokens) {
-        this.tokens = tokens;
     }
 
 }

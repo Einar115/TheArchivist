@@ -1,0 +1,259 @@
+/* The shell's <main> is a flex column: claim the remaining height so the dark page reaches the bottom. */
+:host {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.documents-page {
+  flex: 1 0 auto;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
+.doc-card,
+.upload-queue {
+  --bs-card-bg: var(--bs-tertiary-bg);
+  --bs-card-cap-bg: var(--bs-body-bg);
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.doc-card.pending {
+  --bs-card-bg: #2f2e2a;
+  --bs-card-border-color: #5c4a12;
+}
+
+.doc-table {
+  --bs-table-bg: transparent;
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.03);
+}
+
+.doc-table th {
+  padding: 0.75rem 1.25rem;
+  color: var(--bs-tertiary-color);
+  background-color: var(--bs-body-bg);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.doc-table td {
+  padding: 0.875rem 1.25rem;
+}
+
+.doc-table tr.pending {
+  --bs-table-bg: rgba(255, 218, 106, 0.04);
+}
+
+.upload-queue li + li {
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.upload-queue .progress {
+  height: 4px;
+}
+
+/* Shape and colour come from Bootstrap utilities in the template; only the sizes live here. */
+.file-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.125rem;
+}
+
+.avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.625rem;
+}
+
+.btn-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.btn-icon-lg {
+  width: 2.75rem;
+  flex-shrink: 0;
+}
+
+.dropzone-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  font-size: 1.5rem;
+}
+
+.danger-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.1875rem 0.5625rem;
+  border: 1px solid;
+  border-radius: 50rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge::before {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background-color: currentColor;
+  content: "";
+}
+
+[data-status="PENDING"] {
+  border-color: var(--bs-warning-border-subtle);
+  color: var(--bs-warning-text-emphasis);
+  background-color: var(--bs-warning-bg-subtle);
+}
+
+[data-status="APPROVED"] {
+  border-color: var(--bs-success-border-subtle);
+  color: var(--bs-success-text-emphasis);
+  background-color: var(--bs-success-bg-subtle);
+}
+
+[data-status="REJECTED"] {
+  border-color: var(--bs-danger-border-subtle);
+  color: var(--bs-danger-text-emphasis);
+  background-color: var(--bs-danger-bg-subtle);
+}
+
+.status-tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--bs-tertiary-bg);
+  border-radius: 0.5rem;
+  background-color: #171a1d;
+  scrollbar-width: none;
+}
+
+.status-tab {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4375rem 0.75rem;
+  border: 0;
+  border-radius: 0.375rem;
+  color: var(--bs-secondary-color);
+  background: none;
+  font-size: 0.875rem;
+}
+
+.status-tab.active {
+  color: var(--bs-emphasis-color);
+  background-color: var(--bs-tertiary-bg);
+  font-weight: 500;
+}
+
+.status-tab .count {
+  padding: 0 0.4375rem;
+  border-radius: 50rem;
+  background-color: var(--bs-secondary-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.search {
+  max-width: 20rem;
+}
+
+.dropzone {
+  padding: 1.75rem 2rem;
+  border: 1.5px dashed var(--bs-primary-border-subtle);
+  border-radius: 0.75rem;
+  background-color: rgba(var(--bs-primary-rgb), 0.04);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.dropzone.dragging {
+  border-color: var(--bs-primary);
+  background-color: rgba(var(--bs-primary-rgb), 0.12);
+}
+
+.modal {
+  --bs-modal-bg: var(--bs-tertiary-bg);
+  --bs-modal-footer-bg: var(--bs-body-bg);
+}
+
+.extracted-text {
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  background-color: var(--bs-body-bg);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.sheet-handle {
+  width: 2.25rem;
+  height: 0.25rem;
+  margin: 0.625rem auto 0;
+  border-radius: 2px;
+  background-color: var(--bs-border-color);
+}
+
+/* Primary action first in the DOM: on top of the sheet on mobile, rightmost in the desktop modal. */
+.sheet-actions {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+@media (max-width: 991.98px) {
+  /* Chips that run off the edge, so it reads as a horizontal scroller. */
+  .status-tabs {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+    border: 0;
+    background: none;
+  }
+
+  .status-tab {
+    border: 1px solid var(--bs-border-color);
+    border-radius: 50rem;
+  }
+
+  .status-tab.active {
+    border-color: var(--bs-secondary-color);
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .sheet-dialog {
+    position: fixed;
+    inset: auto 0 0;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+  }
+
+  .sheet-dialog .modal-content {
+    border-bottom: 0;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .sheet-actions {
+    flex-direction: column;
+  }
+
+  .sheet-actions > .btn {
+    width: 100%;
+    margin: 0 0 0.5rem;
+  }
+}

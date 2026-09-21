@@ -1,87 +1,412 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-lg-8 mx-auto">
-      <h1 class="mb-4">Gestor de Documentos</h1>
+<div class="documents-page" data-bs-theme="dark">
+  <div class="container-xxl px-3 px-md-4 px-xl-5 py-4 py-lg-5">
+    <input #filePicker type="file" class="d-none" multiple [accept]="accept" (change)="onFilesSelected($event)" />
 
-      <!-- Error Alert -->
-      @if (error()) {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          {{ error() }}
-          <button type="button" class="btn-close" (click)="error.set(null)"></button>
-        </div>
-      }
-
-      <!-- Drag & Drop Zone -->
-      <div
-        class="border-3 border-dashed rounded p-5 mb-4 text-center"
-        [ngClass]="{ 'bg-light': dragover() }"
-        (dragover)="onDragOver($event)"
-        (dragleave)="onDragLeave($event)"
-        (drop)="onDrop($event)"
-        style="cursor: pointer; border-style: dashed; border-color: #dee2e6; transition: all 0.3s;"
-      >
-        <div class="mb-3">
-          <i class="bi bi-cloud-arrow-up" style="font-size: 3rem; color: #6c757d;"></i>
-        </div>
-        <h5>Arrastra documentos aquí</h5>
-        <p class="text-muted mb-3">o</p>
-        <label for="fileInput" class="btn btn-primary">
-          Selecciona un archivo
-          <input
-            #fileInput
-            type="file"
-            id="fileInput"
-            class="d-none"
-            (change)="onFileSelected($event)"
-            accept=".pdf,.txt,.md,.doc,.docx"
-          />
-        </label>
-        <p class="text-muted mt-3 small">
-          Soportados: PDF, TXT, MD, DOC, DOCX
+    <header class="d-flex align-items-center align-items-lg-end justify-content-between gap-3 mb-4">
+      <div class="min-w-0">
+        <h1 class="h3 fw-semibold text-white mb-1">Documentos</h1>
+        <p class="small text-body-secondary mb-0">
+          @if (isAdmin()) {
+            Revisa lo que sube el equipo. Un documento solo llega al chat cuando lo apruebas.
+          } @else {
+            Sube documentos al archivo. Un administrador los revisa antes de que el chat pueda usarlos.
+          }
         </p>
       </div>
-
-      <!-- Loading Spinner -->
-      @if (loading()) {
-        <div class="text-center mb-4">
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Subiendo...</span>
-          </div>
-          <p class="mt-2">Procesando documento...</p>
-        </div>
+      @if (isAdmin()) {
+        <button type="button" class="btn btn-primary d-inline-flex align-items-center gap-2 flex-shrink-0"
+                (click)="filePicker.click()" aria-label="Subir documento">
+          <i class="bi bi-upload"></i>
+          <span class="d-none d-sm-inline">Subir documento</span>
+        </button>
       }
+    </header>
 
-      <!-- Documents List -->
-      <div>
-        <h5 class="mb-3">Documentos subidos</h5>
-        @if (documents().length === 0) {
-          <p class="text-muted text-center py-4">No hay documentos subidos aún</p>
-        } @else {
-          <div class="list-group">
-            @for (doc of documents(); track doc.id) {
-              <div class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <h6 class="mb-1">{{ doc.name }}</h6>
-                  <small class="text-muted">
-                    Subido: {{ doc.uploadedAt | date: 'short' }}
-                  </small>
-                  @if (doc.game) {
-                    <br />
-                    <small class="badge bg-secondary">{{ doc.game }}</small>
+    @if (notice(); as current) {
+      <div class="alert d-flex align-items-center gap-2 py-2" role="status"
+           [class.alert-success]="current.kind === 'success'" [class.alert-danger]="current.kind === 'danger'">
+        <i class="bi flex-shrink-0" [class.bi-check-circle-fill]="current.kind === 'success'"
+           [class.bi-exclamation-triangle-fill]="current.kind === 'danger'"></i>
+        <span class="flex-grow-1">{{ current.text }}</span>
+        <button type="button" class="btn-close" aria-label="Cerrar aviso" (click)="notice.set(null)"></button>
+      </div>
+    }
+
+    @if (!isAdmin()) {
+      <div class="dropzone text-center mb-3" [class.dragging]="dragging()"
+           (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+        <span class="dropzone-icon d-inline-flex align-items-center justify-content-center rounded-circle border border-primary-subtle text-primary-emphasis bg-primary-subtle"><i class="bi bi-cloud-arrow-up"></i></span>
+        <div class="fw-semibold text-white mt-2 d-none d-lg-block">Arrastra tus archivos aquí</div>
+        <div class="fw-semibold text-white mt-2 d-lg-none">Sube un documento</div>
+        <p class="small text-body-secondary mb-3">
+          PDF, DOC, DOCX, TXT o MD. Quedarán en espera hasta que un administrador los apruebe.
+        </p>
+        <button type="button" class="btn btn-outline-primary d-none d-lg-inline-block" (click)="filePicker.click()">
+          <i class="bi bi-folder2-open me-2"></i>Seleccionar archivos
+        </button>
+        <button type="button" class="btn btn-primary w-100 d-lg-none" (click)="filePicker.click()">
+          <i class="bi bi-folder2-open me-2"></i>Seleccionar archivos
+        </button>
+      </div>
+    }
+
+    @if (uploads().length) {
+      <ul class="card upload-queue list-unstyled mb-4" aria-label="Subidas">
+        @for (item of uploads(); track item.key) {
+          <li class="d-flex align-items-center gap-3 px-3 px-lg-4 py-3">
+            <span class="file-icon d-inline-flex align-items-center justify-content-center flex-shrink-0 rounded-3 bg-body-secondary text-body-secondary"><i class="bi" [class]="fileIcon(item.name)"></i></span>
+            <div class="flex-grow-1 min-w-0">
+              <div class="d-flex justify-content-between gap-2 small">
+                <span class="text-white fw-medium text-truncate">{{ item.name }}</span>
+                <span class="flex-shrink-0" [class.text-success]="item.state === 'done'"
+                      [class.text-danger]="item.state === 'error'"
+                      [class.text-body-tertiary]="item.state === 'uploading'">{{ uploadStatus(item) }}</span>
+              </div>
+              <div class="progress mt-2" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                   [attr.aria-valuenow]="progress(item)" [attr.aria-label]="'Progreso de ' + item.name">
+                <div class="progress-bar" [class.bg-success]="item.state === 'done'"
+                     [class.bg-danger]="item.state === 'error'"
+                     [style.width.%]="item.state === 'error' ? 100 : progress(item)"></div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-link text-body-secondary p-1" (click)="removeUpload(item)"
+                    [attr.aria-label]="(item.state === 'uploading' ? 'Cancelar la subida de ' : 'Quitar de la lista ') + item.name">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+
+    @if (isAdmin()) {
+      <div class="d-flex flex-column flex-lg-row gap-3 justify-content-between align-items-lg-center mb-3">
+        <div class="status-tabs" role="tablist" aria-label="Filtrar por estado">
+          @for (tab of tabs; track tab.value) {
+            <button type="button" role="tab" class="status-tab" [class.active]="filter() === tab.value"
+                    [attr.aria-selected]="filter() === tab.value" (click)="setFilter(tab.value)">
+              {{ tab.label }}
+              <span class="count" [attr.data-status]="tab.value">{{ counts()[tab.value] }}</span>
+            </button>
+          }
+        </div>
+        <div class="input-group search">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="search" class="form-control" placeholder="Buscar por nombre o usuario"
+                 aria-label="Buscar documentos" [value]="search()" (input)="onSearch($event)" />
+        </div>
+      </div>
+    } @else {
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 fw-semibold text-white mb-0">Mis envíos</h2>
+        <span class="small text-body-secondary">{{ counts().PENDING }} en revisión</span>
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="text-center text-body-secondary py-5">
+        <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Cargando documentos…
+      </div>
+    } @else if (loadError()) {
+      <div class="alert alert-danger d-flex align-items-center gap-2">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span class="flex-grow-1">No se pudieron cargar los documentos.</span>
+        <button type="button" class="btn btn-sm btn-outline-danger" (click)="load()">Reintentar</button>
+      </div>
+    } @else if (!filtered().length) {
+      <div class="text-center text-body-secondary py-5">
+        <i class="bi bi-inbox fs-1"></i>
+        <p class="mt-2 mb-0">{{ emptyText() }}</p>
+      </div>
+    } @else {
+      <!-- From lg up: table -->
+      <div class="card doc-card d-none d-lg-block">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0 doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Documento</th>
+                @if (isAdmin()) {
+                  <th scope="col">Subido por</th>
+                }
+                <th scope="col">Fecha</th>
+                <th scope="col">Estado</th>
+                @if (isAdmin()) {
+                  <th scope="col" class="text-end">Acciones</th>
+                } @else {
+                  <th scope="col">Detalle</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (doc of visible(); track doc.id) {
+                <tr [class.pending]="isAdmin() && doc.status === 'PENDING'">
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <span class="file-icon d-inline-flex align-items-center justify-content-center flex-shrink-0 rounded-3 bg-body-secondary text-body-secondary"><i class="bi" [class]="fileIcon(doc.filename)"></i></span>
+                      <div class="min-w-0">
+                        <div class="fw-medium text-white text-truncate">{{ doc.filename }}</div>
+                        <div class="small text-body-tertiary">{{ meta(doc) }}</div>
+                      </div>
+                    </div>
+                  </td>
+                  @if (isAdmin()) {
+                    <td class="text-nowrap">
+                      <span class="avatar me-2 d-inline-flex align-items-center justify-content-center rounded-circle bg-body-secondary fw-semibold">{{ initials(doc.uploadedBy) }}</span>{{ doc.uploadedBy }}
+                    </td>
+                  }
+                  <td class="text-nowrap">
+                    <div>{{ formatDate(doc.uploadedAt) }}</div>
+                    <div class="small text-body-tertiary">{{ formatTime(doc.uploadedAt) }}</div>
+                  </td>
+                  <td><span class="status-badge" [attr.data-status]="doc.status">{{ statusLabel[doc.status] }}</span></td>
+                  @if (isAdmin()) {
+                    <td class="text-end text-nowrap">
+                      @if (doc.status !== 'REJECTED') {
+                        <button type="button" class="btn btn-sm btn-outline-secondary btn-icon d-inline-flex align-items-center justify-content-center p-0" (click)="openPreview(doc)"
+                                [attr.aria-label]="'Vista previa de ' + doc.filename">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                      }
+                      @if (doc.status === 'PENDING') {
+                        <button type="button" class="btn btn-sm btn-outline-success ms-2" (click)="approve(doc)"
+                                [disabled]="busyId() === doc.id">
+                          @if (busyId() === doc.id) {
+                            <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+                          } @else {
+                            <i class="bi bi-check-lg me-1"></i>
+                          }
+                          Aprobar
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="openReject(doc)"
+                                [disabled]="busyId() === doc.id">
+                          <i class="bi bi-x-lg me-1"></i>Rechazar
+                        </button>
+                      } @else {
+                        <button type="button" class="btn btn-sm btn-outline-danger btn-icon ms-2 d-inline-flex align-items-center justify-content-center p-0" (click)="openDelete(doc)"
+                                [attr.aria-label]="'Eliminar ' + doc.filename">
+                          <i class="bi bi-trash3"></i>
+                        </button>
+                      }
+                    </td>
+                  } @else {
+                    <td class="small text-body-secondary">
+                      <i class="bi me-2" [class]="detailIcon(doc)"></i>{{ statusDetail(doc) }}
+                    </td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center px-4 py-2">
+          <ng-container [ngTemplateOutlet]="pager" />
+        </div>
+      </div>
+
+      <!-- Below lg: cards -->
+      <ul class="list-unstyled d-flex flex-column gap-3 mb-0 d-lg-none">
+        @for (doc of visible(); track doc.id) {
+          <li class="card doc-card" [class.pending]="isAdmin() && doc.status === 'PENDING'">
+            <div class="card-body p-3 d-flex flex-column gap-3">
+              <div class="d-flex align-items-center gap-3">
+                <span class="file-icon d-inline-flex align-items-center justify-content-center flex-shrink-0 rounded-3 bg-body-secondary text-body-secondary"><i class="bi" [class]="fileIcon(doc.filename)"></i></span>
+                <div class="min-w-0 flex-grow-1">
+                  <div class="fw-medium text-white text-truncate">{{ doc.filename }}</div>
+                  <div class="small text-body-tertiary">{{ meta(doc) }}</div>
+                </div>
+                @if (!isAdmin()) {
+                  <span class="status-badge align-self-start" [attr.data-status]="doc.status">{{ statusLabel[doc.status] }}</span>
+                }
+              </div>
+
+              @if (isAdmin()) {
+                <div class="d-flex justify-content-between align-items-center gap-2 small">
+                  <span class="text-body-secondary text-truncate">
+                    <span class="avatar me-2 d-inline-flex align-items-center justify-content-center rounded-circle bg-body-secondary fw-semibold">{{ initials(doc.uploadedBy) }}</span>{{ doc.uploadedBy }} · {{ formatDate(doc.uploadedAt) }}
+                  </span>
+                  <span class="status-badge" [attr.data-status]="doc.status">{{ statusLabel[doc.status] }}</span>
+                </div>
+                <div class="d-flex gap-2">
+                  @if (doc.status === 'PENDING') {
+                    <button type="button" class="btn btn-outline-secondary btn-icon-lg d-inline-flex align-items-center justify-content-center p-0" (click)="openPreview(doc)"
+                            [attr.aria-label]="'Vista previa de ' + doc.filename">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-success flex-fill" (click)="approve(doc)"
+                            [disabled]="busyId() === doc.id">
+                      <i class="bi bi-check-lg me-1"></i>Aprobar
+                    </button>
+                    <button type="button" class="btn btn-outline-danger flex-fill" (click)="openReject(doc)"
+                            [disabled]="busyId() === doc.id">
+                      <i class="bi bi-x-lg me-1"></i>Rechazar
+                    </button>
+                  } @else if (doc.status === 'APPROVED') {
+                    <button type="button" class="btn btn-outline-secondary flex-fill" (click)="openPreview(doc)">
+                      <i class="bi bi-eye me-1"></i>Vista previa
+                    </button>
+                    <button type="button" class="btn btn-outline-danger btn-icon-lg d-inline-flex align-items-center justify-content-center p-0" (click)="openDelete(doc)"
+                            [attr.aria-label]="'Eliminar ' + doc.filename">
+                      <i class="bi bi-trash3"></i>
+                    </button>
+                  } @else {
+                    <button type="button" class="btn btn-outline-danger flex-fill" (click)="openDelete(doc)">
+                      <i class="bi bi-trash3 me-1"></i>Eliminar
+                    </button>
                   }
                 </div>
-                <button
-                  class="btn btn-sm btn-danger"
-                  (click)="deleteDocument(doc.id)"
-                  [disabled]="loading()"
-                >
-                  <i class="bi bi-trash"></i> Eliminar
-                </button>
+              } @else {
+                <div class="small text-body-secondary">
+                  <i class="bi me-2" [class]="detailIcon(doc)"></i>{{ statusDetail(doc) }}
+                </div>
+              }
+            </div>
+          </li>
+        }
+      </ul>
+      <div class="d-flex d-lg-none justify-content-between align-items-center mt-3">
+        <ng-container [ngTemplateOutlet]="pager" />
+      </div>
+    }
+  </div>
+</div>
+
+<ng-template #pager>
+  <span class="small text-body-tertiary">{{ rangeText() }}</span>
+  @if (pageCount() > 1) {
+    <nav aria-label="Paginación de documentos">
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item" [class.disabled]="currentPage() === 1">
+          <button type="button" class="page-link" aria-label="Página anterior" (click)="goTo(currentPage() - 1)">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </li>
+        @for (number of pages(); track number) {
+          <li class="page-item" [class.active]="number === currentPage()">
+            <button type="button" class="page-link" (click)="goTo(number)"
+                    [attr.aria-current]="number === currentPage() ? 'page' : null">{{ number }}</button>
+          </li>
+        }
+        <li class="page-item" [class.disabled]="currentPage() === pageCount()">
+          <button type="button" class="page-link" aria-label="Página siguiente" (click)="goTo(currentPage() + 1)">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  }
+</ng-template>
+
+@if (dialog(); as current) {
+  <div class="modal-backdrop show"></div>
+  <!-- Driven by Angular state instead of Bootstrap's Modal plugin, which cannot see which document is open. -->
+  <div class="modal d-block" data-bs-theme="dark" tabindex="-1" role="dialog" aria-modal="true"
+       aria-labelledby="document-dialog-title" (click)="onBackdropClick($event)">
+    @if (current.kind === 'preview') {
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-lg-down">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="min-w-0">
+              <h2 class="modal-title h5 text-truncate" id="document-dialog-title">{{ current.doc.filename }}</h2>
+              <div class="small text-body-tertiary">Vista previa del texto extraído</div>
+            </div>
+            <button type="button" class="btn-close" aria-label="Cerrar" (click)="closeDialog()"></button>
+          </div>
+          <div class="modal-body d-flex flex-column gap-3">
+            <div class="d-flex flex-wrap align-items-center gap-3 small text-body-secondary">
+              <span><i class="bi bi-person me-1"></i>{{ current.doc.uploadedBy }}</span>
+              <span><i class="bi bi-calendar3 me-1"></i>{{ formatDate(current.doc.uploadedAt) }}, {{ formatTime(current.doc.uploadedAt) }}</span>
+              <span><i class="bi bi-file-earmark me-1"></i>{{ meta(current.doc) }}</span>
+              <span class="status-badge" [attr.data-status]="current.doc.status">{{ statusLabel[current.doc.status] }}</span>
+            </div>
+            @if (current.doc.status === 'PENDING') {
+              <div class="alert alert-primary d-flex gap-2 small py-2 mb-0">
+                <i class="bi bi-info-circle"></i>
+                <span>Es el texto que se indexará si lo apruebas. Hasta entonces, el chat no lo usa.</span>
+              </div>
+            }
+            <div class="extracted-text">
+              @if (previewText(); as text) {
+                {{ text }}
+              } @else {
+                <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Cargando texto…
+              }
+            </div>
+          </div>
+          @if (current.doc.status === 'PENDING') {
+            <div class="modal-footer flex-nowrap">
+              <button type="button" class="btn btn-outline-secondary d-none d-lg-inline-block" (click)="closeDialog()">Cerrar</button>
+              <button type="button" class="btn btn-outline-danger flex-fill flex-lg-grow-0" (click)="openReject(current.doc)">
+                <i class="bi bi-x-lg me-1"></i>Rechazar
+              </button>
+              <button type="button" class="btn btn-success flex-fill flex-lg-grow-0" (click)="approve(current.doc)"
+                      [disabled]="busyId() === current.doc.id">
+                @if (busyId() === current.doc.id) {
+                  <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+                } @else {
+                  <i class="bi bi-check-lg me-1"></i>
+                }
+                Aprobar e indexar
+              </button>
+            </div>
+          } @else {
+            <div class="modal-footer d-none d-lg-flex">
+              <button type="button" class="btn btn-outline-secondary" (click)="closeDialog()">Cerrar</button>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <!-- A centred modal from lg up, a bottom sheet below it (see .sheet-dialog). -->
+      <div class="modal-dialog modal-dialog-centered sheet-dialog">
+        <div class="modal-content">
+          <div class="sheet-handle d-lg-none"></div>
+          <div class="modal-header">
+            @if (current.kind === 'delete') {
+              <span class="danger-icon me-3 d-inline-flex align-items-center justify-content-center flex-shrink-0 rounded-circle border border-danger-subtle text-danger-emphasis bg-danger-subtle"><i class="bi bi-trash3"></i></span>
+            }
+            <div class="min-w-0">
+              <h2 class="modal-title h5" id="document-dialog-title">
+                {{ current.kind === 'reject' ? 'Rechazar documento' : 'Eliminar documento' }}
+              </h2>
+              <div class="small text-body-tertiary text-truncate">
+                {{ current.doc.filename }}{{ current.kind === 'reject' ? ' · ' + current.doc.uploadedBy : '' }}
+              </div>
+            </div>
+            <button type="button" class="btn-close ms-auto" aria-label="Cerrar" (click)="closeDialog()"
+                    [disabled]="busyId() === current.doc.id"></button>
+          </div>
+          <div class="modal-body">
+            @if (current.kind === 'reject') {
+              <p>El documento no se añadirá al archivo y el chat no podrá usarlo.</p>
+              <label for="reject-reason" class="form-label">Motivo <span class="text-body-tertiary">(opcional)</span></label>
+              <textarea id="reject-reason" class="form-control" rows="3" placeholder="Explica al autor por qué no se acepta…"
+                        [value]="rejectReason()" (input)="onReasonInput($event)"></textarea>
+              <div class="form-text">{{ current.doc.uploadedBy }} lo verá en «Mis envíos».</div>
+            } @else {
+              <p>
+                «{{ current.doc.filename }}»{{ current.doc.chunkCount ? ' y sus ' + current.doc.chunkCount + ' fragmentos' : '' }}
+                se borrarán del archivo. El chat dejará de usarlo en sus respuestas.
+              </p>
+              <div class="alert alert-danger d-flex align-items-center gap-2 small py-2 mb-0">
+                <i class="bi bi-exclamation-triangle-fill"></i>Esta acción no se puede deshacer.
               </div>
             }
           </div>
-        }
+          <div class="modal-footer sheet-actions">
+            @if (current.kind === 'reject') {
+              <button type="button" class="btn btn-danger" (click)="confirmReject()" [disabled]="busyId() === current.doc.id">
+                <i class="bi bi-x-lg me-1"></i>Rechazar documento
+              </button>
+            } @else {
+              <button type="button" class="btn btn-danger" (click)="confirmDelete()" [disabled]="busyId() === current.doc.id">
+                <i class="bi bi-trash3 me-1"></i>Eliminar
+              </button>
+            }
+            <button type="button" class="btn btn-outline-secondary" (click)="closeDialog()"
+                    [disabled]="busyId() === current.doc.id">Cancelar</button>
+          </div>
+        </div>
       </div>
-    </div>
+    }
   </div>
-</div>
+}

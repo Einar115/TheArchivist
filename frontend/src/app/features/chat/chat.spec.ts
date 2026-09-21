@@ -39,7 +39,7 @@ describe('Chat', () => {
     });
   });
 
-  it('starts a conversation from a suggestion and opens it', async () => {
+  it('starts a conversation from the first question and opens it', async () => {
     const router = TestBed.inject(Router);
     let target: unknown[] = [];
     router.navigate = ((commands: unknown[]) => {
@@ -49,10 +49,10 @@ describe('Chat', () => {
     await render();
     expect(root().textContent).toContain('¿Qué quieres saber del archivo?');
 
-    component.send(component.suggestions[0].text);
+    component.send('¿Quién custodiaba la Trifuerza?');
 
     const [conversation] = TestBed.inject(ConversationService).conversations();
-    expect(conversation.title).toContain('Trifuerza');
+    expect(conversation.title).toBe('¿Quién custodiaba la Trifuerza?');
     expect(target).toEqual(['/chat', conversation.id]);
   });
 

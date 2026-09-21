@@ -103,28 +103,6 @@
   padding: 0.5rem 1rem 1rem;
 }
 
-.suggestions {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.suggestion {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--bs-border-color);
-  border-radius: 0.75rem;
-  color: var(--bs-body-color);
-  background: none;
-  font-size: 0.875rem;
-  text-align: left;
-}
-
-.suggestion:hover {
-  background-color: rgba(255, 255, 255, 0.04);
-}
-
 .composer {
   padding: 0.875rem 1rem 0.75rem;
   border: 1px solid var(--bs-border-color);
@@ -182,7 +160,7 @@
   text-align: center;
 }
 
-/* Desktop empty state: greeting, composer and suggestions sit together in the middle of the page. */
+/* Desktop empty state: greeting and composer sit together in the middle of the page. */
 @media (min-width: 992px) {
   .chat-page.is-empty {
     justify-content: center;
@@ -190,17 +168,5 @@
 
   .is-empty .empty {
     flex: 0 0 auto;
-  }
-
-  .is-empty .suggestions {
-    order: 1;
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* Mobile empty state: the composer stays at the bottom, with only two suggestions above it. */
-@media (max-width: 991.98px) {
-  .suggestion:nth-child(n + 3) {
-    display: none;
   }
 }

@@ -18,13 +18,6 @@ export class Chat {
   private readonly conversations = inject(ConversationService);
   private readonly router = inject(Router);
 
-  readonly suggestions = [
-    { icon: 'bi-stars', text: 'placeholder' },
-    { icon: 'bi-list-ul', text: 'placeholder' },
-    { icon: 'bi-arrow-left-right', text: 'placeholder' },
-    { icon: 'bi-shield-shaded', text: 'placeholder' },
-  ];
-
   private readonly conversationId = toSignal(
     inject(ActivatedRoute).paramMap.pipe(map(params => params.get('id'))),
     { initialValue: null }

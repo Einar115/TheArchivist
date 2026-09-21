@@ -1,0 +1,2488 @@
+{
+  "version": "2.17",
+  "children": [
+    {
+      "type": "frame",
+      "id": "ovXum",
+      "x": 0,
+      "y": -1104,
+      "name": "Sidebar",
+      "reusable": true,
+      "clip": true,
+      "width": 264,
+      "height": 1024,
+      "fill": "$bs-sidebar-bg",
+      "stroke": "$bs-card-bg",
+      "strokeWidth": {
+        "right": 1
+      },
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "NdEIP",
+          "name": "Sidebar Top",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            16,
+            12,
+            8,
+            12
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "mpUCg",
+              "name": "Brand Row",
+              "width": "fill_container",
+              "padding": [
+                4,
+                6
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EWe3q",
+                  "name": "Brand",
+                  "gap": 9,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "FLRIF",
+                      "name": "Brand Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "book",
+                      "library": "lucide",
+                      "fill": "$bs-link"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LYb5I",
+                      "name": "Brand Name",
+                      "fill": "$bs-white",
+                      "content": "TheArchivist",
+                      "fontFamily": "$font-body",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "B2YZ2",
+                  "name": "Collapse Icon",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "panel-left",
+                  "library": "lucide",
+                  "fill": "$bs-secondary-color"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "OCVOn",
+              "name": "New Chat Button",
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "stroke": "$bs-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": [
+                10,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "JVsHS",
+                  "name": "New Chat Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "square-pen",
+                  "library": "lucide",
+                  "fill": "$bs-body-color"
+                },
+                {
+                  "type": "text",
+                  "id": "PHRvm",
+                  "name": "New Chat Label",
+                  "fill": "$bs-body-color",
+                  "content": "Nuevo chat",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "M7jw2R",
+          "name": "Sidebar Nav",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 2,
+          "padding": [
+            8,
+            12
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Y2GGyx",
+              "name": "Nav Chat",
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "gap": 10,
+              "padding": [
+                9,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "N7ubX",
+                  "name": "Nav Chat Icon",
+                  "width": 17,
+                  "height": 17,
+                  "icon": "message-square",
+                  "library": "lucide",
+                  "fill": "$bs-secondary-color"
+                },
+                {
+                  "type": "text",
+                  "id": "vHFHl",
+                  "name": "Nav Chat Label",
+                  "fill": "$bs-body-color",
+                  "content": "Chat",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fudZg",
+              "name": "Nav Documentos",
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "gap": 10,
+              "padding": [
+                9,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "g4hhR",
+                  "name": "Nav Documentos Icon",
+                  "width": 17,
+                  "height": 17,
+                  "icon": "file-text",
+                  "library": "lucide",
+                  "fill": "$bs-secondary-color"
+                },
+                {
+                  "type": "text",
+                  "id": "d734BT",
+                  "name": "Nav Documentos Label",
+                  "fill": "$bs-body-color",
+                  "content": "Documentos",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MgvTN",
+              "name": "Admin Section Label",
+              "width": "fill_container",
+              "padding": [
+                18,
+                12,
+                6,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "rkhbC",
+                  "name": "Admin Section Text",
+                  "fill": "$bs-muted",
+                  "content": "ADMINISTRACIÓN",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 0.6
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "X4rju",
+              "name": "Nav Usuarios",
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "gap": 10,
+              "padding": [
+                9,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "c7MJT",
+                  "name": "Nav Usuarios Icon",
+                  "width": 17,
+                  "height": 17,
+                  "icon": "users",
+                  "library": "lucide",
+                  "fill": "$bs-secondary-color"
+                },
+                {
+                  "type": "text",
+                  "id": "MfemT",
+                  "name": "Nav Usuarios Label",
+                  "fill": "$bs-body-color",
+                  "content": "Usuarios",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DJODt",
+          "name": "Recents",
+          "clip": true,
+          "width": "fill_container",
+          "height": "fill_container",
+          "stroke": "$bs-card-bg",
+          "strokeWidth": {
+            "top": 1
+          },
+          "layout": "vertical",
+          "gap": 2,
+          "padding": [
+            14,
+            12,
+            8,
+            12
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "oOr8J",
+              "name": "Group HOY",
+              "width": "fill_container",
+              "padding": [
+                10,
+                12,
+                4,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "FBGUw",
+                  "name": "Group Label",
+                  "fill": "$bs-muted",
+                  "content": "HOY",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 0.6
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CahZ2",
+              "name": "Recent La caída del reino de Hyrule",
+              "clip": true,
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "padding": [
+                8,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "R9NwK",
+                  "name": "Title",
+                  "fill": "$bs-body-color",
+                  "content": "La caída del reino de Hyrule",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tjSsm",
+              "name": "Recent Bestiario de Elden Ring",
+              "clip": true,
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "padding": [
+                8,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "o7Ssao",
+                  "name": "Title",
+                  "fill": "$bs-body-color",
+                  "content": "Bestiario de Elden Ring",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "OdcMe",
+              "name": "Group ÚLTIMOS 7 DÍAS",
+              "width": "fill_container",
+              "padding": [
+                10,
+                12,
+                4,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "YIDFz",
+                  "name": "Group Label",
+                  "fill": "$bs-muted",
+                  "content": "ÚLTIMOS 7 DÍAS",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 0.6
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "R2Yq9",
+              "name": "Recent Objetos únicos de Dark Souls",
+              "clip": true,
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "padding": [
+                8,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "NMBbQ",
+                  "name": "Title",
+                  "fill": "$bs-body-color",
+                  "content": "Objetos únicos de Dark Souls",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XUuCE",
+              "name": "Recent Cronología de Mass Effect",
+              "clip": true,
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "padding": [
+                8,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vCEbx",
+                  "name": "Title",
+                  "fill": "$bs-body-color",
+                  "content": "Cronología de Mass Effect",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RuXV4",
+              "name": "Recent Los Sheikah y su tecnología",
+              "clip": true,
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "padding": [
+                8,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Qi54T",
+                  "name": "Title",
+                  "fill": "$bs-body-color",
+                  "content": "Los Sheikah y su tecnología",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Pc12d",
+              "name": "Recent Brujos de la Escuela del Lobo",
+              "clip": true,
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "padding": [
+                8,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "KfokU",
+                  "name": "Title",
+                  "fill": "$bs-body-color",
+                  "content": "Brujos de la Escuela del Lobo",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "f8I3Yx",
+          "name": "Sidebar Bottom",
+          "width": "fill_container",
+          "stroke": "$bs-card-bg",
+          "strokeWidth": {
+            "top": 1
+          },
+          "layout": "vertical",
+          "gap": 6,
+          "padding": 12,
+          "children": [
+            {
+              "type": "frame",
+              "id": "lOPBq",
+              "name": "Health Status",
+              "gap": 8,
+              "padding": [
+                4,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "KIcBM",
+                  "name": "Health Dot",
+                  "fill": "$bs-success",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "gfj40",
+                  "name": "Health Text",
+                  "fill": "$bs-secondary-color",
+                  "content": "Backend conectado",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ngrHa",
+              "name": "User Menu",
+              "width": "fill_container",
+              "cornerRadius": 8,
+              "gap": 10,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "O9pqlh",
+                  "name": "User Avatar",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bs-primary-subtle",
+                  "cornerRadius": 16,
+                  "stroke": "$bs-primary-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jxxH2",
+                      "name": "User Initials",
+                      "fill": "$bs-link",
+                      "content": "AD",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pzLut",
+                  "name": "User Text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "DhIv5",
+                      "name": "User Name",
+                      "fill": "$bs-white",
+                      "content": "admin",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "n4AHGR",
+                      "name": "User Role",
+                      "fill": "$bs-secondary-color",
+                      "content": "ADMIN_DOCUMENTS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "LjWL0",
+                  "name": "Logout Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "log-out",
+                  "library": "lucide",
+                  "fill": "$bs-secondary-color"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "q1vQ4",
+      "x": 344,
+      "y": -1104,
+      "name": "Composer",
+      "reusable": true,
+      "width": 760,
+      "fill": "$bs-card-bg",
+      "cornerRadius": 18,
+      "stroke": "$bs-border",
+      "strokeWidth": 1,
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#00000059",
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "blur": 24,
+        "spread": -6
+      },
+      "layout": "vertical",
+      "gap": 12,
+      "padding": [
+        14,
+        16,
+        12,
+        16
+      ],
+      "children": [
+        {
+          "type": "text",
+          "id": "bnZgn",
+          "name": "Input Text",
+          "fill": "$bs-muted",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Pregunta al Archivista…",
+          "lineHeight": 1.5,
+          "fontFamily": "$font-body",
+          "fontSize": 15,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "w2uK6",
+          "name": "Composer Bar",
+          "width": "fill_container",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "eU9dV",
+              "name": "Hint",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "k1XF4K",
+                  "name": "Hint Icon",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "library",
+                  "library": "lucide",
+                  "fill": "$bs-muted"
+                },
+                {
+                  "type": "text",
+                  "id": "oOixB",
+                  "name": "Hint Text",
+                  "fill": "$bs-muted",
+                  "content": "Responde con los documentos aprobados",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yA95v",
+              "name": "Send Button",
+              "width": 34,
+              "height": 34,
+              "fill": "$bs-primary",
+              "cornerRadius": 17,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "p0qnYL",
+                  "name": "Send Icon",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "arrow-up",
+                  "library": "lucide",
+                  "fill": "$bs-white"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "UX3n3",
+      "x": 1184,
+      "y": -1104,
+      "name": "Mobile Topbar",
+      "reusable": true,
+      "width": 390,
+      "height": 56,
+      "fill": "$bs-sidebar-bg",
+      "stroke": "$bs-card-bg",
+      "strokeWidth": {
+        "bottom": 1
+      },
+      "gap": 6,
+      "padding": [
+        0,
+        8
+      ],
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "kLa12",
+          "name": "Menu Button",
+          "width": 40,
+          "height": 40,
+          "cornerRadius": 8,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "M9PHf",
+              "name": "Menu Icon",
+              "width": 22,
+              "height": 22,
+              "icon": "menu",
+              "library": "lucide",
+              "fill": "$bs-body-color"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "FsKZS",
+          "name": "Brand Name",
+          "fill": "$bs-white",
+          "content": "TheArchivist",
+          "fontFamily": "$font-body",
+          "fontSize": 16,
+          "fontWeight": "600"
+        },
+        {
+          "type": "frame",
+          "id": "oB40p",
+          "name": "Spacer",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "orU2i",
+          "name": "Health",
+          "width": 24,
+          "height": 24,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "DDvSP",
+              "name": "Health Dot",
+              "fill": "$bs-success",
+              "width": 8,
+              "height": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "FFtYW",
+      "x": 0,
+      "y": 0,
+      "name": "Chat — Nueva conversación",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$bs-body-bg",
+      "children": [
+        {
+          "id": "aTszm",
+          "type": "ref",
+          "ref": "ovXum",
+          "name": "Sidebar",
+          "height": "fill_container",
+          "descendants": {
+            "Y2GGyx": {
+              "fill": "$bs-card-bg"
+            },
+            "N7ubX": {
+              "fill": "$bs-link"
+            },
+            "vHFHl": {
+              "fill": "$bs-white",
+              "fontWeight": "500"
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "U2UKPe",
+          "name": "Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 28,
+          "padding": 48,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "z4TTB",
+              "name": "Mark",
+              "width": 56,
+              "height": 56,
+              "fill": "$bs-primary-subtle",
+              "cornerRadius": 28,
+              "stroke": "$bs-primary-border",
+              "strokeWidth": 1,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "gKAk2",
+                  "name": "Icon",
+                  "width": 26,
+                  "height": 26,
+                  "icon": "book-open",
+                  "library": "lucide",
+                  "fill": "$bs-link"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cxUhb",
+              "name": "Greeting",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "evohS",
+                  "name": "Title",
+                  "fill": "$bs-white",
+                  "content": "¿Qué quieres saber del archivo?",
+                  "fontFamily": "$font-body",
+                  "fontSize": 30,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.6
+                },
+                {
+                  "type": "text",
+                  "id": "z0aqD",
+                  "name": "Subtitle",
+                  "fill": "$bs-secondary-color",
+                  "content": "El Archivista responde con los documentos que ha aprobado tu equipo.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "id": "eXK4O",
+              "type": "ref",
+              "ref": "q1vQ4",
+              "name": "Composer",
+              "width": 720
+            },
+            {
+              "type": "frame",
+              "id": "ZSQM6",
+              "name": "Suggestions",
+              "width": 720,
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vILFF",
+                  "name": "Suggestion Row 1",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "O2o0r",
+                      "name": "Suggestion",
+                      "width": "fill_container",
+                      "cornerRadius": 12,
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "gap": 12,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "LNlU8",
+                          "name": "Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "sparkles",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ebAq7",
+                          "name": "Text",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "¿Quién custodiaba la Trifuerza antes de la Calamidad?",
+                          "lineHeight": 1.45,
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rRzg7",
+                      "name": "Suggestion",
+                      "width": "fill_container",
+                      "cornerRadius": 12,
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "gap": 12,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "rqgZP",
+                          "name": "Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "list",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "f4bAb",
+                          "name": "Text",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Resume la caída del reino de Hyrule en cinco puntos",
+                          "lineHeight": 1.45,
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "be5E4",
+                  "name": "Suggestion Row 2",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "G8BlAM",
+                      "name": "Suggestion",
+                      "width": "fill_container",
+                      "cornerRadius": 12,
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "gap": 12,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "TMuMp",
+                          "name": "Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "git-compare",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "BsmIV",
+                          "name": "Text",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Compara la Escuela del Lobo con la del Grifo",
+                          "lineHeight": 1.45,
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "t1KPq",
+                      "name": "Suggestion",
+                      "width": "fill_container",
+                      "cornerRadius": 12,
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "gap": 12,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "UdDIv",
+                          "name": "Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "sword",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "QBsBk",
+                          "name": "Text",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "¿Qué objetos únicos aparecen en Dark Souls?",
+                          "lineHeight": 1.45,
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Bijzg",
+      "x": 1520,
+      "y": 0,
+      "name": "Chat — Conversación",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$bs-body-bg",
+      "children": [
+        {
+          "id": "Pv1Zy",
+          "type": "ref",
+          "ref": "ovXum",
+          "name": "Sidebar",
+          "height": "fill_container",
+          "descendants": {
+            "CahZ2": {
+              "fill": "$bs-card-bg"
+            },
+            "R9NwK": {
+              "fill": "$bs-white"
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "BWWxm",
+          "name": "Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "e4KbI",
+              "name": "Conversation Bar",
+              "width": "fill_container",
+              "height": 56,
+              "gap": 6,
+              "padding": [
+                0,
+                24
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iXaJl",
+                  "name": "Conversation Title",
+                  "fill": "$bs-body-color",
+                  "content": "La caída del reino de Hyrule",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "icon",
+                  "id": "Wsjko",
+                  "name": "Chevron",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-down",
+                  "library": "lucide",
+                  "fill": "$bs-muted"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "c9LLu",
+              "name": "Messages",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Vafxy",
+                  "name": "Thread",
+                  "width": 760,
+                  "layout": "vertical",
+                  "gap": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "er6m4",
+                      "name": "User Message",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "FaYiK",
+                          "name": "Bubble",
+                          "fill": "$bs-card-bg",
+                          "cornerRadius": 18,
+                          "padding": [
+                            11,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "rp4RT",
+                              "name": "Text",
+                              "fill": "$bs-white",
+                              "content": "¿Quién custodiaba la Trifuerza antes de la Calamidad?",
+                              "lineHeight": 1.5,
+                              "fontFamily": "$font-body",
+                              "fontSize": 15,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gAPtj",
+                      "name": "Assistant Message",
+                      "width": "fill_container",
+                      "gap": 14,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xFfoQ",
+                          "name": "Assistant Avatar",
+                          "width": 30,
+                          "height": 30,
+                          "fill": "$bs-primary-subtle",
+                          "cornerRadius": 15,
+                          "stroke": "$bs-primary-border",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "jzkui",
+                              "name": "Icon",
+                              "width": 15,
+                              "height": 15,
+                              "icon": "book-open",
+                              "library": "lucide",
+                              "fill": "$bs-link"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "zmCu0",
+                          "name": "Answer",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": [
+                            4,
+                            0,
+                            0,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "W9sa5",
+                              "name": "Paragraph",
+                              "fill": "$bs-body-color",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Según las crónicas del archivo, la familia real de Hyrule custodiaba los tres fragmentos de la Trifuerza, cada uno en un santuario distinto:",
+                              "lineHeight": 1.65,
+                              "fontFamily": "$font-body",
+                              "fontSize": 15,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "w0jnc",
+                              "name": "List",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 8,
+                              "padding": [
+                                0,
+                                0,
+                                0,
+                                4
+                              ],
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "hE4vm",
+                                  "name": "Item Poder",
+                                  "width": "fill_container",
+                                  "gap": 10,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "T5UiV",
+                                      "name": "Bullet",
+                                      "width": 6,
+                                      "height": 24,
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "ellipse",
+                                          "id": "zxf3q",
+                                          "name": "Dot",
+                                          "fill": "$bs-secondary-color",
+                                          "width": 5,
+                                          "height": 5
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "C745w",
+                                      "name": "Item Text",
+                                      "width": "fill_container",
+                                      "gap": 4,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "S9T2pB",
+                                          "name": "Term",
+                                          "fill": "$bs-white",
+                                          "content": "Poder:",
+                                          "lineHeight": 1.6,
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 15,
+                                          "fontWeight": "600"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "Q6PvS",
+                                          "name": "Desc",
+                                          "fill": "$bs-body-color",
+                                          "textGrowth": "fixed-width",
+                                          "width": "fill_container",
+                                          "content": "en el Santuario de la Ciudadela, bajo la protección de la guardia real.",
+                                          "lineHeight": 1.6,
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 15,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "V1AgzZ",
+                                  "name": "Item Sabiduría",
+                                  "width": "fill_container",
+                                  "gap": 10,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "n4vXdN",
+                                      "name": "Bullet",
+                                      "width": 6,
+                                      "height": 24,
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "ellipse",
+                                          "id": "js6FQ",
+                                          "name": "Dot",
+                                          "fill": "$bs-secondary-color",
+                                          "width": 5,
+                                          "height": 5
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "i3goT",
+                                      "name": "Item Text",
+                                      "width": "fill_container",
+                                      "gap": 4,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "x9ryv",
+                                          "name": "Term",
+                                          "fill": "$bs-white",
+                                          "content": "Sabiduría:",
+                                          "lineHeight": 1.6,
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 15,
+                                          "fontWeight": "600"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "Fgi86",
+                                          "name": "Desc",
+                                          "fill": "$bs-body-color",
+                                          "textGrowth": "fixed-width",
+                                          "width": "fill_container",
+                                          "content": "confiado a los Sheikah, junto a su tecnología ancestral.",
+                                          "lineHeight": 1.6,
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 15,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "O4kM2",
+                                  "name": "Item Valor",
+                                  "width": "fill_container",
+                                  "gap": 10,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "lWqgu",
+                                      "name": "Bullet",
+                                      "width": 6,
+                                      "height": 24,
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "ellipse",
+                                          "id": "gt73F",
+                                          "name": "Dot",
+                                          "fill": "$bs-secondary-color",
+                                          "width": 5,
+                                          "height": 5
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "UFsIy",
+                                      "name": "Item Text",
+                                      "width": "fill_container",
+                                      "gap": 4,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "bWbMu",
+                                          "name": "Term",
+                                          "fill": "$bs-white",
+                                          "content": "Valor:",
+                                          "lineHeight": 1.6,
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 15,
+                                          "fontWeight": "600"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "eS6l7",
+                                          "name": "Desc",
+                                          "fill": "$bs-body-color",
+                                          "textGrowth": "fixed-width",
+                                          "width": "fill_container",
+                                          "content": "oculto en el bosque, al cuidado de los guardianes del Árbol Deku.",
+                                          "lineHeight": 1.6,
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 15,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "xyra3",
+                              "name": "Paragraph",
+                              "fill": "$bs-body-color",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "El primer sello se rompió durante el eclipse de la luna escarlata, cuando los guardianes dejaron de responder a las órdenes de palacio.",
+                              "lineHeight": 1.65,
+                              "fontFamily": "$font-body",
+                              "fontSize": 15,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "HKH5C",
+                              "name": "Sources",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "padding": [
+                                4,
+                                0,
+                                0,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "pubQq",
+                                  "name": "Sources Label",
+                                  "fill": "$bs-muted",
+                                  "content": "Fuentes",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "dBdI5",
+                                  "name": "Source Chip",
+                                  "fill": "$bs-sidebar-bg",
+                                  "cornerRadius": 999,
+                                  "stroke": "$bs-border",
+                                  "strokeWidth": 1,
+                                  "gap": 6,
+                                  "padding": [
+                                    4,
+                                    10
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "a6SDf",
+                                      "name": "Icon",
+                                      "width": 13,
+                                      "height": 13,
+                                      "icon": "file-text",
+                                      "library": "lucide",
+                                      "fill": "$bs-secondary-color"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "DWHDO",
+                                      "name": "Name",
+                                      "fill": "$bs-secondary-color",
+                                      "content": "guia-zelda-breath-of-the-wild.pdf",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "VvCIg",
+                                  "name": "Source Chip",
+                                  "fill": "$bs-sidebar-bg",
+                                  "cornerRadius": 999,
+                                  "stroke": "$bs-border",
+                                  "strokeWidth": 1,
+                                  "gap": 6,
+                                  "padding": [
+                                    4,
+                                    10
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "rugPz",
+                                      "name": "Icon",
+                                      "width": 13,
+                                      "height": 13,
+                                      "icon": "file-text",
+                                      "library": "lucide",
+                                      "fill": "$bs-secondary-color"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "AqPuI",
+                                      "name": "Name",
+                                      "fill": "$bs-secondary-color",
+                                      "content": "leyendas-de-hyrule.md",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "RoCxu",
+                              "name": "Answer Actions",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "V5Uzv",
+                                  "name": "Copy Button",
+                                  "width": 30,
+                                  "height": 30,
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "h810S",
+                                      "name": "Icon",
+                                      "width": 15,
+                                      "height": 15,
+                                      "icon": "copy",
+                                      "library": "lucide",
+                                      "fill": "$bs-muted"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "lhcPU",
+                                  "name": "Regenerate Button",
+                                  "width": 30,
+                                  "height": 30,
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "BNQjK",
+                                      "name": "Icon",
+                                      "width": 15,
+                                      "height": 15,
+                                      "icon": "rotate-ccw",
+                                      "library": "lucide",
+                                      "fill": "$bs-muted"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EpoqS",
+                      "name": "User Message",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "t8ISgq",
+                          "name": "Bubble",
+                          "fill": "$bs-card-bg",
+                          "cornerRadius": 18,
+                          "padding": [
+                            11,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "R38N4",
+                              "name": "Text",
+                              "fill": "$bs-white",
+                              "content": "¿Y qué fue de los Sheikah después?",
+                              "lineHeight": 1.5,
+                              "fontFamily": "$font-body",
+                              "fontSize": 15,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DtPkm",
+                      "name": "Assistant Message",
+                      "width": "fill_container",
+                      "gap": 14,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "TFx69",
+                          "name": "Assistant Avatar",
+                          "width": 30,
+                          "height": 30,
+                          "fill": "$bs-primary-subtle",
+                          "cornerRadius": 15,
+                          "stroke": "$bs-primary-border",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "T2jtO",
+                              "name": "Icon",
+                              "width": 15,
+                              "height": 15,
+                              "icon": "book-open",
+                              "library": "lucide",
+                              "fill": "$bs-link"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DAdLO",
+                          "name": "Answer",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": [
+                            4,
+                            0,
+                            0,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "AcW7J",
+                              "name": "Streaming Line",
+                              "width": "fill_container",
+                              "gap": 3,
+                              "alignItems": "end",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "p96dn",
+                                  "name": "Partial",
+                                  "fill": "$bs-body-color",
+                                  "content": "Tras la caída del castillo, muchos Sheikah se refugiaron en la aldea de Kakariko y",
+                                  "lineHeight": 1.65,
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 15,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "rectangle",
+                                  "cornerRadius": 2,
+                                  "id": "GnuKN",
+                                  "name": "Caret",
+                                  "opacity": 0.7,
+                                  "fill": "$bs-body-color",
+                                  "width": 8,
+                                  "height": 17
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "M4IQeo",
+              "name": "Composer Area",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                8,
+                24,
+                16,
+                24
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "cZE7e",
+                  "type": "ref",
+                  "ref": "q1vQ4",
+                  "name": "Composer",
+                  "width": 760,
+                  "descendants": {
+                    "yA95v": {
+                      "fill": "$bs-white"
+                    },
+                    "p0qnYL": {
+                      "icon": "square",
+                      "fill": "#212529",
+                      "width": 13,
+                      "height": 13
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "U32cK",
+                  "name": "Disclaimer",
+                  "fill": "$bs-muted",
+                  "content": "El Archivista puede equivocarse. Comprueba la información en las fuentes.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "tPojr",
+      "x": 0,
+      "y": 1184,
+      "name": "Móvil — Nueva conversación",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bs-body-bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "KY7Eh",
+          "type": "ref",
+          "ref": "UX3n3",
+          "name": "Mobile Topbar",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "Cc3G8",
+          "name": "Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            0,
+            16,
+            16,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "oNMyo",
+              "name": "Hero",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 14,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "W2ZY8",
+                  "name": "Mark",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$bs-primary-subtle",
+                  "cornerRadius": 24,
+                  "stroke": "$bs-primary-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "K6Kbz",
+                      "name": "Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "book-open",
+                      "library": "lucide",
+                      "fill": "$bs-link"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Wh6BB",
+                  "name": "Title",
+                  "fill": "$bs-white",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "¿Qué quieres saber del archivo?",
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 22,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.4
+                },
+                {
+                  "type": "text",
+                  "id": "ViJZM",
+                  "name": "Subtitle",
+                  "fill": "$bs-secondary-color",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Responde con los documentos que ha aprobado tu equipo.",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pwcvR",
+              "name": "Suggestions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gjnCy",
+                  "name": "Suggestion",
+                  "width": "fill_container",
+                  "cornerRadius": 12,
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 10,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "e5HB4d",
+                      "name": "Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "sparkles",
+                      "library": "lucide",
+                      "fill": "$bs-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y8ITZR",
+                      "name": "Text",
+                      "fill": "$bs-body-color",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "¿Quién custodiaba la Trifuerza antes de la Calamidad?",
+                      "lineHeight": 1.45,
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Olti4",
+                  "name": "Suggestion",
+                  "width": "fill_container",
+                  "cornerRadius": 12,
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 10,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "ZlKOV",
+                      "name": "Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "list",
+                      "library": "lucide",
+                      "fill": "$bs-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "i7EJpD",
+                      "name": "Text",
+                      "fill": "$bs-body-color",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Resume la caída del reino de Hyrule",
+                      "lineHeight": 1.45,
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "e2s6v",
+              "type": "ref",
+              "ref": "q1vQ4",
+              "name": "Composer",
+              "width": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "k3YRa",
+      "x": 470,
+      "y": 1184,
+      "name": "Móvil — Conversación",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bs-body-bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "XVfg4",
+          "type": "ref",
+          "ref": "UX3n3",
+          "name": "Mobile Topbar",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "Er6dn",
+          "name": "Messages",
+          "clip": true,
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 22,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WPOFS",
+              "name": "User Message",
+              "width": "fill_container",
+              "padding": [
+                0,
+                0,
+                0,
+                48
+              ],
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "trt7k",
+                  "name": "Bubble",
+                  "width": "fill_container",
+                  "fill": "$bs-card-bg",
+                  "cornerRadius": 18,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Og7Vy",
+                      "name": "Text",
+                      "fill": "$bs-white",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "¿Quién custodiaba la Trifuerza antes de la Calamidad?",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wChYS",
+              "name": "Assistant Message",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TplHL",
+                  "name": "Assistant Avatar",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$bs-primary-subtle",
+                  "cornerRadius": 13,
+                  "stroke": "$bs-primary-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "joyCA",
+                      "name": "Icon",
+                      "width": 13,
+                      "height": 13,
+                      "icon": "book-open",
+                      "library": "lucide",
+                      "fill": "$bs-link"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "W9Yz7",
+                  "name": "Paragraph",
+                  "fill": "$bs-body-color",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Según las crónicas del archivo, la familia real de Hyrule custodiaba los tres fragmentos de la Trifuerza, cada uno en un santuario distinto: el Poder en la Ciudadela, la Sabiduría con los Sheikah y el Valor en el bosque.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "OIveh",
+                  "name": "Answer Footer",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "S8OKv",
+                      "name": "Sources Chip",
+                      "fill": "$bs-sidebar-bg",
+                      "cornerRadius": 999,
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "gap": 6,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "eV6iu",
+                          "name": "Icon",
+                          "width": 13,
+                          "height": 13,
+                          "icon": "library",
+                          "library": "lucide",
+                          "fill": "$bs-secondary-color"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yt50b",
+                          "name": "Label",
+                          "fill": "$bs-secondary-color",
+                          "content": "2 fuentes",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "FBfkB",
+                          "name": "Chevron",
+                          "width": 13,
+                          "height": 13,
+                          "icon": "chevron-down",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "S7gAeB",
+                      "name": "Answer Actions",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "V25St",
+                          "name": "Copy Button",
+                          "width": 34,
+                          "height": 34,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "wn3us",
+                              "name": "Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "copy",
+                              "library": "lucide",
+                              "fill": "$bs-muted"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "iabkv",
+                          "name": "Regenerate Button",
+                          "width": 34,
+                          "height": 34,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "svEGm",
+                              "name": "Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "rotate-ccw",
+                              "library": "lucide",
+                              "fill": "$bs-muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cuF9J",
+              "name": "User Message",
+              "width": "fill_container",
+              "padding": [
+                0,
+                0,
+                0,
+                48
+              ],
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TkTVx",
+                  "name": "Bubble",
+                  "width": "fill_container",
+                  "fill": "$bs-card-bg",
+                  "cornerRadius": 18,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "H0WRlP",
+                      "name": "Text",
+                      "fill": "$bs-white",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "¿Y qué fue de los Sheikah después?",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ANjTW",
+              "name": "Assistant Message",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "G2c2t",
+                  "name": "Assistant Avatar",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$bs-primary-subtle",
+                  "cornerRadius": 13,
+                  "stroke": "$bs-primary-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "F8t8rn",
+                      "name": "Icon",
+                      "width": 13,
+                      "height": 13,
+                      "icon": "book-open",
+                      "library": "lucide",
+                      "fill": "$bs-link"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Y9FyDC",
+                  "name": "Streaming",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Kh5Y2",
+                      "name": "Paragraph",
+                      "fill": "$bs-body-color",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Tras la caída del castillo, muchos Sheikah se refugiaron en la aldea de Kakariko y",
+                      "lineHeight": 1.6,
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "btGqo",
+                      "name": "Caret",
+                      "opacity": 0.7,
+                      "fill": "$bs-body-color",
+                      "width": 8,
+                      "height": 17
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "AzBI4",
+          "name": "Composer Area",
+          "width": "fill_container",
+          "fill": "$bs-body-bg",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            8,
+            12,
+            14,
+            12
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "L9W9U",
+              "type": "ref",
+              "ref": "q1vQ4",
+              "name": "Composer",
+              "width": "fill_container",
+              "descendants": {
+                "eU9dV": {
+                  "enabled": false
+                },
+                "yA95v": {
+                  "fill": "$bs-white"
+                },
+                "p0qnYL": {
+                  "icon": "square",
+                  "fill": "#212529",
+                  "width": 13,
+                  "height": 13
+                }
+              }
+            },
+            {
+              "type": "text",
+              "id": "JqJcE",
+              "name": "Disclaimer",
+              "fill": "$bs-muted",
+              "content": "El Archivista puede equivocarse. Comprueba las fuentes.",
+              "fontFamily": "$font-body",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "bs-body-bg": {
+      "type": "color",
+      "value": "#212529"
+    },
+    "bs-sidebar-bg": {
+      "type": "color",
+      "value": "#171A1D"
+    },
+    "bs-card-bg": {
+      "type": "color",
+      "value": "#2B3035"
+    },
+    "bs-input-bg": {
+      "type": "color",
+      "value": "#212529"
+    },
+    "bs-addon-bg": {
+      "type": "color",
+      "value": "#343A40"
+    },
+    "bs-border": {
+      "type": "color",
+      "value": "#495057"
+    },
+    "bs-body-color": {
+      "type": "color",
+      "value": "#DEE2E6"
+    },
+    "bs-secondary-color": {
+      "type": "color",
+      "value": "#ADB5BD"
+    },
+    "bs-muted": {
+      "type": "color",
+      "value": "#6C757D"
+    },
+    "bs-primary": {
+      "type": "color",
+      "value": "#0D6EFD"
+    },
+    "bs-primary-subtle": {
+      "type": "color",
+      "value": "#031633"
+    },
+    "bs-primary-border": {
+      "type": "color",
+      "value": "#084298"
+    },
+    "bs-link": {
+      "type": "color",
+      "value": "#6EA8FE"
+    },
+    "bs-success": {
+      "type": "color",
+      "value": "#75B798"
+    },
+    "bs-danger": {
+      "type": "color",
+      "value": "#EA868F"
+    },
+    "bs-danger-subtle": {
+      "type": "color",
+      "value": "#2C0B0E"
+    },
+    "bs-danger-border": {
+      "type": "color",
+      "value": "#842029"
+    },
+    "bs-white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "bs-radius": {
+      "type": "number",
+      "value": 6
+    },
+    "font-body": {
+      "type": "string",
+      "value": "Inter"
+    }
+  },
+  "fileToken": "159d5116-c715-4da7-a220-8d6afc5fc664"
+}

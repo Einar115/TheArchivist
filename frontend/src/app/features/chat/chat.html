@@ -80,17 +80,6 @@
   }
 
   <div class="composer-area">
-    @if (!conversation()) {
-      <div class="suggestions">
-        @for (suggestion of suggestions; track suggestion.text) {
-          <button type="button" class="suggestion" (click)="send(suggestion.text)">
-            <i class="bi text-body-tertiary" [class]="suggestion.icon"></i>
-            <span>{{ suggestion.text }}</span>
-          </button>
-        }
-      </div>
-    }
-
     <form class="composer" (submit)="$event.preventDefault(); send()">
       <textarea #input class="composer-input" rows="1" placeholder="Pregunta al Archivista…"
                 aria-label="Mensaje para el Archivista" [value]="draft()"

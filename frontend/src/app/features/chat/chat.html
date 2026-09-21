@@ -1,91 +1,118 @@
-<div class="container-fluid h-100 d-flex flex-column">
-  <div class="row flex-grow-1 g-0">
-    <!-- Chat Messages -->
-    <div class="col-lg-8 d-flex flex-column border-end">
-      <div class="bg-light p-3 border-bottom">
-        <h4 class="mb-0">The Archivist - Consultor de Lore</h4>
-      </div>
+<div class="chat-page" [class.is-empty]="!conversation()" data-bs-theme="dark">
+  @if (conversation(); as current) {
+    <div class="conversation-bar d-none d-lg-flex align-items-center px-4">
+      <h1 class="h6 fw-medium mb-0 text-truncate">{{ current.title }}</h1>
+    </div>
 
-      <div #messageContainer class="flex-grow-1 overflow-y-auto p-4" style="min-height: 0;">
-        @for (msg of messages(); track msg.timestamp) {
-          <div class="mb-3">
-            @if (msg.role === 'user') {
-              <div class="text-end">
-                <span class="badge bg-primary p-2 d-inline-block text-start" style="max-width: 70%;">
-                  {{ msg.content }}
-                </span>
+    <div #thread class="thread-scroll" role="log" [attr.aria-busy]="streaming()" (scroll)="onThreadScroll()">
+      <div class="thread mx-auto px-3 px-lg-4 py-4">
+        @for (message of current.messages; track message.id; let last = $last) {
+          @if (message.role === 'user') {
+            <div class="d-flex justify-content-end mb-4">
+              <div class="user-bubble">{{ message.content }}</div>
+            </div>
+          } @else {
+            <div class="d-flex flex-column flex-lg-row gap-2 gap-lg-3 mb-4">
+              <span class="assistant-avatar" aria-hidden="true"><i class="bi bi-book"></i></span>
+              <div class="flex-grow-1 min-w-0">
+                @if (message.status === 'streaming' && !message.content) {
+                  <div class="small text-body-secondary py-1">
+                    <span class="spinner-grow spinner-grow-sm me-2" aria-hidden="true"></span>Buscando en el archivo…
+                  </div>
+                } @else {
+                  <div class="answer markdown" [class.streaming]="message.status === 'streaming'" [innerHTML]="html(message)"></div>
+                }
+
+                @if (message.status === 'error') {
+                  <div class="alert alert-danger d-flex align-items-center gap-2 small py-2 mt-2 mb-0">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <span class="flex-grow-1">No se pudo obtener la respuesta.</span>
+                    @if (last) {
+                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="regenerate()">Reintentar</button>
+                    }
+                  </div>
+                }
+                @if (message.status === 'stopped') {
+                  <div class="small text-body-tertiary mt-2"><i class="bi bi-stop-circle me-1"></i>Respuesta detenida</div>
+                }
+
+                @if (message.sources.length) {
+                  <div class="d-flex flex-wrap align-items-center gap-2 mt-3">
+                    <span class="small fw-semibold text-body-tertiary">Fuentes</span>
+                    @for (source of message.sources; track source.documentId) {
+                      <span class="source-chip"><i class="bi bi-file-earmark-text"></i>{{ source.filename }}</span>
+                    }
+                  </div>
+                }
+
+                @if (message.status === 'done' || message.status === 'stopped') {
+                  <div class="answer-actions d-flex gap-1 mt-2">
+                    <button type="button" class="btn btn-sm btn-link" (click)="copy(message)"
+                            [attr.aria-label]="copiedId() === message.id ? 'Copiado' : 'Copiar respuesta'"
+                            [attr.title]="copiedId() === message.id ? 'Copiado' : 'Copiar'">
+                      <i class="bi" [class.bi-clipboard]="copiedId() !== message.id" [class.bi-check2]="copiedId() === message.id"></i>
+                    </button>
+                    @if (last) {
+                      <button type="button" class="btn btn-sm btn-link" (click)="regenerate()"
+                              aria-label="Regenerar respuesta" title="Regenerar">
+                        <i class="bi bi-arrow-clockwise"></i>
+                      </button>
+                    }
+                  </div>
+                }
               </div>
-              <small class="text-muted d-block text-end mt-1">
-                {{ msg.timestamp | date: 'short' }}
-              </small>
-            } @else {
-              <div class="text-start">
-                <span class="badge bg-secondary p-2 d-inline-block text-start" style="max-width: 70%;">
-                  {{ msg.content }}
-                </span>
-              </div>
-              <small class="text-muted d-block text-start mt-1">
-                {{ msg.timestamp | date: 'short' }}
-              </small>
-            }
-          </div>
-        }
-
-        @if (loading() && answer()) {
-          <div class="mb-3">
-            <span class="badge bg-secondary p-2 d-inline-block text-start" style="max-width: 70%;">
-              {{ answer() }}
-              <span class="ms-2">
-                <span class="spinner-border spinner-border-sm" role="status"></span>
-              </span>
-            </span>
-          </div>
+            </div>
+          }
         }
       </div>
-
-      <!-- Input Area -->
-      <div class="p-3 border-top bg-light">
-        <div class="input-group">
-          <textarea
-            [ngModel]="question()"
-            (ngModelChange)="question.set($event)"
-            (keydown)="onKeydown($event)"
-            class="form-control"
-            placeholder="Haz tu pregunta..."
-            rows="3"
-            [disabled]="loading()"
-          ></textarea>
-          <button
-            class="btn btn-primary"
-            (click)="sendMessage()"
-            [disabled]="!question().trim() || loading()"
-          >
-            @if (loading()) {
-              <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-              Enviando...
-            } @else {
-              <i class="bi bi-send"></i> Enviar
-            }
-          </button>
+    </div>
+  } @else {
+    <div class="empty d-flex flex-column justify-content-center align-items-center text-center px-3 py-4">
+      <span class="mark" aria-hidden="true"><i class="bi bi-book"></i></span>
+      <h1 class="h3 fw-semibold text-white mt-3 mb-2">¿Qué quieres saber del archivo?</h1>
+      <p class="text-body-secondary mb-0">El Archivista responde con los documentos que ha aprobado tu equipo.</p>
+      @if (missing()) {
+        <div class="alert alert-warning small py-2 mt-3 mb-0">
+          Esa conversación ya no está disponible: por ahora solo se guardan mientras dura la sesión.
         </div>
-        <small class="text-muted d-block mt-2">
-          Presiona Shift+Enter para nueva línea
-        </small>
-      </div>
+      }
     </div>
+  }
 
-    <!-- Sidebar Info (Optional) -->
-    <div class="col-lg-4 p-4 bg-light">
-      <h5>Información</h5>
-      <p class="text-muted small">
-        Esta es una aplicación RAG que consulta una base de datos de lore de videojuegos.
-      </p>
-      <hr />
-      <h6>Estadísticas</h6>
-      <ul class="small">
-        <li>Mensajes: {{ messages().length }}</li>
-        <li>Estado: {{ loading() ? 'Pensando...' : 'Listo' }}</li>
-      </ul>
-    </div>
+  <div class="composer-area">
+    @if (!conversation()) {
+      <div class="suggestions">
+        @for (suggestion of suggestions; track suggestion.text) {
+          <button type="button" class="suggestion" (click)="send(suggestion.text)">
+            <i class="bi text-body-tertiary" [class]="suggestion.icon"></i>
+            <span>{{ suggestion.text }}</span>
+          </button>
+        }
+      </div>
+    }
+
+    <form class="composer" (submit)="$event.preventDefault(); send()">
+      <textarea #input class="composer-input" rows="1" placeholder="Pregunta al Archivista…"
+                aria-label="Mensaje para el Archivista" [value]="draft()"
+                (input)="onInput($event)" (keydown)="onKeydown($event)"></textarea>
+      <div class="d-flex align-items-center justify-content-between gap-2 mt-2">
+        <span class="small text-body-tertiary text-truncate" [class.d-none]="!!conversation()" [class.d-lg-inline]="!!conversation()">
+          <i class="bi bi-collection me-2"></i>Responde con los documentos aprobados
+        </span>
+        @if (streaming()) {
+          <button type="button" class="composer-btn stop ms-auto" (click)="stop()" aria-label="Detener respuesta">
+            <i class="bi bi-stop-fill"></i>
+          </button>
+        } @else {
+          <button type="submit" class="composer-btn ms-auto" [disabled]="!draft().trim()" aria-label="Enviar">
+            <i class="bi bi-arrow-up"></i>
+          </button>
+        }
+      </div>
+    </form>
+
+    @if (conversation()) {
+      <p class="disclaimer">El Archivista puede equivocarse. Comprueba la información en las fuentes.</p>
+    }
   </div>
 </div>

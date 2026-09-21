@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
+ * Markdown rendered from chat answers (see core/utils/markdown.ts). It lives here because it reaches the page through
+ * [innerHTML], which component style encapsulation cannot target.
+ */
+.markdown > :first-child { margin-top: 0; }
+.markdown > :last-child { margin-bottom: 0; }
+.markdown p, .markdown ul, .markdown ol, .markdown pre { margin: 0 0 0.85rem; }
+.markdown ul, .markdown ol { padding-left: 1.25rem; }
+.markdown li + li { margin-top: 0.35rem; }
+.markdown h4, .markdown h5, .markdown h6 { margin: 1.25rem 0 0.5rem; color: var(--bs-emphasis-color); font-size: 1rem; font-weight: 600; }
+.markdown strong { color: var(--bs-emphasis-color); font-weight: 600; }
+.markdown code { padding: 0.1rem 0.3rem; border-radius: 0.25rem; color: var(--bs-emphasis-color); background-color: var(--bs-secondary-bg); font-size: 0.875em; }
+.markdown pre { padding: 0.75rem 1rem; overflow-x: auto; border: 1px solid var(--bs-border-color); border-radius: 0.5rem; background-color: var(--bs-body-bg); }
+.markdown pre code { padding: 0; background: none; }
+
+/* Blinking caret after the last block while an answer streams. */
+.markdown.streaming > :last-child::after {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background-color: currentColor;
+  opacity: 0.7;
+  animation: markdown-caret 1s steps(2, start) infinite;
+  content: "";
+}
+
+@keyframes markdown-caret {
+  to { visibility: hidden; }
+}

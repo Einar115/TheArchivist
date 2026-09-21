@@ -5,11 +5,14 @@ import { of } from 'rxjs';
 import { Shell } from './shell';
 import { HealthService } from '../core/services/health-service';
 import { AuthService } from '../core/services/auth-service';
+import { ConversationService } from '../core/services/conversation-service';
 import { AuthResponse } from '../core/models/auth.model';
+import { Conversation } from '../core/models/chat.model';
 
 describe('Shell', () => {
   const isHealthy = signal(true);
   const user = signal<AuthResponse | null>(null);
+  const conversations = signal<Conversation[]>([]);
 
   let fixture: ComponentFixture<Shell>;
 
@@ -18,14 +21,17 @@ describe('Shell', () => {
   beforeEach(async () => {
     isHealthy.set(true);
     user.set({ username: 'admin', roles: ['ADMIN_DOCUMENTS'] });
+    conversations.set([{ id: 'c1', title: 'La caída del reino de Hyrule', updatedAt: Date.now(), messages: [] }]);
 
     await TestBed.configureTestingModule({
       imports: [Shell],
       providers: [
-        provideRouter([]),
+        // Logging out navigates to /login, so the router needs a route to land on.
+        provideRouter([{ path: 'login', children: [] }]),
         // The real HealthService polls /actuator/health every 5 s; the indicator only reads the signal.
         { provide: HealthService, useValue: { isHealthy } },
         { provide: AuthService, useValue: { user, loadCurrentUser: () => of(null), logout: () => of(undefined) } },
+        { provide: ConversationService, useValue: { conversations, clear: () => conversations.set([]) } },
       ],
     }).compileComponents();
 
@@ -73,5 +79,15 @@ describe('Shell', () => {
     fixture.detectChanges();
 
     expect(text()).not.toContain('Administración');
+  });
+
+  it("lists this session's conversations under Hoy and drops them on logout", () => {
+    expect(text()).toContain('Hoy');
+    expect(text()).toContain('La caída del reino de Hyrule');
+
+    fixture.componentInstance.logout();
+    fixture.detectChanges();
+
+    expect(text()).not.toContain('La caída del reino de Hyrule');
   });
 });

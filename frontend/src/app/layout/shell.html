@@ -51,8 +51,20 @@
         }
       </nav>
 
-      <!-- Reserved for the recent conversations list, once the backend persists chat history. -->
-      <div class="flex-grow-1 overflow-y-auto px-3 mt-3"></div>
+      <!-- This session's conversations; ConversationService keeps them in memory until the backend stores history. -->
+      <div class="flex-grow-1 overflow-y-auto px-3 mt-3">
+        <div class="label" aria-label="Conversaciones recientes">
+          @for (group of recentGroups(); track group.label) {
+            <div class="sidebar-section px-3 pt-2 pb-1">{{ group.label }}</div>
+            @for (conversation of group.items; track conversation.id) {
+              <a [routerLink]="['/chat', conversation.id]" routerLinkActive="active" class="sidebar-link"
+                 [attr.title]="conversation.title" data-bs-dismiss="offcanvas" data-bs-target="#app-sidebar">
+                <span class="d-block text-truncate">{{ conversation.title }}</span>
+              </a>
+            }
+          }
+        </div>
+      </div>
 
       <div class="border-top p-3 d-flex flex-column gap-2">
         <!-- Backend Health Status, fed by HealthService polling /actuator/health -->

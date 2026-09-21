@@ -1,0 +1,206 @@
+/* The shell's <main> is a flex column: the chat fills it and only the thread scrolls. */
+:host,
+.chat-page {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chat-page {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
+.conversation-bar {
+  height: 3.5rem;
+  flex-shrink: 0;
+}
+
+.thread-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.empty {
+  flex: 1 1 auto;
+}
+
+.thread,
+.composer-area {
+  width: 100%;
+  max-width: 48rem;
+}
+
+.user-bubble {
+  max-width: 85%;
+  padding: 0.6875rem 1rem;
+  border-radius: 1.125rem;
+  color: var(--bs-emphasis-color);
+  background-color: var(--bs-tertiary-bg);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.assistant-avatar,
+.mark {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--bs-primary-border-subtle);
+  border-radius: 50%;
+  color: var(--bs-primary-text-emphasis);
+  background-color: var(--bs-primary-bg-subtle);
+}
+
+.assistant-avatar {
+  width: 1.875rem;
+  height: 1.875rem;
+  font-size: 0.875rem;
+}
+
+.mark {
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.5rem;
+}
+
+.answer {
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.source-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 50rem;
+  color: var(--bs-secondary-color);
+  background-color: #171a1d;
+  font-size: 0.75rem;
+}
+
+.answer-actions .btn {
+  --bs-btn-color: var(--bs-tertiary-color);
+  --bs-btn-hover-color: var(--bs-emphasis-color);
+  --bs-btn-padding-x: 0.5rem;
+}
+
+.composer-area {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 1rem;
+}
+
+.suggestions {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.suggestion {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.75rem;
+  color: var(--bs-body-color);
+  background: none;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.suggestion:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.composer {
+  padding: 0.875rem 1rem 0.75rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1.125rem;
+  background-color: var(--bs-tertiary-bg);
+  box-shadow: 0 0.5rem 1.5rem -0.375rem rgba(0, 0, 0, 0.35);
+}
+
+.composer:focus-within {
+  border-color: var(--bs-secondary-color);
+}
+
+.composer-input {
+  width: 100%;
+  max-height: 12.5rem;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  resize: none;
+  color: var(--bs-emphasis-color);
+  background: none;
+  line-height: 1.5;
+}
+
+.composer-input::placeholder {
+  color: var(--bs-tertiary-color);
+}
+
+.composer-btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.125rem;
+  height: 2.125rem;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background-color: var(--bs-primary);
+}
+
+.composer-btn:disabled {
+  opacity: 0.4;
+}
+
+.composer-btn.stop {
+  color: var(--bs-body-bg);
+  background-color: var(--bs-emphasis-color);
+}
+
+.disclaimer {
+  margin: 0;
+  color: var(--bs-tertiary-color);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* Desktop empty state: greeting, composer and suggestions sit together in the middle of the page. */
+@media (min-width: 992px) {
+  .chat-page.is-empty {
+    justify-content: center;
+  }
+
+  .is-empty .empty {
+    flex: 0 0 auto;
+  }
+
+  .is-empty .suggestions {
+    order: 1;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile empty state: the composer stays at the bottom, with only two suggestions above it. */
+@media (max-width: 991.98px) {
+  .suggestion:nth-child(n + 3) {
+    display: none;
+  }
+}

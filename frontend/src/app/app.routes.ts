@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { adminGuard } from './core/guards/admin-guard';
+import { adminGuard, uploaderGuard } from './core/guards/role-guard';
 
 export const routes: Routes = [
     // Outside the shell on purpose: no navbar, full viewport.
@@ -10,7 +10,12 @@ export const routes: Routes = [
         children: [
             { path: '', redirectTo: 'chat', pathMatch: 'full' },
             { path: 'chat', loadComponent: () => import('./features/chat/chat').then(m => m.Chat) },
-            { path: 'documents', loadComponent: () => import('./features/documents/documents').then(m => m.Documents) },
+            { path: 'chat/:id', loadComponent: () => import('./features/chat/chat').then(m => m.Chat) },
+            {
+                path: 'documents',
+                canActivate: [uploaderGuard],
+                loadComponent: () => import('./features/documents/documents').then(m => m.Documents),
+            },
             {
                 path: 'admin/users/new',
                 canActivate: [adminGuard],

@@ -1,7 +1,7 @@
 package com.einar115.thearchivist.service.impl;
 
-import com.einar115.thearchivist.entity.DocumentHistoryEntity;
-import com.einar115.thearchivist.repository.DocumentHistoryRepository;
+import com.einar115.thearchivist.entity.DocumentEntity;
+import com.einar115.thearchivist.repository.DocumentRepository;
 import com.einar115.thearchivist.repository.UserRepository;
 import com.einar115.thearchivist.service.IngestionService;
 import org.springframework.ai.document.Document;
@@ -23,13 +23,13 @@ public class IngestionServiceImpl implements IngestionService {
     private final VectorStore vectorStore;
     private final TokenTextSplitter splitter;
     private final UserRepository  userRepository;
-    private final DocumentHistoryRepository documentHistoryRepository;
+    private final DocumentRepository documentRepository;
 
-    public IngestionServiceImpl(VectorStore vectorStore, TokenTextSplitter splitter, UserRepository userRepository, DocumentHistoryRepository documentHistoryRepository) {
+    public IngestionServiceImpl(VectorStore vectorStore, TokenTextSplitter splitter, UserRepository userRepository, DocumentRepository documentRepository) {
         this.vectorStore = vectorStore;
         this.splitter = splitter;
         this.userRepository = userRepository;
-        this.documentHistoryRepository = documentHistoryRepository;
+        this.documentRepository = documentRepository;
     }
 
     @Override
@@ -70,23 +70,22 @@ public class IngestionServiceImpl implements IngestionService {
                 .strip();
 
         // Store in the DB with PENDING status
-        DocumentHistoryEntity history = new DocumentHistoryEntity();
-        history.setDocumentId(documentId);
-        history.setFilename(filename);
-        history.setFileSize(file.getSize());
-        history.setUser(userRepository.findById(userId).orElse(null));
-        history.setUploadedAt(Instant.now());
-        history.setContent(content);
-        history.setStatus(DocumentHistoryEntity.DocumentStatusEnum.PENDING);
+        DocumentEntity document = new DocumentEntity();
+        document.setFilename(filename);
+        document.setFileSize(file.getSize());
+        document.setUploadedBy(userRepository.findById(userId).orElse(null));
+        document.setUploadedAt(Instant.now());
+        document.setContent(content);
+        document.setStatus(DocumentEntity.DocumentStatusEnum.PENDING);
 
-        documentHistoryRepository.save(history);
-        return documentId.toString();
+        DocumentEntity saved = documentRepository.save(document);
+        return saved.getId().toString();
     }
 
     @Override
     public void approveDocument(UUID documentId) throws IOException {
-        DocumentHistoryEntity history = documentHistoryRepository
-                .findByDocumentId(documentId)
+        DocumentEntity history = documentRepository
+                .findById(documentId)
                 .orElseThrow(() -> new RuntimeException("Document not found: " + documentId));
 
         // Ingest into Qdrant from the stored content
@@ -95,7 +94,7 @@ public class IngestionServiceImpl implements IngestionService {
         );
 
         rawDocs.forEach(doc -> {
-            doc.getMetadata().put("documentId", documentId);
+            doc.getMetadata().put("documentId", documentId.toString());
             doc.getMetadata().put("source", history.getFilename());
             doc.getMetadata().put("uploadedAt", history.getUploadedAt().toString());
         });
@@ -104,9 +103,9 @@ public class IngestionServiceImpl implements IngestionService {
         vectorStore.add(chunks);
 
         // Update the status and count the chunks
-        history.setStatus(DocumentHistoryEntity.DocumentStatusEnum.APPROVED);
+        history.setStatus(DocumentEntity.DocumentStatusEnum.APPROVED);
         history.setChunkCount(chunks.size());
-        documentHistoryRepository.save(history);
+        documentRepository.save(history);
     }
 
     @Override
@@ -116,10 +115,10 @@ public class IngestionServiceImpl implements IngestionService {
                 .build();
         vectorStore.delete(filter);
 
-        documentHistoryRepository.findByDocumentId(UUID.fromString(documentId))
+        documentRepository.findById(UUID.fromString(documentId))
                 .ifPresent(history -> {
-                    history.setStatus(DocumentHistoryEntity.DocumentStatusEnum.REJECTED);
-                    documentHistoryRepository.save(history);
+                    history.setStatus(DocumentEntity.DocumentStatusEnum.REJECTED);
+                    documentRepository.save(history);
                 });
     }
 

@@ -1,4 +1,4 @@
-// Mirrors DocumentHistoryEntity.DocumentStatusEnum.
+// Mirrors DocumentEntity.DocumentStatusEnum.
 export type DocumentStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
 
 export interface IngestResponse {

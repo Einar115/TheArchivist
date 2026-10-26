@@ -4,11 +4,8 @@ WORKDIR /app
 
 RUN corepack enable
 
-COPY package.json pnpm-lock.yaml ./
-
-# pnpm 11 fails the install if there are unapproved build scripts. They are approved here.
-# so that the image does not depend on the local pnpm configuration.
-RUN printf 'allowBuilds:\n  "@parcel/watcher": true\n  esbuild: true\n  lmdb: true\n  msgpackr-extract: true\n' > pnpm-workspace.yaml
+# pnpm-workspace.yaml approves the dependency build scripts: pnpm fails the install on unapproved ones.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN pnpm install --frozen-lockfile
 

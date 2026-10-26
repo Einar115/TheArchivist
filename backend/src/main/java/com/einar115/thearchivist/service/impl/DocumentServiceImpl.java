@@ -7,7 +7,10 @@ import com.einar115.thearchivist.dto.response.SubmitResponse;
 import com.einar115.thearchivist.entity.DocumentEntity;
 import com.einar115.thearchivist.exception.DocumentNotFoundException;
 import com.einar115.thearchivist.exception.DuplicateDocumentException;
+import com.einar115.thearchivist.exception.InvalidDocumentFileException;
 import com.einar115.thearchivist.exception.InvalidDocumentStateException;
+import com.einar115.thearchivist.exception.UnreadableDocumentException;
+import com.einar115.thearchivist.exception.UnsupportedDocumentTypeException;
 import com.einar115.thearchivist.repository.DocumentRepository;
 import com.einar115.thearchivist.repository.UserRepository;
 import com.einar115.thearchivist.service.DocumentService;
@@ -18,6 +21,7 @@ import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +36,21 @@ import java.util.stream.Collectors;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
+
+    // Mirrors the filename column, VARCHAR(255).
+    private static final int MAX_FILENAME_LENGTH = 255;
+
+    // What Tika reports for the formats the frontend accepts: pdf, doc, docx, txt and md.
+    private static final Set<String> ALLOWED_MIME_TYPES = Set.of(
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "text/plain",
+            "text/markdown");
+
+    // Thread-safe and costly to build, so one instance is shared.
+    private static final Tika TIKA = new Tika();
+
     private final VectorStore vectorStore;
     private final TokenTextSplitter splitter;
     private final UserRepository  userRepository;
@@ -46,23 +65,35 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public SubmitResponse submit(MultipartFile file, DocumentMetadataRequest metadata, Integer userId) throws IOException {
-        String filename = file.getOriginalFilename();
-        byte[] bytes = file.getBytes();
-        String checksum = sha256Hex(bytes);
+        if (file.isEmpty()) {
+            throw new InvalidDocumentFileException("The file is empty");
+        }
+        String filename = baseName(file.getOriginalFilename());
+        if (filename.isBlank()) {
+            throw new InvalidDocumentFileException("The file has no name");
+        }
+        if (filename.length() > MAX_FILENAME_LENGTH) {
+            throw new InvalidDocumentFileException("The file name exceeds " + MAX_FILENAME_LENGTH + " characters");
+        }
 
+        byte[] bytes = file.getBytes();
+
+        // Detected from the bytes, with the name as a hint: the Content-Type sent by the browser is not trusted.
+        String mimeType = TIKA.detect(bytes, filename);
+        if (!ALLOWED_MIME_TYPES.contains(mimeType)) {
+            throw new UnsupportedDocumentTypeException(filename, mimeType);
+        }
+
+        String checksum = sha256Hex(bytes);
         if (documentRepository.existsByChecksumAndStatusNot(checksum, DocumentEntity.DocumentStatusEnum.REJECTED)) {
             throw new DuplicateDocumentException(checksum);
         }
 
-        String mimeType = new Tika().detect(bytes, filename);
-        // Process the file with Tika, reusing the bytes already in memory
-        var resource = new InputStreamResource(new ByteArrayInputStream(bytes), filename);
-        List<Document> rawDocs = new TikaDocumentReader(resource).get();
-        // Extract the combined content
-        String content = rawDocs.stream()
-                .map(Document::getText)
-                .collect(Collectors.joining("\n"))
-                .strip();
+        String content = extractText(bytes, filename);
+        // A scanned PDF has no text layer: storing it would leave a document that can never be approved.
+        if (content.isBlank()) {
+            throw new UnreadableDocumentException(filename);
+        }
 
         // Store in the DB with PENDING status
         DocumentEntity document = new DocumentEntity();
@@ -87,7 +118,16 @@ public class DocumentServiceImpl implements DocumentService {
         document.setAuthor(blankToNull(metadata.author()));
         document.setOriginUrl(blankToNull(metadata.originUrl()));
 
-        DocumentEntity saved = documentRepository.save(document);
+        DocumentEntity saved;
+        try {
+            saved = documentRepository.save(document);
+        } catch (DataIntegrityViolationException e) {
+            // Two uploads of the same file at once both pass the check above; the partial unique index stops the second.
+            if (documentRepository.existsByChecksumAndStatusNot(checksum, DocumentEntity.DocumentStatusEnum.REJECTED)) {
+                throw new DuplicateDocumentException(checksum);
+            }
+            throw e;
+        }
         // Built from the saved entity so the response carries the normalised values, not the raw form input.
         return new SubmitResponse(saved.getId(), saved.getFilename(), saved.getStatus().name(), saved.getUniverse(), saved.getLang());
     }
@@ -177,6 +217,27 @@ public class DocumentServiceImpl implements DocumentService {
         if (document.getTitle() != null) metadata.put("title", document.getTitle());
         if (document.getDocumentType() != null) metadata.put("documentType", document.getDocumentType().name());
         return metadata;
+    }
+
+    // Some browsers send the full client path, with either separator: keep only the name.
+    private static String baseName(String originalFilename) {
+        if (originalFilename == null) return "";
+        int lastSeparator = Math.max(originalFilename.lastIndexOf('/'), originalFilename.lastIndexOf('\\'));
+        return originalFilename.substring(lastSeparator + 1).strip();
+    }
+
+    private static String extractText(byte[] bytes, String filename) {
+        try {
+            var resource = new InputStreamResource(new ByteArrayInputStream(bytes), filename);
+            return new TikaDocumentReader(resource).get().stream()
+                    .map(Document::getText)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.joining("\n"))
+                    .strip();
+        } catch (RuntimeException e) {
+            // TikaDocumentReader wraps parser failures (a corrupt or password-protected PDF) in a RuntimeException.
+            throw new UnreadableDocumentException(filename, e);
+        }
     }
 
     // An optional field left empty in the form arrives as "" rather than being omitted.

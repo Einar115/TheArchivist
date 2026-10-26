@@ -33,6 +33,8 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.filter.Filter;
 import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.mock.web.MockMultipartFile;
 
 import java.nio.charset.StandardCharsets;
@@ -287,11 +289,13 @@ class DocumentServiceImplTest {
             UserEntity reviewer = new UserEntity();
             when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(document));
             when(userRepository.getReferenceById(REVIEWER_ID)).thenReturn(reviewer);
+            claimSucceeds();
 
             documentService.approve(DOCUMENT_ID, REVIEWER_ID);
 
-            // Previous vectors are cleared before adding, so a retried approve does not index twice.
+            // The review is claimed before Qdrant is touched; previous vectors are cleared before adding.
             InOrder order = inOrder(vectorStore, documentRepository);
+            order.verify(documentRepository).saveAndFlush(document);
             order.verify(vectorStore).delete(filterCaptor.capture());
             order.verify(vectorStore).add(chunksCaptor.capture());
             order.verify(documentRepository).save(document);
@@ -323,6 +327,7 @@ class DocumentServiceImplTest {
             document.setTitle(null);
             document.setDocumentType(null);
             when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(document));
+            claimSucceeds();
 
             documentService.approve(DOCUMENT_ID, REVIEWER_ID);
 
@@ -330,6 +335,56 @@ class DocumentServiceImplTest {
             assertThat(chunksCaptor.getValue().getFirst().getMetadata())
                     .doesNotContainKeys("work", "title", "documentType")
                     .containsKeys("documentId", "filename", "universe", "lang", "canonicity", "uploadedAt");
+        }
+
+        @Test
+        void stopsBeforeQdrantWhenAnotherAdminReviewedFirst() {
+            when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(pendingDocument()));
+            when(documentRepository.saveAndFlush(any(DocumentEntity.class)))
+                    .thenThrow(new ObjectOptimisticLockingFailureException(DocumentEntity.class, DOCUMENT_ID));
+
+            assertThatThrownBy(() -> documentService.approve(DOCUMENT_ID, REVIEWER_ID))
+                    .isInstanceOf(OptimisticLockingFailureException.class);
+
+            verifyNoInteractions(vectorStore);
+            verify(documentRepository, never()).save(any());
+        }
+
+        @Test
+        void discardsItsOwnChunksWhenTheDocumentChangedWhileIndexing() {
+            DocumentEntity document = pendingDocument();
+            when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(document));
+            claimSucceeds();
+            // Another admin rejected or deleted it while the chunks were being embedded.
+            when(documentRepository.save(any(DocumentEntity.class)))
+                    .thenThrow(new ObjectOptimisticLockingFailureException(DocumentEntity.class, DOCUMENT_ID));
+
+            assertThatThrownBy(() -> documentService.approve(DOCUMENT_ID, REVIEWER_ID))
+                    .isInstanceOf(OptimisticLockingFailureException.class);
+
+            verify(vectorStore).add(chunksCaptor.capture());
+            List<String> addedIds = chunksCaptor.getValue().stream().map(Document::getId).toList();
+            // By id, not by documentId: a concurrent approve that won keeps its own vectors.
+            verify(vectorStore).delete(addedIds);
+        }
+
+        @Test
+        void discardsItsOwnChunksWhenQdrantFailsHalfway() {
+            when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(pendingDocument()));
+            claimSucceeds();
+            doThrow(new IllegalStateException("Qdrant unavailable")).when(vectorStore).add(any());
+
+            assertThatThrownBy(() -> documentService.approve(DOCUMENT_ID, REVIEWER_ID))
+                    .isInstanceOf(IllegalStateException.class);
+
+            verify(vectorStore).add(chunksCaptor.capture());
+            verify(vectorStore).delete(chunksCaptor.getValue().stream().map(Document::getId).toList());
+            verify(documentRepository, never()).save(any());
+        }
+
+        // The claim returns the same instance, as merge would return the managed copy.
+        private void claimSucceeds() {
+            when(documentRepository.saveAndFlush(any(DocumentEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
         }
 
         @Test
@@ -436,17 +491,30 @@ class DocumentServiceImplTest {
 
         @ParameterizedTest
         @EnumSource(DocumentStatusEnum.class)
-        void removesVectorsBeforeDeletingRow(DocumentStatusEnum status) {
+        void flushesRowDeletionBeforeRemovingVectors(DocumentStatusEnum status) {
             DocumentEntity document = pendingDocument();
             document.setStatus(status);
             when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(document));
 
             documentService.delete(DOCUMENT_ID);
 
+            // The flush runs the version check before Qdrant is touched.
             InOrder order = inOrder(vectorStore, documentRepository);
-            order.verify(vectorStore).delete(filterCaptor.capture());
             order.verify(documentRepository).delete(document);
+            order.verify(documentRepository).flush();
+            order.verify(vectorStore).delete(filterCaptor.capture());
             assertThat(filterCaptor.getValue()).isEqualTo(documentIdFilter());
+        }
+
+        @Test
+        void leavesVectorsAloneWhenTheDocumentChangedMeanwhile() {
+            when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(pendingDocument()));
+            doThrow(new ObjectOptimisticLockingFailureException(DocumentEntity.class, DOCUMENT_ID)).when(documentRepository).flush();
+
+            assertThatThrownBy(() -> documentService.delete(DOCUMENT_ID))
+                    .isInstanceOf(OptimisticLockingFailureException.class);
+
+            verifyNoInteractions(vectorStore);
         }
 
         @Test
@@ -461,17 +529,16 @@ class DocumentServiceImplTest {
         }
 
         @Test
-        void keepsRowWhenVectorStoreFails() {
+        void propagatesVectorStoreFailureSoTheTransactionRollsBack() {
             DocumentEntity document = pendingDocument();
             document.setStatus(DocumentStatusEnum.APPROVED);
             when(documentRepository.findById(DOCUMENT_ID)).thenReturn(Optional.of(document));
             doThrow(new IllegalStateException("Qdrant unavailable")).when(vectorStore).delete(any(Filter.Expression.class));
 
+            // @Transactional rolls the row deletion back on this exception, so the delete can be retried from the UI.
+            // Without a Spring context the rollback itself is not exercised here, only that the failure escapes.
             assertThatThrownBy(() -> documentService.delete(DOCUMENT_ID))
                     .isInstanceOf(IllegalStateException.class);
-
-            // The row survives, so the delete can be retried from the UI.
-            verify(documentRepository, never()).delete(any());
         }
     }
 

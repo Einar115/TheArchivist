@@ -5,6 +5,7 @@ import com.einar115.thearchivist.dto.request.DocumentMetadataRequest;
 import com.einar115.thearchivist.dto.response.DocumentContentResponse;
 import com.einar115.thearchivist.dto.response.DocumentSummaryResponse;
 import com.einar115.thearchivist.dto.response.SubmitResponse;
+import com.einar115.thearchivist.entity.DocumentEntity;
 import com.einar115.thearchivist.entity.DocumentEntity.CanonicityEnum;
 import com.einar115.thearchivist.entity.DocumentEntity.DocumentStatusEnum;
 import com.einar115.thearchivist.entity.DocumentEntity.DocumentTypeEnum;
@@ -25,6 +26,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -251,9 +253,19 @@ class DocumentControllerTest {
         @Test
         void adminApprovesDocument() throws Exception {
             mockMvc.perform(post(BASE_URL + "/{id}/approve", DOCUMENT_ID).with(user(ADMIN)).with(csrf()))
-                    .andExpect(status().isOk());
+                    .andExpect(status().isNoContent());
 
             verify(documentService).approve(DOCUMENT_ID, 1);
+        }
+
+        @Test
+        void returnsConflictWhenAnotherAdminChangedItMeanwhile() throws Exception {
+            doThrow(new ObjectOptimisticLockingFailureException(DocumentEntity.class, DOCUMENT_ID))
+                    .when(documentService).approve(DOCUMENT_ID, 1);
+
+            mockMvc.perform(post(BASE_URL + "/{id}/approve", DOCUMENT_ID).with(user(ADMIN)).with(csrf()))
+                    .andExpect(status().isConflict())
+                    .andExpect(jsonPath("$.message").value("The document was modified by another user"));
         }
 
         @Test

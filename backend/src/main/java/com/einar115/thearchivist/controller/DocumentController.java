@@ -58,7 +58,7 @@ public class DocumentController {
     @PostMapping("/{id}/approve")
     public ResponseEntity<Void> approveDocument(@PathVariable UUID id, @AuthenticationPrincipal MainUser user) {
         documentService.approve(id, user.getId());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/reject")

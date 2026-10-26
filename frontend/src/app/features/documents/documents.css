@@ -274,7 +274,15 @@
   color: var(--bs-body-color);
 }
 
+/* Matches the extracted-text box: a recessed panel listing the files the metadata applies to. */
 .pending-files {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
   max-height: 7.5rem;
+  padding: 0.625rem 0.75rem;
   overflow-y: auto;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  background-color: var(--bs-body-bg);
 }

@@ -386,9 +386,14 @@ export class Documents {
   }
 
   meta(doc: DocumentSummary): string {
+    return `${doc.universe} · ${this.fileMeta(doc)}`;
+  }
+
+  // Without the universe: the preview already lists it with the rest of the metadata.
+  fileMeta(doc: DocumentSummary): string {
     const extension = doc.filename.split('.').pop()?.toUpperCase() ?? '';
     const chunks = doc.chunkCount ? ` · ${doc.chunkCount} fragmentos` : '';
-    return `${doc.universe} · ${extension} · ${this.formatSize(doc.fileSize)}${chunks}`;
+    return `${extension} · ${this.formatSize(doc.fileSize)}${chunks}`;
   }
 
   fileIcon(filename: string): string {

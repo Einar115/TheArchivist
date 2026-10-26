@@ -315,7 +315,7 @@
             <div class="d-flex flex-wrap align-items-center gap-3 small text-body-secondary">
               <span><i class="bi bi-person me-1"></i>{{ uploaderName(current.doc) }}</span>
               <span><i class="bi bi-calendar3 me-1"></i>{{ formatDate(current.doc.uploadedAt) }}, {{ formatTime(current.doc.uploadedAt) }}</span>
-              <span><i class="bi bi-file-earmark me-1"></i>{{ meta(current.doc) }}</span>
+              <span><i class="bi bi-file-earmark me-1"></i>{{ fileMeta(current.doc) }}</span>
               <span class="status-badge" [attr.data-status]="current.doc.status">{{ statusLabel[current.doc.status] }}</span>
             </div>
             <dl class="doc-metadata small mb-0">

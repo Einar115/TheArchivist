@@ -46,6 +46,11 @@ public class DocumentEntity {
     @Column(name = "reviewed_at")
     private Instant reviewedAt;
 
+    // Two admins reviewing the same document: the second save fails instead of silently overwriting the first.
+    @Version
+    @Column(name = "version", nullable = false)
+    private Long version;
+
     @Column(name = "checksum", length = 64, nullable = false)
     private String checksum;
 
@@ -162,6 +167,10 @@ public class DocumentEntity {
 
     public void setUploadedBy(UserEntity uploadedBy) {
         this.uploadedBy = uploadedBy;
+    }
+
+    public Long getVersion() {
+        return version;
     }
 
     public UUID getId() {

@@ -3,7 +3,10 @@ package com.einar115.thearchivist.exception.handler;
 import com.einar115.thearchivist.dto.response.ErrorResponse;
 import com.einar115.thearchivist.exception.DocumentNotFoundException;
 import com.einar115.thearchivist.exception.DuplicateDocumentException;
+import com.einar115.thearchivist.exception.InvalidDocumentFileException;
 import com.einar115.thearchivist.exception.InvalidDocumentStateException;
+import com.einar115.thearchivist.exception.UnreadableDocumentException;
+import com.einar115.thearchivist.exception.UnsupportedDocumentTypeException;
 import com.einar115.thearchivist.exception.UsernameAlreadyExistsException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -37,6 +40,25 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleDuplicateDocumentException(DuplicateDocumentException ex, HttpServletRequest request) {
         LOGGER.warn(ex.getMessage());
         return buildErrorResponse(ex, HttpStatus.CONFLICT, request);
+    }
+
+    @ExceptionHandler(InvalidDocumentFileException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidDocumentFileException(InvalidDocumentFileException ex, HttpServletRequest request) {
+        LOGGER.warn(ex.getMessage());
+        return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(UnsupportedDocumentTypeException.class)
+    public ResponseEntity<ErrorResponse> handleUnsupportedDocumentTypeException(UnsupportedDocumentTypeException ex, HttpServletRequest request) {
+        LOGGER.warn(ex.getMessage());
+        return buildErrorResponse(ex, HttpStatus.UNSUPPORTED_MEDIA_TYPE, request);
+    }
+
+    @ExceptionHandler(UnreadableDocumentException.class)
+    public ResponseEntity<ErrorResponse> handleUnreadableDocumentException(UnreadableDocumentException ex, HttpServletRequest request) {
+        // The cause, when there is one, is a parser failure worth keeping in the log.
+        LOGGER.warn(ex.getMessage(), ex.getCause());
+        return buildErrorResponse(ex, HttpStatus.UNPROCESSABLE_CONTENT, request);
     }
 
     @ExceptionHandler(DocumentNotFoundException.class)

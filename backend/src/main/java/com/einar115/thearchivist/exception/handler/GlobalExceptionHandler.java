@@ -11,6 +11,7 @@ import com.einar115.thearchivist.exception.UsernameAlreadyExistsException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -71,6 +72,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleInvalidDocumentStateException(InvalidDocumentStateException ex, HttpServletRequest request) {
         LOGGER.warn(ex.getMessage());
         return buildErrorResponse(ex, HttpStatus.CONFLICT, request);
+    }
+
+    // Raised by @Version when two admins act on the same document at once: the second one loses.
+    @ExceptionHandler(OptimisticLockingFailureException.class)
+    public ResponseEntity<ErrorResponse> handleOptimisticLockingFailureException(OptimisticLockingFailureException ex, HttpServletRequest request) {
+        LOGGER.warn("Concurrent modification on {}: {}", request.getRequestURI(), ex.getMessage());
+        // Fixed message on purpose: the original one names the entity class and its identifier.
+        return buildErrorResponse("The document was modified by another user", HttpStatus.CONFLICT, request);
     }
 
     // A path variable or request parameter that cannot be converted, such as a malformed UUID.

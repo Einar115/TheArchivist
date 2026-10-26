@@ -15,6 +15,8 @@ import com.einar115.thearchivist.repository.DocumentRepository;
 import com.einar115.thearchivist.repository.UserRepository;
 import com.einar115.thearchivist.service.DocumentService;
 import org.apache.tika.Tika;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
@@ -36,6 +38,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
     // Mirrors the filename column, VARCHAR(255).
     private static final int MAX_FILENAME_LENGTH = 255;
@@ -160,16 +164,27 @@ public class DocumentServiceImpl implements DocumentService {
             throw new InvalidDocumentStateException(id, document.getStatus());
         }
 
-        // Clears vectors left by a previous attempt whose save failed, so a retry does not index them twice.
-        vectorStore.delete(new FilterExpressionBuilder().eq("documentId", id.toString()).build());
-        vectorStore.add(chunks);
-
-        // Update the status and count the chunks
-        document.setStatus(DocumentEntity.DocumentStatusEnum.APPROVED);
+        // Claims the review before the slow indexing: the save bumps the version, so a concurrent approve or reject
+        // that loaded the same version fails here, before anything reaches Qdrant. If indexing then fails, the
+        // document stays PENDING with this reviewer recorded until the next attempt overwrites it.
         document.setReviewedBy(userRepository.getReferenceById(reviewerId));
         document.setReviewedAt(Instant.now());
-        document.setChunkCount(chunks.size());
-        documentRepository.save(document);
+        document = documentRepository.saveAndFlush(document);
+
+        // Clears vectors left by an attempt that crashed between indexing and saving, so a retry does not index them twice.
+        vectorStore.delete(new FilterExpressionBuilder().eq("documentId", id.toString()).build());
+
+        try {
+            vectorStore.add(chunks);
+
+            document.setStatus(DocumentEntity.DocumentStatusEnum.APPROVED);
+            document.setChunkCount(chunks.size());
+            // Fails with a version conflict if another admin rejected, approved or deleted it while it was indexing.
+            documentRepository.save(document);
+        } catch (RuntimeException e) {
+            discardChunks(chunks);
+            throw e;
+        }
     }
 
     @Override
@@ -195,14 +210,27 @@ public class DocumentServiceImpl implements DocumentService {
         DocumentEntity document = documentRepository.findById(id)
                 .orElseThrow(() -> new DocumentNotFoundException(id));
 
-        // Qdrant first: if it fails the row survives and the delete can be retried from the UI.
+        // The row first, flushed so the version check runs now: a document changed in the meantime fails here,
+        // before its vectors are touched. If Qdrant then fails, the transaction rolls the row back and the delete
+        // can be retried from the UI.
+        documentRepository.delete(document);
+        documentRepository.flush();
+
         // Done for every status, so it also cleans up vectors left behind by an approve that failed halfway.
         var filter = new FilterExpressionBuilder()
                 .eq("documentId", id.toString())
                 .build();
         vectorStore.delete(filter);
+    }
 
-        documentRepository.delete(document);
+    // Removes exactly the chunks this attempt added. Deleting by documentId instead could wipe the vectors of a
+    // concurrent approve that won. Best effort: the original failure is the one worth reporting.
+    private void discardChunks(List<Document> chunks) {
+        try {
+            vectorStore.delete(chunks.stream().map(Document::getId).toList());
+        } catch (RuntimeException e) {
+            LOGGER.warn("Could not discard {} chunks after a failed approve", chunks.size(), e);
+        }
     }
 
     private static Map<String, Object> chunkMetadata(DocumentEntity document) {

@@ -12,7 +12,10 @@ import com.einar115.thearchivist.entity.RoleEntity;
 import com.einar115.thearchivist.entity.UserEntity;
 import com.einar115.thearchivist.exception.DocumentNotFoundException;
 import com.einar115.thearchivist.exception.DuplicateDocumentException;
+import com.einar115.thearchivist.exception.InvalidDocumentFileException;
 import com.einar115.thearchivist.exception.InvalidDocumentStateException;
+import com.einar115.thearchivist.exception.UnreadableDocumentException;
+import com.einar115.thearchivist.exception.UnsupportedDocumentTypeException;
 import com.einar115.thearchivist.model.MainUser;
 import com.einar115.thearchivist.service.DocumentService;
 import org.junit.jupiter.api.Nested;
@@ -185,6 +188,32 @@ class DocumentControllerTest {
             mockMvc.perform(validSubmit().with(user(UPLOADER)).with(csrf()))
                     .andExpect(status().isContentTooLarge())
                     .andExpect(jsonPath("$.message").value("File exceeds the maximum upload size"));
+        }
+
+        @Test
+        void returnsBadRequestForInvalidFile() throws Exception {
+            when(documentService.submit(any(), any(), anyInt())).thenThrow(new InvalidDocumentFileException("The file is empty"));
+
+            mockMvc.perform(validSubmit().with(user(UPLOADER)).with(csrf()))
+                    .andExpect(status().isBadRequest())
+                    .andExpect(jsonPath("$.message").value("The file is empty"));
+        }
+
+        @Test
+        void returnsUnsupportedMediaTypeForDisallowedFormat() throws Exception {
+            when(documentService.submit(any(), any(), anyInt()))
+                    .thenThrow(new UnsupportedDocumentTypeException("cover.png", "image/png"));
+
+            mockMvc.perform(validSubmit().with(user(UPLOADER)).with(csrf()))
+                    .andExpect(status().isUnsupportedMediaType());
+        }
+
+        @Test
+        void returnsUnprocessableContentWhenNoTextCanBeExtracted() throws Exception {
+            when(documentService.submit(any(), any(), anyInt())).thenThrow(new UnreadableDocumentException("scan.pdf"));
+
+            mockMvc.perform(validSubmit().with(user(UPLOADER)).with(csrf()))
+                    .andExpect(status().isUnprocessableContent());
         }
 
         @Test

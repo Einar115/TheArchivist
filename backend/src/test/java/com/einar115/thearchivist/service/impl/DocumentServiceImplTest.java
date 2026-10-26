@@ -11,7 +11,10 @@ import com.einar115.thearchivist.entity.DocumentEntity.DocumentTypeEnum;
 import com.einar115.thearchivist.entity.UserEntity;
 import com.einar115.thearchivist.exception.DocumentNotFoundException;
 import com.einar115.thearchivist.exception.DuplicateDocumentException;
+import com.einar115.thearchivist.exception.InvalidDocumentFileException;
 import com.einar115.thearchivist.exception.InvalidDocumentStateException;
+import com.einar115.thearchivist.exception.UnreadableDocumentException;
+import com.einar115.thearchivist.exception.UnsupportedDocumentTypeException;
 import com.einar115.thearchivist.repository.DocumentRepository;
 import com.einar115.thearchivist.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +32,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.filter.Filter;
 import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mock.web.MockMultipartFile;
 
 import java.nio.charset.StandardCharsets;
@@ -160,6 +164,117 @@ class DocumentServiceImplTest {
                     .isInstanceOf(DuplicateDocumentException.class);
 
             verify(documentRepository, never()).save(any());
+        }
+
+        @Test
+        void acceptsMarkdown() throws Exception {
+            returnSavedEntity();
+            var markdown = new MockMultipartFile("file", "notas.md", "text/markdown", "# Hyrule\n\nLore notes.".getBytes(StandardCharsets.UTF_8));
+
+            documentService.submit(markdown, fullMetadata(), UPLOADER_ID);
+
+            verify(documentRepository).save(documentCaptor.capture());
+            assertThat(documentCaptor.getValue().getMimeType()).isEqualTo("text/markdown");
+        }
+
+        @Test
+        void keepsOnlyTheNameWhenTheBrowserSendsAPath() throws Exception {
+            returnSavedEntity();
+            var withPath = new MockMultipartFile("file", "C:\\fakepath\\hyrule-chronicles.txt", "text/plain", LORE_TEXT.getBytes(StandardCharsets.UTF_8));
+
+            SubmitResponse response = documentService.submit(withPath, fullMetadata(), UPLOADER_ID);
+
+            assertThat(response.filename()).isEqualTo("hyrule-chronicles.txt");
+        }
+
+        @Test
+        void rejectsEmptyFile() {
+            var empty = new MockMultipartFile("file", "empty.txt", "text/plain", new byte[0]);
+
+            assertThatThrownBy(() -> documentService.submit(empty, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(InvalidDocumentFileException.class);
+
+            verifyNoInteractions(documentRepository);
+        }
+
+        @Test
+        void rejectsFileWithoutName() {
+            var nameless = new MockMultipartFile("file", "", "text/plain", LORE_TEXT.getBytes(StandardCharsets.UTF_8));
+
+            assertThatThrownBy(() -> documentService.submit(nameless, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(InvalidDocumentFileException.class);
+
+            verifyNoInteractions(documentRepository);
+        }
+
+        @Test
+        void rejectsNameLongerThanTheColumn() {
+            var longName = new MockMultipartFile("file", "a".repeat(252) + ".txt", "text/plain", LORE_TEXT.getBytes(StandardCharsets.UTF_8));
+
+            assertThatThrownBy(() -> documentService.submit(longName, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(InvalidDocumentFileException.class);
+
+            verifyNoInteractions(documentRepository);
+        }
+
+        @Test
+        void rejectsUnsupportedTypeDetectedFromTheBytes() {
+            // A PNG renamed to .txt: the type comes from the content, not from the name or the browser's Content-Type.
+            byte[] png = {(byte) 0x89, 'P', 'N', 'G', '\r', '\n', 0x1a, '\n', 0, 0, 0, 0x0d, 'I', 'H', 'D', 'R'};
+            var disguised = new MockMultipartFile("file", "notes.txt", "text/plain", png);
+
+            assertThatThrownBy(() -> documentService.submit(disguised, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(UnsupportedDocumentTypeException.class)
+                    .hasMessageContaining("image/png");
+
+            verifyNoInteractions(documentRepository);
+        }
+
+        @Test
+        void rejectsDocumentWithoutText() {
+            var blank = new MockMultipartFile("file", "blank.txt", "text/plain", "   \n\n   ".getBytes(StandardCharsets.UTF_8));
+
+            assertThatThrownBy(() -> documentService.submit(blank, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(UnreadableDocumentException.class);
+
+            verify(documentRepository, never()).save(any());
+        }
+
+        @Test
+        void rejectsDocumentThatCannotBeParsed() {
+            var corrupt = new MockMultipartFile("file", "broken.pdf", "application/pdf", "%PDF-1.7\nnot really a pdf".getBytes(StandardCharsets.UTF_8));
+
+            assertThatThrownBy(() -> documentService.submit(corrupt, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(UnreadableDocumentException.class);
+
+            verify(documentRepository, never()).save(any());
+        }
+
+        @Test
+        void reportsConcurrentDuplicateCaughtByTheUniqueIndex() throws Exception {
+            String checksum = sha256(file.getBytes());
+            // The first check passes; by the time the row is inserted another upload of the same file has won.
+            when(documentRepository.existsByChecksumAndStatusNot(checksum, DocumentStatusEnum.REJECTED)).thenReturn(false, true);
+            when(documentRepository.save(any(DocumentEntity.class))).thenThrow(new DataIntegrityViolationException("uq_documents_checksum_active"));
+
+            assertThatThrownBy(() -> documentService.submit(file, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(DuplicateDocumentException.class);
+        }
+
+        @Test
+        void rethrowsIntegrityViolationsUnrelatedToDuplicates() throws Exception {
+            when(documentRepository.save(any(DocumentEntity.class))).thenThrow(new DataIntegrityViolationException("other constraint"));
+
+            assertThatThrownBy(() -> documentService.submit(file, fullMetadata(), UPLOADER_ID))
+                    .isInstanceOf(DataIntegrityViolationException.class);
+        }
+
+        private void returnSavedEntity() {
+            when(documentRepository.save(any(DocumentEntity.class))).thenAnswer(invocation -> {
+                DocumentEntity entity = invocation.getArgument(0);
+                entity.setId(DOCUMENT_ID);
+                return entity;
+            });
         }
     }
 

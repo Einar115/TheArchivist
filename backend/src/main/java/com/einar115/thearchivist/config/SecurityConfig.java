@@ -10,7 +10,6 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -55,7 +54,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,  "/api/v1/auth/me").permitAll()   // see CSRF note
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register").hasRole("ADMIN_DOCUMENTS")
                         .requestMatchers("/api/v1/chat/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,   "/api/v1/documents/ingest").hasRole("UPLOADER")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/documents").hasRole("UPLOADER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/documents/submit").hasRole("UPLOADER")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/documents/*/content").hasRole("ADMIN_DOCUMENTS")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/documents/*/approve", "/api/v1/documents/*/reject").hasRole("ADMIN_DOCUMENTS")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/documents/**").hasRole("ADMIN_DOCUMENTS")
                         .requestMatchers("/actuator/health", "/actuator/health/**", "/actuator/info").permitAll()
                         .requestMatchers("/actuator/**").hasRole("ADMIN_DOCUMENTS")

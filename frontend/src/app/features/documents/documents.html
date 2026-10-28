@@ -91,7 +91,7 @@
         </div>
         <div class="input-group search">
           <span class="input-group-text"><i class="bi bi-search"></i></span>
-          <input type="search" class="form-control" placeholder="Buscar por nombre o usuario"
+          <input type="search" class="form-control" placeholder="Buscar por nombre, universo o usuario"
                  aria-label="Buscar documentos" [value]="search()" (input)="onSearch($event)" />
         </div>
       </div>
@@ -151,7 +151,7 @@
                   </td>
                   @if (isAdmin()) {
                     <td class="text-nowrap">
-                      <span class="avatar me-2 d-inline-flex align-items-center justify-content-center rounded-circle bg-body-secondary fw-semibold">{{ initials(doc.uploadedBy) }}</span>{{ doc.uploadedBy }}
+                      <span class="avatar me-2 d-inline-flex align-items-center justify-content-center rounded-circle bg-body-secondary fw-semibold">{{ initials(doc.uploadedBy) }}</span>{{ uploaderName(doc) }}
                     </td>
                   }
                   <td class="text-nowrap">
@@ -222,7 +222,7 @@
               @if (isAdmin()) {
                 <div class="d-flex justify-content-between align-items-center gap-2 small">
                   <span class="text-body-secondary text-truncate">
-                    <span class="avatar me-2 d-inline-flex align-items-center justify-content-center rounded-circle bg-body-secondary fw-semibold">{{ initials(doc.uploadedBy) }}</span>{{ doc.uploadedBy }} · {{ formatDate(doc.uploadedAt) }}
+                    <span class="avatar me-2 d-inline-flex align-items-center justify-content-center rounded-circle bg-body-secondary fw-semibold">{{ initials(doc.uploadedBy) }}</span>{{ uploaderName(doc) }} · {{ formatDate(doc.uploadedAt) }}
                   </span>
                   <span class="status-badge" [attr.data-status]="doc.status">{{ statusLabel[doc.status] }}</span>
                 </div>
@@ -313,11 +313,22 @@
           </div>
           <div class="modal-body d-flex flex-column gap-3">
             <div class="d-flex flex-wrap align-items-center gap-3 small text-body-secondary">
-              <span><i class="bi bi-person me-1"></i>{{ current.doc.uploadedBy }}</span>
+              <span><i class="bi bi-person me-1"></i>{{ uploaderName(current.doc) }}</span>
               <span><i class="bi bi-calendar3 me-1"></i>{{ formatDate(current.doc.uploadedAt) }}, {{ formatTime(current.doc.uploadedAt) }}</span>
-              <span><i class="bi bi-file-earmark me-1"></i>{{ meta(current.doc) }}</span>
+              <span><i class="bi bi-file-earmark me-1"></i>{{ fileMeta(current.doc) }}</span>
               <span class="status-badge" [attr.data-status]="current.doc.status">{{ statusLabel[current.doc.status] }}</span>
             </div>
+            <dl class="doc-metadata small mb-0">
+              @if (current.doc.title) {
+                <dt>Título</dt><dd>{{ current.doc.title }}</dd>
+              }
+              <dt>Universo</dt><dd>{{ current.doc.universe }}{{ current.doc.work ? ' · ' + current.doc.work : '' }}</dd>
+              <dt>Idioma</dt><dd>{{ languageLabel(current.doc.lang) }}</dd>
+              <dt>Canonicidad</dt><dd>{{ canonicityLabel(current.doc.canonicity) }}</dd>
+              @if (current.doc.documentType) {
+                <dt>Tipo</dt><dd>{{ documentTypeLabel(current.doc.documentType) }}</dd>
+              }
+            </dl>
             @if (current.doc.status === 'PENDING') {
               <div class="alert alert-primary d-flex gap-2 small py-2 mb-0">
                 <i class="bi bi-info-circle"></i>
@@ -369,7 +380,7 @@
                 {{ current.kind === 'reject' ? 'Rechazar documento' : 'Eliminar documento' }}
               </h2>
               <div class="small text-body-tertiary text-truncate">
-                {{ current.doc.filename }}{{ current.kind === 'reject' ? ' · ' + current.doc.uploadedBy : '' }}
+                {{ current.doc.filename }}{{ current.kind === 'reject' ? ' · ' + uploaderName(current.doc) : '' }}
               </div>
             </div>
             <button type="button" class="btn-close ms-auto" aria-label="Cerrar" (click)="closeDialog()"
@@ -379,9 +390,12 @@
             @if (current.kind === 'reject') {
               <p>El documento no se añadirá al archivo y el chat no podrá usarlo.</p>
               <label for="reject-reason" class="form-label">Motivo <span class="text-body-tertiary">(opcional)</span></label>
-              <textarea id="reject-reason" class="form-control" rows="3" placeholder="Explica al autor por qué no se acepta…"
+              <!-- maxlength mirrors @Size(max = 500) on RejectRequest.reason. -->
+              <textarea id="reject-reason" class="form-control" rows="3" maxlength="500" placeholder="Explica al autor por qué no se acepta…"
                         [value]="rejectReason()" (input)="onReasonInput($event)"></textarea>
-              <div class="form-text">{{ current.doc.uploadedBy }} lo verá en «Mis envíos».</div>
+              @if (current.doc.uploadedBy) {
+                <div class="form-text">{{ current.doc.uploadedBy }} lo verá en «Mis envíos».</div>
+              }
             } @else {
               <p>
                 «{{ current.doc.filename }}»{{ current.doc.chunkCount ? ' y sus ' + current.doc.chunkCount + ' fragmentos' : '' }}
@@ -408,5 +422,113 @@
         </div>
       </div>
     }
+  </div>
+}
+
+@if (pendingFiles(); as files) {
+  <div class="modal-backdrop show"></div>
+  <div class="modal d-block" data-bs-theme="dark" tabindex="-1" role="dialog" aria-modal="true"
+       aria-labelledby="metadata-dialog-title" (click)="onBackdropClick($event)">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-lg-down">
+      <form class="modal-content" [formGroup]="metadataForm" (ngSubmit)="submitMetadata()" novalidate>
+        <div class="modal-header">
+          <div class="min-w-0">
+            <h2 class="modal-title h5" id="metadata-dialog-title">Datos del documento</h2>
+            <div class="small text-body-tertiary text-truncate">
+              @if (files.length === 1) {
+                {{ files[0].name }}
+              } @else {
+                {{ files.length }} archivos · los datos se aplicarán a todos
+              }
+            </div>
+          </div>
+          <button type="button" class="btn-close" aria-label="Cerrar" (click)="cancelMetadata()"></button>
+        </div>
+
+        <div class="modal-body">
+          @if (files.length > 1) {
+            <ul class="pending-files list-unstyled small text-body-secondary d-flex flex-column gap-1 p-2 mb-3 border rounded-3 bg-body">
+              @for (file of files; track $index) {
+                <li class="text-truncate"><i class="bi me-2" [class]="fileIcon(file.name)"></i>{{ file.name }}</li>
+              }
+            </ul>
+          }
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="meta-universe" class="form-label">Universo</label>
+              <input id="meta-universe" type="text" class="form-control" formControlName="universe" maxlength="100"
+                     placeholder="p. ej. The Witcher" [class.is-invalid]="isMetadataInvalid('universe')" />
+              <div class="invalid-feedback">Indica a qué universo pertenece.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="meta-work" class="form-label">Obra <span class="text-body-tertiary">(opcional)</span></label>
+              <input id="meta-work" type="text" class="form-control" formControlName="work" maxlength="150"
+                     placeholder="p. ej. The Witcher 3: Wild Hunt" />
+            </div>
+
+            @if (files.length === 1) {
+              <div class="col-12">
+                <label for="meta-title" class="form-label">Título <span class="text-body-tertiary">(opcional)</span></label>
+                <input id="meta-title" type="text" class="form-control" formControlName="title" maxlength="200"
+                       placeholder="Nombre legible para citarlo en el chat" />
+              </div>
+            }
+
+            <div class="col-md-4">
+              <label for="meta-lang" class="form-label">Idioma</label>
+              <select id="meta-lang" class="form-select" formControlName="lang" [class.is-invalid]="isMetadataInvalid('lang')">
+                @for (option of languageOptions; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="meta-canonicity" class="form-label">Canonicidad</label>
+              <select id="meta-canonicity" class="form-select" formControlName="canonicity"
+                      [class.is-invalid]="isMetadataInvalid('canonicity')">
+                <option value="" disabled>Elige una opción</option>
+                @for (option of canonicityOptions; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+              <div class="invalid-feedback">Elige la canonicidad.</div>
+            </div>
+            <div class="col-md-4">
+              <label for="meta-type" class="form-label">Tipo <span class="text-body-tertiary">(opcional)</span></label>
+              <select id="meta-type" class="form-select" formControlName="documentType">
+                <option value="">Sin especificar</option>
+                @for (option of documentTypeOptions; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            </div>
+            @for (option of canonicityOptions; track option.value) {
+              @if (metadataForm.controls.canonicity.value === option.value) {
+                <div class="col-12 form-text mt-1">{{ option.label }}: {{ option.hint }}</div>
+              }
+            }
+
+            <div class="col-md-6">
+              <label for="meta-author" class="form-label">Autor <span class="text-body-tertiary">(opcional)</span></label>
+              <input id="meta-author" type="text" class="form-control" formControlName="author" maxlength="150" />
+            </div>
+            <div class="col-md-6">
+              <label for="meta-url" class="form-label">URL de origen <span class="text-body-tertiary">(opcional)</span></label>
+              <input id="meta-url" type="url" class="form-control" formControlName="originUrl" maxlength="500"
+                     placeholder="https://…" [class.is-invalid]="isMetadataInvalid('originUrl')" />
+              <div class="invalid-feedback">Introduce una URL que empiece por http:// o https://.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer sheet-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-upload me-1"></i>{{ files.length === 1 ? 'Subir documento' : 'Subir ' + files.length + ' documentos' }}
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="cancelMetadata()">Cancelar</button>
+        </div>
+      </form>
+    </div>
   </div>
 }

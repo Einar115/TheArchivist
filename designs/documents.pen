@@ -1,5 +1,5 @@
 {
-  "version": "2.17",
+  "version": "2.21",
   "children": [
     {
       "type": "frame",
@@ -607,7 +607,8 @@
                           "fill": "$bs-secondary-color",
                           "content": "Pendientes",
                           "fontFamily": "$font-body",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "frame",
@@ -653,7 +654,8 @@
                           "fill": "$bs-secondary-color",
                           "content": "Aprobados",
                           "fontFamily": "$font-body",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "frame",
@@ -699,7 +701,8 @@
                           "fill": "$bs-secondary-color",
                           "content": "Rechazados",
                           "fontFamily": "$font-body",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "frame",
@@ -760,7 +763,7 @@
                       "id": "O5AURf",
                       "name": "Placeholder",
                       "fill": "$bs-muted",
-                      "content": "Buscar por nombre o usuario",
+                      "content": "Buscar por nombre, universo o usuario",
                       "fontFamily": "$font-body",
                       "fontSize": 14,
                       "fontWeight": "normal"
@@ -960,7 +963,7 @@
                               "id": "PtC76",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 2,4 MB",
+                              "content": "The Legend of Zelda · PDF · 2,4 MB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -1263,7 +1266,7 @@
                               "id": "cqFsZ",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "DOCX · 860 KB",
+                              "content": "Elden Ring · DOCX · 860 KB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -1566,7 +1569,7 @@
                               "id": "hy7jV",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "MD · 42 KB",
+                              "content": "Hollow Knight · MD · 42 KB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -1868,7 +1871,7 @@
                               "id": "C85JEZ",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 5,1 MB · 128 fragmentos",
+                              "content": "Mass Effect · PDF · 5,1 MB · 128 fragmentos",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -2122,7 +2125,7 @@
                               "id": "kF6SF",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "TXT · 310 KB",
+                              "content": "Dark Souls · TXT · 310 KB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -2352,7 +2355,7 @@
                               "id": "XGpIR",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 12,8 MB · 402 fragmentos",
+                              "content": "The Witcher · PDF · 12,8 MB · 402 fragmentos",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -2638,7 +2641,8 @@
                               "fill": "$bs-body-color",
                               "content": "2",
                               "fontFamily": "$font-body",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -2661,7 +2665,8 @@
                               "fill": "$bs-body-color",
                               "content": "3",
                               "fontFamily": "$font-body",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -3334,7 +3339,7 @@
                               "id": "hK3T7",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 2,4 MB",
+                              "content": "The Legend of Zelda · PDF · 2,4 MB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -3504,7 +3509,7 @@
                               "id": "T4YM3Y",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "MD · 42 KB",
+                              "content": "Hollow Knight · MD · 42 KB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -3674,7 +3679,7 @@
                               "id": "XZxm7",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 3,7 MB",
+                              "content": "The Legend of Zelda · PDF · 3,7 MB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -3844,7 +3849,7 @@
                               "id": "o5q0l",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "TXT · 18 KB",
+                              "content": "The Legend of Zelda · TXT · 18 KB",
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -3984,8 +3989,7 @@
               "x": 0,
               "y": 20
             },
-            "blur": 48,
-            "spread": -8
+            "blur": 48
           },
           "layout": "vertical",
           "children": [
@@ -4183,6 +4187,181 @@
                           "fontFamily": "$font-body",
                           "fontSize": 12,
                           "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DFDaj",
+                  "name": "Metadata List",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ulhZb",
+                      "name": "Row Título",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FBRPe",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 96,
+                          "content": "Título",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "f05Bvb",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Crónicas de Hyrule",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WJSoa",
+                      "name": "Row Universo",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gTE1T",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 96,
+                          "content": "Universo",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "nJ8tc",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "The Legend of Zelda · Breath of the Wild",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gkQuJ",
+                      "name": "Row Idioma",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EtaOH",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 96,
+                          "content": "Idioma",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "JPd6Z",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Español",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Z9emjP",
+                      "name": "Row Canonicidad",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "W6626",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 96,
+                          "content": "Canonicidad",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "b6Nle2",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Canon",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ipoUF",
+                      "name": "Row Tipo",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "DmxqK",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 96,
+                          "content": "Tipo",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "XBEhM",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Guía oficial",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -4431,8 +4610,7 @@
                   "x": 0,
                   "y": 20
                 },
-                "blur": 48,
-                "spread": -8
+                "blur": 48
               },
               "layout": "vertical",
               "children": [
@@ -4695,8 +4873,7 @@
                   "x": 0,
                   "y": 20
                 },
-                "blur": 48,
-                "spread": -8
+                "blur": 48
               },
               "layout": "vertical",
               "children": [
@@ -5177,7 +5354,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Pendientes",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -5225,7 +5403,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Aprobados",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -5273,7 +5452,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Rechazados",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -5334,7 +5514,7 @@
                   "id": "IGdz6",
                   "name": "Placeholder",
                   "fill": "$bs-muted",
-                  "content": "Buscar por nombre o usuario",
+                  "content": "Buscar por nombre, universo o usuario",
                   "fontFamily": "$font-body",
                   "fontSize": 14,
                   "fontWeight": "normal"
@@ -5418,7 +5598,10 @@
                               "id": "hmpLs",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 2,4 MB",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "The Legend of Zelda · PDF · 2,4 MB",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -5701,7 +5884,10 @@
                               "id": "rBieQ",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "DOCX · 860 KB",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Elden Ring · DOCX · 860 KB",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -5984,7 +6170,10 @@
                               "id": "RnnFo",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 5,1 MB · 128 fragmentos",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Mass Effect · PDF · 5,1 MB · 128 fragmentos",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -6228,7 +6417,10 @@
                               "id": "qcbRn",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "TXT · 310 KB",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Dark Souls · TXT · 310 KB",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -6738,7 +6930,10 @@
                               "id": "PaipO",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 2,4 MB · 18 sep",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "The Legend of Zelda · PDF · 2,4 MB · 18 sep",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -6858,7 +7053,10 @@
                               "id": "Q0xYDR",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "MD · 42 KB · 17 sep",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Hollow Knight · MD · 42 KB · 17 sep",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -6978,7 +7176,10 @@
                               "id": "YN0WR",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "PDF · 3,7 MB · 11 sep",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "The Legend of Zelda · PDF · 3,7 MB · 11 sep",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -7098,7 +7299,10 @@
                               "id": "IYKdT",
                               "name": "Meta",
                               "fill": "$bs-muted",
-                              "content": "TXT · 18 KB · 9 sep",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "The Legend of Zelda · TXT · 18 KB · 9 sep",
+                              "lineHeight": 1.4,
                               "fontFamily": "$font-body",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -7435,6 +7639,196 @@
                           "name": "Text",
                           "fill": "$bs-secondary-color",
                           "content": "PDF · 2,4 MB",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ET6PT",
+                  "name": "Metadata List",
+                  "width": "fill_container",
+                  "stroke": "$bs-border",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    10,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "pbWxJ",
+                      "name": "Row Título",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kamQJ",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 88,
+                          "content": "Título",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "od8qD",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Crónicas de Hyrule",
+                          "lineHeight": 1.4,
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "E5sODF",
+                      "name": "Row Universo",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "V5lXE2",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 88,
+                          "content": "Universo",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "lLHou",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "The Legend of Zelda · Breath of the Wild",
+                          "lineHeight": 1.4,
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fMaxg",
+                      "name": "Row Idioma",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "q0xwz",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 88,
+                          "content": "Idioma",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "oGgoK",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Español",
+                          "lineHeight": 1.4,
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cbVAr",
+                      "name": "Row Canonicidad",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XV8EW",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 88,
+                          "content": "Canonicidad",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "smSEE",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Canon",
+                          "lineHeight": 1.4,
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "d9h0t",
+                      "name": "Row Tipo",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "e7OXQY",
+                          "name": "Term",
+                          "fill": "$bs-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 88,
+                          "content": "Tipo",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "RRz0Y",
+                          "name": "Value",
+                          "fill": "$bs-body-color",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Guía oficial",
+                          "lineHeight": 1.4,
                           "fontFamily": "$font-body",
                           "fontSize": 12,
                           "fontWeight": "normal"
@@ -7824,7 +8218,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Pendientes",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -7872,7 +8267,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Aprobados",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -7920,7 +8316,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Rechazados",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -9450,7 +9847,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Pendientes",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -9498,7 +9896,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Aprobados",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -9546,7 +9945,8 @@
                       "fill": "$bs-secondary-color",
                       "content": "Rechazados",
                       "fontFamily": "$font-body",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -10890,6 +11290,2386 @@
                       ]
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "RDHTX",
+      "x": 4560,
+      "y": 0,
+      "name": "Documentos — Datos del documento",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "#0E1012",
+      "layout": "none",
+      "children": [
+        {
+          "type": "text",
+          "id": "kLpt8",
+          "x": 70,
+          "y": 64,
+          "name": "Caption Metadata Modal — Single",
+          "fill": "$bs-muted",
+          "content": "UN ARCHIVO",
+          "fontFamily": "$font-body",
+          "fontSize": 12,
+          "fontWeight": "600",
+          "letterSpacing": 0.6
+        },
+        {
+          "type": "frame",
+          "id": "pFpUZ",
+          "x": 70,
+          "y": 92,
+          "name": "Metadata Modal — Single",
+          "clip": true,
+          "width": 620,
+          "fill": "$bs-card-bg",
+          "cornerRadius": 12,
+          "stroke": "$bs-border",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000080",
+            "offset": {
+              "x": 0,
+              "y": 20
+            },
+            "blur": 48
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "zvvHK",
+              "name": "Modal Header",
+              "width": "fill_container",
+              "stroke": "$bs-border",
+              "strokeWidth": {
+                "bottom": 1
+              },
+              "gap": 14,
+              "padding": [
+                18,
+                24
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zs9ni",
+                  "name": "Header Text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gIgzt",
+                      "name": "Title",
+                      "fill": "$bs-white",
+                      "content": "Datos del documento",
+                      "fontFamily": "$font-body",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "s6SWN",
+                      "name": "Subtitle",
+                      "fill": "$bs-muted",
+                      "content": "cronicas-de-hyrule.pdf",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "hle66",
+                  "name": "Close Icon",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "x",
+                  "library": "lucide",
+                  "fill": "$bs-secondary-color"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "IgM0G",
+              "name": "Modal Body",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aEPuq",
+                  "name": "Row Universe",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "rYN5L",
+                      "name": "Field Universo",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "p6vjSv",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "CfIIR",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "Universo",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DgaqJ",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "JFSzE",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "The Legend of Zelda",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nnWpa",
+                      "name": "Field Obra",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "b5Gyg8",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "x09M4f",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "Obra",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Z7Cwz",
+                              "name": "Optional",
+                              "fill": "$bs-muted",
+                              "content": "(opcional)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "jhiXn",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Auwqq",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "Breath of the Wild",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VkkQE",
+                  "name": "Row Title",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MjbE0",
+                      "name": "Field Título",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "G7ouw",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uq7V9",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "Título",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "pogHp",
+                              "name": "Optional",
+                              "fill": "$bs-muted",
+                              "content": "(opcional)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "a1KvKV",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "nmvSh",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "Crónicas de Hyrule",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Hsv7U",
+                  "name": "Classification",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "UowJM",
+                      "name": "Row Classification",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "wWeXI",
+                          "name": "Field Idioma",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "M7JpR",
+                              "name": "Label Row",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "wdvqb",
+                                  "name": "Label",
+                                  "fill": "$bs-body-color",
+                                  "content": "Idioma",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "BLEZ9",
+                              "name": "Select",
+                              "width": "fill_container",
+                              "fill": "$bs-input-bg",
+                              "cornerRadius": "$bs-radius",
+                              "stroke": "$bs-border",
+                              "strokeWidth": 1,
+                              "gap": 8,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "KVGjl",
+                                  "name": "Value",
+                                  "fill": "$bs-body-color",
+                                  "content": "Español",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "LDeKI",
+                                  "name": "Chevron",
+                                  "width": 16,
+                                  "height": 16,
+                                  "icon": "chevron-down",
+                                  "library": "lucide",
+                                  "fill": "$bs-secondary-color"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Qy6W2",
+                          "name": "Field Canonicidad",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "f8rot",
+                              "name": "Label Row",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ZEjul",
+                                  "name": "Label",
+                                  "fill": "$bs-body-color",
+                                  "content": "Canonicidad",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "bHqAG",
+                              "name": "Select",
+                              "width": "fill_container",
+                              "fill": "$bs-input-bg",
+                              "cornerRadius": "$bs-radius",
+                              "stroke": "$bs-border",
+                              "strokeWidth": 1,
+                              "gap": 8,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "AYmfn",
+                                  "name": "Value",
+                                  "fill": "$bs-body-color",
+                                  "content": "Canon",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "Lwpt7",
+                                  "name": "Chevron",
+                                  "width": 16,
+                                  "height": 16,
+                                  "icon": "chevron-down",
+                                  "library": "lucide",
+                                  "fill": "$bs-secondary-color"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "qHrsp",
+                          "name": "Field Tipo",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "p0IYm",
+                              "name": "Label Row",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "D42DI",
+                                  "name": "Label",
+                                  "fill": "$bs-body-color",
+                                  "content": "Tipo",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "CFq6L",
+                                  "name": "Optional",
+                                  "fill": "$bs-muted",
+                                  "content": "(opcional)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "NInyt",
+                              "name": "Select",
+                              "width": "fill_container",
+                              "fill": "$bs-input-bg",
+                              "cornerRadius": "$bs-radius",
+                              "stroke": "$bs-border",
+                              "strokeWidth": 1,
+                              "gap": 8,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "E5G3H",
+                                  "name": "Value",
+                                  "fill": "$bs-body-color",
+                                  "content": "Guía oficial",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "OWmZd",
+                                  "name": "Chevron",
+                                  "width": 16,
+                                  "height": 16,
+                                  "icon": "chevron-down",
+                                  "library": "lucide",
+                                  "fill": "$bs-secondary-color"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "M8q9p",
+                      "name": "Canonicity Hint",
+                      "fill": "$bs-muted",
+                      "content": "Canon: Contenido oficial de la obra.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OsWqF",
+                  "name": "Row Source",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DdkVU",
+                      "name": "Field Autor",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "fEejq",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ayW2l",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "Autor",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "SYyu0",
+                              "name": "Optional",
+                              "fill": "$bs-muted",
+                              "content": "(opcional)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "pWQIs",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "o6aMH",
+                              "name": "Value",
+                              "fill": "$bs-body-color",
+                              "content": "Nintendo",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aMRai",
+                      "name": "Field URL de origen",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xLTWh",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "iUqwN",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "URL de origen",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "DIBmN",
+                              "name": "Optional",
+                              "fill": "$bs-muted",
+                              "content": "(opcional)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uUzfp",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "vl7Kr",
+                              "name": "Placeholder",
+                              "fill": "$bs-muted",
+                              "content": "https://…",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "f0A1mn",
+              "name": "Modal Footer",
+              "width": "fill_container",
+              "fill": "$bs-body-bg",
+              "stroke": "$bs-border",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 8,
+              "padding": [
+                14,
+                24
+              ],
+              "justifyContent": "end",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EG29l",
+                  "name": "Cancelar Button",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cYIz4",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Cancelar",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "G8rxLW",
+                  "name": "Submit Button",
+                  "fill": "$bs-primary",
+                  "cornerRadius": "$bs-radius",
+                  "gap": 6,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "c69T3c",
+                      "name": "Icon",
+                      "width": 15,
+                      "height": 15,
+                      "icon": "upload",
+                      "library": "lucide",
+                      "fill": "$bs-white"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YwHtG",
+                      "name": "Label",
+                      "fill": "$bs-white",
+                      "content": "Subir documento",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "J75akt",
+          "x": 750,
+          "y": 92,
+          "name": "Metadata Modal — Batch",
+          "clip": true,
+          "width": 620,
+          "fill": "$bs-card-bg",
+          "cornerRadius": 12,
+          "stroke": "$bs-border",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000080",
+            "offset": {
+              "x": 0,
+              "y": 20
+            },
+            "blur": 48
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Cb1wo",
+              "name": "Modal Header",
+              "width": "fill_container",
+              "stroke": "$bs-border",
+              "strokeWidth": {
+                "bottom": 1
+              },
+              "gap": 14,
+              "padding": [
+                18,
+                24
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Lsn1P",
+                  "name": "Header Text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PGHrK",
+                      "name": "Title",
+                      "fill": "$bs-white",
+                      "content": "Datos del documento",
+                      "fontFamily": "$font-body",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "s4avH",
+                      "name": "Subtitle",
+                      "fill": "$bs-muted",
+                      "content": "3 archivos · los datos se aplicarán a todos",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "DYt6s",
+                  "name": "Close Icon",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "x",
+                  "library": "lucide",
+                  "fill": "$bs-secondary-color"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "y2ldxn",
+              "name": "Modal Body",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "s0aqO",
+                  "name": "Pending Files",
+                  "width": "fill_container",
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": 8,
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "F80Kq",
+                      "name": "File guia-zelda-breath-of-the-wild.pdf",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "VWV1D",
+                          "name": "Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "file-text",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "d91ra",
+                          "name": "Name",
+                          "fill": "$bs-secondary-color",
+                          "content": "guia-zelda-breath-of-the-wild.pdf",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bJ29R",
+                      "name": "File bestiario-tears-of-the-kingdom.docx",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "B5po5",
+                          "name": "Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "file-type",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ont2W",
+                          "name": "Name",
+                          "fill": "$bs-secondary-color",
+                          "content": "bestiario-tears-of-the-kingdom.docx",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sNNbe",
+                      "name": "File notas-lore-majoras-mask.md",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Pyvvm",
+                          "name": "Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "file-code",
+                          "library": "lucide",
+                          "fill": "$bs-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Kt90P",
+                          "name": "Name",
+                          "fill": "$bs-secondary-color",
+                          "content": "notas-lore-majoras-mask.md",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n9ZqB",
+                  "name": "Row Universe",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ARY7j",
+                      "name": "Field Universo",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "kqvZD",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "WJOue",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "Universo",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ciNGe",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-danger",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "N6vM7",
+                              "name": "Placeholder",
+                              "fill": "$bs-muted",
+                              "content": "p. ej. The Witcher",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "yY4Aj",
+                              "name": "Invalid Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "circle-alert",
+                              "library": "lucide",
+                              "fill": "$bs-danger"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "IUYIt",
+                          "name": "Error",
+                          "fill": "$bs-danger",
+                          "content": "Indica a qué universo pertenece.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ZdrC4",
+                      "name": "Field Obra",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Z1pv2V",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "jR1pH",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "Obra",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "xsigy",
+                              "name": "Optional",
+                              "fill": "$bs-muted",
+                              "content": "(opcional)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "XWAKk",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "a23EJU",
+                              "name": "Placeholder",
+                              "fill": "$bs-muted",
+                              "content": "p. ej. Breath of the Wild",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wlcvU",
+                  "name": "Classification",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ryy0V",
+                      "name": "Row Classification",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "NTUTY",
+                          "name": "Field Idioma",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "dDZGl",
+                              "name": "Label Row",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "lW4ZU",
+                                  "name": "Label",
+                                  "fill": "$bs-body-color",
+                                  "content": "Idioma",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "N3t1a",
+                              "name": "Select",
+                              "width": "fill_container",
+                              "fill": "$bs-input-bg",
+                              "cornerRadius": "$bs-radius",
+                              "stroke": "$bs-border",
+                              "strokeWidth": 1,
+                              "gap": 8,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "C5aFJK",
+                                  "name": "Value",
+                                  "fill": "$bs-body-color",
+                                  "content": "Español",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "G1hVlz",
+                                  "name": "Chevron",
+                                  "width": 16,
+                                  "height": 16,
+                                  "icon": "chevron-down",
+                                  "library": "lucide",
+                                  "fill": "$bs-secondary-color"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "w1Zj5",
+                          "name": "Field Canonicidad",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "LtNTx",
+                              "name": "Label Row",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Y45u0",
+                                  "name": "Label",
+                                  "fill": "$bs-body-color",
+                                  "content": "Canonicidad",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "CkatF",
+                              "name": "Select",
+                              "width": "fill_container",
+                              "fill": "$bs-input-bg",
+                              "cornerRadius": "$bs-radius",
+                              "stroke": "$bs-danger",
+                              "strokeWidth": 1,
+                              "gap": 8,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "eDRiz",
+                                  "name": "Placeholder",
+                                  "fill": "$bs-muted",
+                                  "content": "Elige una opción",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "tMFC5",
+                                  "name": "Invalid Icon",
+                                  "width": 16,
+                                  "height": 16,
+                                  "icon": "circle-alert",
+                                  "library": "lucide",
+                                  "fill": "$bs-danger"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "WUZSM",
+                              "name": "Error",
+                              "fill": "$bs-danger",
+                              "content": "Elige la canonicidad.",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Gq8H9",
+                          "name": "Field Tipo",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "lYXPA",
+                              "name": "Label Row",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "zEnp5",
+                                  "name": "Label",
+                                  "fill": "$bs-body-color",
+                                  "content": "Tipo",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "aPjDw",
+                                  "name": "Optional",
+                                  "fill": "$bs-muted",
+                                  "content": "(opcional)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "B4c9Ke",
+                              "name": "Select",
+                              "width": "fill_container",
+                              "fill": "$bs-input-bg",
+                              "cornerRadius": "$bs-radius",
+                              "stroke": "$bs-border",
+                              "strokeWidth": 1,
+                              "gap": 8,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BtRDN",
+                                  "name": "Value",
+                                  "fill": "$bs-muted",
+                                  "content": "Sin especificar",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "gvsZU",
+                                  "name": "Chevron",
+                                  "width": 16,
+                                  "height": 16,
+                                  "icon": "chevron-down",
+                                  "library": "lucide",
+                                  "fill": "$bs-secondary-color"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "TOkSu",
+                  "name": "Row Source",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cNKpc",
+                      "name": "Field Autor",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "BOFES",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "x79PMd",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "Autor",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "GrfQg",
+                              "name": "Optional",
+                              "fill": "$bs-muted",
+                              "content": "(opcional)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "r16TsV",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "bAFT3",
+                              "name": "Placeholder",
+                              "fill": "$bs-muted",
+                              "content": " ",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JN48d",
+                      "name": "Field URL de origen",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "nIV9S",
+                          "name": "Label Row",
+                          "gap": 6,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Iy7Ot",
+                              "name": "Label",
+                              "fill": "$bs-body-color",
+                              "content": "URL de origen",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "y54ZB1",
+                              "name": "Optional",
+                              "fill": "$bs-muted",
+                              "content": "(opcional)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mAkTn",
+                          "name": "Input",
+                          "width": "fill_container",
+                          "fill": "$bs-input-bg",
+                          "cornerRadius": "$bs-radius",
+                          "stroke": "$bs-border",
+                          "strokeWidth": 1,
+                          "gap": 8,
+                          "padding": [
+                            9,
+                            12
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "z2YDfP",
+                              "name": "Placeholder",
+                              "fill": "$bs-muted",
+                              "content": "https://…",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u9Tek",
+              "name": "Modal Footer",
+              "width": "fill_container",
+              "fill": "$bs-body-bg",
+              "stroke": "$bs-border",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 8,
+              "padding": [
+                14,
+                24
+              ],
+              "justifyContent": "end",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "c5Nbja",
+                  "name": "Cancelar Button",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "p6XUDK",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Cancelar",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QXW8H",
+                  "name": "Submit Button",
+                  "fill": "$bs-primary",
+                  "cornerRadius": "$bs-radius",
+                  "gap": 6,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "T1Lor",
+                      "name": "Icon",
+                      "width": 15,
+                      "height": 15,
+                      "icon": "upload",
+                      "library": "lucide",
+                      "fill": "$bs-white"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Hjkad",
+                      "name": "Label",
+                      "fill": "$bs-white",
+                      "content": "Subir 3 documentos",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "NsSRR",
+          "x": 750,
+          "y": 64,
+          "name": "Caption Metadata Modal — Batch",
+          "fill": "$bs-muted",
+          "content": "VARIOS ARCHIVOS · VALIDACIÓN",
+          "fontFamily": "$font-body",
+          "fontSize": 12,
+          "fontWeight": "600",
+          "letterSpacing": 0.6
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "N2oF6",
+      "x": 2350,
+      "y": 1184,
+      "name": "Móvil — Datos del documento",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bs-body-bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "VsHmF",
+          "name": "Sheet Header",
+          "width": "fill_container",
+          "height": 60,
+          "fill": "$bs-sidebar-bg",
+          "stroke": "$bs-card-bg",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "gap": 4,
+          "padding": [
+            0,
+            8,
+            0,
+            4
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "TYgYv",
+              "name": "Close Button",
+              "width": 44,
+              "height": 44,
+              "cornerRadius": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "kQBfV",
+                  "name": "Icon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "x",
+                  "library": "lucide",
+                  "fill": "$bs-body-color"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ijIsK",
+              "name": "Header Text",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "f6XtM",
+                  "name": "Title",
+                  "fill": "$bs-white",
+                  "content": "Datos del documento",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "xeQ6d",
+                  "name": "Subtitle",
+                  "fill": "$bs-muted",
+                  "content": "cronicas-de-hyrule.pdf",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "pdYAf",
+          "name": "Sheet Body",
+          "clip": true,
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "vBN5V",
+              "name": "Field Universo",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "HknFl",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kb94N",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Universo",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "q0f8dD",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "T3v0Cw",
+                      "name": "Value",
+                      "fill": "$bs-body-color",
+                      "content": "The Legend of Zelda",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wqEvP",
+              "name": "Field Obra",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "oafSa",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "t2Lxh",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Obra",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WFd2n",
+                      "name": "Optional",
+                      "fill": "$bs-muted",
+                      "content": "(opcional)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sNHMm",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rrqPs",
+                      "name": "Value",
+                      "fill": "$bs-body-color",
+                      "content": "Breath of the Wild",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "PERrK",
+              "name": "Field Título",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "QpUEQ",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VazcL",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Título",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vjNJQ",
+                      "name": "Optional",
+                      "fill": "$bs-muted",
+                      "content": "(opcional)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ernXo",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Cvf6u",
+                      "name": "Value",
+                      "fill": "$bs-body-color",
+                      "content": "Crónicas de Hyrule",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yebYw",
+              "name": "Field Idioma",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "btk53",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "h8iu7",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Idioma",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Gqnjm",
+                  "name": "Select",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TsWI6",
+                      "name": "Value",
+                      "fill": "$bs-body-color",
+                      "content": "Español",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "A1rWp",
+                      "name": "Chevron",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$bs-secondary-color"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "X0GQ6h",
+              "name": "Field Canonicidad",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EoUw4",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "y2Z2K",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Canonicidad",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "H0z9dR",
+                  "name": "Select",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hI6Bp",
+                      "name": "Value",
+                      "fill": "$bs-body-color",
+                      "content": "Canon",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "N8ocTs",
+                      "name": "Chevron",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$bs-secondary-color"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "oHgcU",
+                  "name": "Canonicity Hint",
+                  "fill": "$bs-muted",
+                  "content": "Canon: Contenido oficial de la obra.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GKLPy",
+              "name": "Field Tipo",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ihzRW",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YVTAn",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Tipo",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lmrzk",
+                      "name": "Optional",
+                      "fill": "$bs-muted",
+                      "content": "(opcional)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LGYYE",
+                  "name": "Select",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ClxUo",
+                      "name": "Value",
+                      "fill": "$bs-body-color",
+                      "content": "Guía oficial",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "dt8wy",
+                      "name": "Chevron",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$bs-secondary-color"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MQU9U",
+              "name": "Field Autor",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ovkCO",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ykgRp",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "Autor",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xWiek",
+                      "name": "Optional",
+                      "fill": "$bs-muted",
+                      "content": "(opcional)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GFNtW",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sCu5r",
+                      "name": "Value",
+                      "fill": "$bs-body-color",
+                      "content": "Nintendo",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "I2cpt",
+              "name": "Field URL de origen",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "iRT6m",
+                  "name": "Label Row",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Q1HQX",
+                      "name": "Label",
+                      "fill": "$bs-body-color",
+                      "content": "URL de origen",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VoNNn",
+                      "name": "Optional",
+                      "fill": "$bs-muted",
+                      "content": "(opcional)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ENcRS",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": "$bs-radius",
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "s3kKSJ",
+                      "name": "Placeholder",
+                      "fill": "$bs-muted",
+                      "content": "https://…",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Y0FJG",
+          "name": "Sticky Footer",
+          "width": "fill_container",
+          "fill": "$bs-sidebar-bg",
+          "stroke": "$bs-card-bg",
+          "strokeWidth": {
+            "top": 1
+          },
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            12,
+            16,
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "S3W1n",
+              "name": "Submit Button",
+              "width": "fill_container",
+              "height": 46,
+              "fill": "$bs-primary",
+              "cornerRadius": 8,
+              "gap": 6,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "HPGGr",
+                  "name": "Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "upload",
+                  "library": "lucide",
+                  "fill": "$bs-white"
+                },
+                {
+                  "type": "text",
+                  "id": "HdLwN",
+                  "name": "Label",
+                  "fill": "$bs-white",
+                  "content": "Subir documento",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "o0SaFG",
+              "name": "Cancel Button",
+              "width": "fill_container",
+              "height": 46,
+              "cornerRadius": 8,
+              "stroke": "$bs-border",
+              "strokeWidth": 1,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "PzcQL",
+                  "name": "Label",
+                  "fill": "$bs-body-color",
+                  "content": "Cancelar",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "500"
                 }
               ]
             }

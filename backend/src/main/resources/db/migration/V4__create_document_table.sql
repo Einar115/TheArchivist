@@ -10,5 +10,5 @@ CREATE TABLE documents (
     FOREIGN KEY (uploaded_by) REFERENCES users(user_id) ON DELETE SET NULL
 );
 
-CREATE INDEX idx_documents_upload_by ON documents(uploaded_by);
+CREATE INDEX idx_documents_uploaded_by ON documents(uploaded_by);
 CREATE INDEX idx_documents_status ON documents(status);

@@ -447,7 +447,7 @@
 
         <div class="modal-body">
           @if (files.length > 1) {
-            <ul class="list-unstyled small text-body-secondary mb-3 pending-files">
+            <ul class="pending-files list-unstyled small text-body-secondary d-flex flex-column gap-1 p-2 mb-3 border rounded-3 bg-body">
               @for (file of files; track $index) {
                 <li class="text-truncate"><i class="bi me-2" [class]="fileIcon(file.name)"></i>{{ file.name }}</li>
               }

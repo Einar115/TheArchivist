@@ -8,17 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AiConfig {
 
-    static final String SYSTEM_PROMPT = """
-            You are The Archivist, a lore expert. Answer questions exclusively based on the provided context.
-            If the answer is not found in the context, say so clearly — never invent information.
-            Cite the source of your information when possible.
-            """;
 
+    // The system prompt is set per request by ChatServiceImpl, next to the context it describes (see ChatPrompts).
     @Bean
     public ChatClient chatClient(ChatClient.Builder builder) {
-        return builder
-                .defaultSystem(SYSTEM_PROMPT)
-                .build();
+        return builder.build();
     }
 
     @Bean

@@ -48,10 +48,12 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: ${CHAT_MODEL:qwen3:1.7b}
+        model: ${CHAT_MODEL:qwen3:8b}
         temperature: 0.3
+        num-ctx: 8192
+        think: false
       embedding:
-        model: ${EMBEDDING_MODEL:nomic-embed-text}
+        model: ${EMBEDDING_MODEL:qwen3-embedding:0.6b}
 
     vectorstore:
       qdrant:

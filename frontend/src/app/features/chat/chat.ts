@@ -3,7 +3,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ConversationService } from '../../core/services/conversation-service';
-import { ChatMessage } from '../../core/models/chat.model';
+import { ChatMessage, ChatSource } from '../../core/models/chat.model';
+import { Canonicity } from '../../core/models/documents.model';
 import { renderMarkdown } from '../../core/utils/markdown';
 
 // How close to the bottom still counts as "following" the answer while it streams.
@@ -30,6 +31,13 @@ export class Chat {
 
   readonly draft = signal('');
   readonly copiedId = signal<string | null>(null);
+
+  // CANON is the norm, so only the other values get a tag next to the source.
+  readonly canonicityTag: Partial<Record<Canonicity, string>> = {
+    SEMI_CANON: 'Semicanon',
+    NON_CANON: 'No canon',
+    SPECULATION: 'Especulación',
+  };
 
   private readonly thread = viewChild<ElementRef<HTMLElement>>('thread');
   private readonly input = viewChild<ElementRef<HTMLTextAreaElement>>('input');
@@ -70,6 +78,10 @@ export class Chat {
   stop(): void {
     const current = this.conversation();
     if (current) this.conversations.stop(current.id);
+  }
+
+  sourceSetting(source: ChatSource): string {
+    return [source.universe, source.work].filter(Boolean).join(' · ');
   }
 
   regenerate(): void {

@@ -37,10 +37,16 @@
                 }
 
                 @if (message.sources.length) {
+                  <!-- The documents the search returned, numbered like the [N] citations in the answer. -->
                   <div class="d-flex flex-wrap align-items-center gap-2 mt-3">
-                    <span class="small fw-semibold text-body-tertiary">Fuentes</span>
+                    <span class="small fw-semibold text-body-tertiary">Documentos consultados</span>
                     @for (source of message.sources; track source.documentId) {
-                      <span class="source-chip"><i class="bi bi-file-earmark-text"></i>{{ source.filename }}</span>
+                      <span class="source-chip" [attr.title]="sourceSetting(source) || null">
+                        <span class="source-number">{{ source.number }}</span>{{ source.title }}
+                        @if (source.canonicity && canonicityTag[source.canonicity]; as tag) {
+                          <span class="source-tag">{{ tag }}</span>
+                        }
+                      </span>
                     }
                   </div>
                 }

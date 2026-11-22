@@ -70,7 +70,10 @@ export class ConversationService {
 
   private stream(id: string, question: string): void {
     const subscription = this.chat.ask(question).subscribe({
-      next: token => this.patchLast(id, last => ({ ...last, content: last.content + token })),
+      next: event =>
+        this.patchLast(id, last =>
+          event.type === 'sources' ? { ...last, sources: event.sources } : { ...last, content: last.content + event.text }
+        ),
       error: () => this.finish(id, 'error'),
       complete: () => this.finish(id, 'done'),
     });

@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ChatRequest } from '../models/chat.model';
+import { ChatRequest, ChatSource, ChatStreamEvent } from '../models/chat.model';
 import { environment } from '../../../environments/environment';
 import { readCookie } from '../utils/cookie';
-import { SseParser } from '../utils/sse-parser';
+import { SseEvent, SseParser } from '../utils/sse-parser';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
   private readonly apiUrl = `${environment.BACKEND_URL}/api/v1/chat`;
 
-  /** Streams the answer token by token. Unsubscribing aborts the request, which is how the UI stops an answer. */
-  ask(question: string): Observable<string> {
-    return new Observable<string>(subscriber => {
+  /**
+   * Streams the sources the answer is built from, then the answer token by token. Unsubscribing aborts the request,
+   * which is how the UI stops an answer.
+   */
+  ask(question: string): Observable<ChatStreamEvent> {
+    return new Observable<ChatStreamEvent>(subscriber => {
       const controller = new AbortController();
       const request: ChatRequest = { question };
 
@@ -38,12 +41,14 @@ export class ChatService {
         const decoder = new TextDecoder();
         const parser = new SseParser();
 
+        const emit = (event: SseEvent) => subscriber.next(toStreamEvent(event));
+
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          parser.push(decoder.decode(value, { stream: true })).forEach(token => subscriber.next(token));
+          parser.push(decoder.decode(value, { stream: true })).forEach(emit);
         }
-        [...parser.push(decoder.decode()), ...parser.end()].forEach(token => subscriber.next(token));
+        [...parser.push(decoder.decode()), ...parser.end()].forEach(emit);
         subscriber.complete();
       };
 
@@ -55,4 +60,10 @@ export class ChatService {
       return () => controller.abort();
     });
   }
+}
+
+function toStreamEvent(event: SseEvent): ChatStreamEvent {
+  return event.event === 'sources'
+    ? { type: 'sources', sources: JSON.parse(event.data) as ChatSource[] }
+    : { type: 'token', text: event.data };
 }

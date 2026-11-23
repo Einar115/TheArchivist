@@ -88,6 +88,15 @@
   font-size: 0.75rem;
 }
 
+.source-number {
+  color: var(--bs-tertiary-color);
+  font-weight: 600;
+}
+
+.source-tag {
+  color: var(--bs-warning-text-emphasis);
+}
+
 .answer-actions .btn {
   --bs-btn-color: var(--bs-tertiary-color);
   --bs-btn-hover-color: var(--bs-emphasis-color);

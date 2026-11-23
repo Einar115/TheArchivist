@@ -2,7 +2,9 @@ package com.einar115.thearchivist.controller;
 
 import com.einar115.thearchivist.dto.request.ChatRequest;
 import com.einar115.thearchivist.service.ChatService;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,7 @@ public class ChatController {
     }
 
     @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> chat(@RequestBody ChatRequest request) {
+    public Flux<ServerSentEvent<Object>> chat(@Valid @RequestBody ChatRequest request) {
         return chatService.ask(request);
     }
 }

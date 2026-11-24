@@ -22,8 +22,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasKey;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -71,6 +70,29 @@ class ChatControllerTest {
                         + "data:Hyrule\n\n"
                         // The token's leading space is kept and a line break becomes a second data line of the same event.
                         + "data: cayó\ndata:- en ruinas\n\n");
+    }
+
+    @Test
+    void passesTheFiltersInTheBodyToTheService() throws Exception {
+        when(chatService.ask(any(ChatRequest.class))).thenReturn(Flux.empty());
+
+        mockMvc.perform(post(URL).with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"question\": \"¿Quién es Ciri?\", \"universe\": \"The Witcher\", \"canonOnly\": true}"))
+                .andExpect(request().asyncStarted());
+
+        verify(chatService).ask(new ChatRequest("¿Quién es Ciri?", "The Witcher", true));
+    }
+
+    @Test
+    void rejectsAUniverseLongerThan100Characters() throws Exception {
+        mockMvc.perform(post(URL).with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"question\": \"¿?\", \"universe\": \"" + "a".repeat(101) + "\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.validationErrors", hasKey("universe")));
+
+        verifyNoInteractions(chatService);
     }
 
     @Test

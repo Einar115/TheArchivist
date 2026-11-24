@@ -23,6 +23,7 @@ import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
 import org.springframework.http.codec.ServerSentEvent;
 import reactor.core.publisher.Flux;
 
@@ -143,8 +144,36 @@ class ChatServiceImplTest {
                 .doesNotContain("<context>");
     }
 
+    @Test
+    void passesTheChosenFiltersToTheSearch() {
+        when(vectorStore.similaritySearch(any(SearchRequest.class))).thenReturn(List.of());
+        streamAnswer("ok");
+
+        ask(new ChatRequest("¿Quién es Ciri?", "The Witcher", true));
+
+        verify(vectorStore).similaritySearch(searchCaptor.capture());
+        var b = new FilterExpressionBuilder();
+        assertThat(searchCaptor.getValue().getFilterExpression())
+                .isEqualTo(b.and(b.eq("universe", "The Witcher"), b.eq("canonicity", "CANON")).build());
+    }
+
+    @Test
+    void searchesTheWholeArchiveWithoutFilters() {
+        when(vectorStore.similaritySearch(any(SearchRequest.class))).thenReturn(List.of());
+        streamAnswer("ok");
+
+        ask("¿Quién es Ciri?");
+
+        verify(vectorStore).similaritySearch(searchCaptor.capture());
+        assertThat(searchCaptor.getValue().getFilterExpression()).isNull();
+    }
+
     private List<ServerSentEvent<Object>> ask(String question) {
-        return chatService.ask(new ChatRequest(question)).collectList().block(Duration.ofSeconds(5));
+        return ask(new ChatRequest(question, null, false));
+    }
+
+    private List<ServerSentEvent<Object>> ask(ChatRequest request) {
+        return chatService.ask(request).collectList().block(Duration.ofSeconds(5));
     }
 
     private List<Message> sentMessages() {

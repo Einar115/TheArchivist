@@ -1,6 +1,7 @@
 package com.einar115.thearchivist.service.impl;
 
 import com.einar115.thearchivist.dto.request.ChatRequest;
+import com.einar115.thearchivist.rag.ChatFilters;
 import com.einar115.thearchivist.rag.ChatPrompts;
 import com.einar115.thearchivist.rag.RetrievedContext;
 import com.einar115.thearchivist.service.ChatService;
@@ -9,6 +10,8 @@ import org.springframework.ai.chat.client.ChatClientResponse;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
+import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
+import org.springframework.ai.vectorstore.filter.Filter;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -22,6 +25,7 @@ public class ChatServiceImpl implements ChatService {
     private final ChatClient chatClient;
     private final RetrievalAugmentationAdvisor ragAdvisor;
 
+
     public ChatServiceImpl(ChatClient chatClient, RetrievalAugmentationAdvisor ragAdvisor) {
         this.chatClient = chatClient;
         this.ragAdvisor = ragAdvisor;
@@ -29,10 +33,14 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public Flux<ServerSentEvent<Object>> ask(ChatRequest request) {
+        Filter.Expression filter = ChatFilters.from(request);
         return chatClient.prompt()
                 .system(ChatPrompts.system())
                 .user(request.question())
-                .advisors(ragAdvisor)
+                .advisors(a -> {
+                    a.advisors(ragAdvisor);
+                    if (filter != null) a.param(VectorStoreDocumentRetriever.FILTER_EXPRESSION, filter);
+                })
                 .stream()
                 .chatClientResponse()   // not content(): we need the context, not only the text
                 .index()

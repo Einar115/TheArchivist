@@ -7,7 +7,7 @@ import { HealthService } from '../core/services/health-service';
 import { AuthService } from '../core/services/auth-service';
 import { ConversationService } from '../core/services/conversation-service';
 import { AuthResponse } from '../core/models/auth.model';
-import { Conversation } from '../core/models/chat.model';
+import { Conversation, NO_FILTERS } from '../core/models/chat.model';
 
 describe('Shell', () => {
   const isHealthy = signal(true);
@@ -21,7 +21,7 @@ describe('Shell', () => {
   beforeEach(async () => {
     isHealthy.set(true);
     user.set({ username: 'admin', roles: ['ADMIN_DOCUMENTS'] });
-    conversations.set([{ id: 'c1', title: 'La caída del reino de Hyrule', updatedAt: Date.now(), messages: [] }]);
+    conversations.set([{ id: 'c1', title: 'La caída del reino de Hyrule', updatedAt: Date.now(), messages: [], filters: NO_FILTERS }]);
 
     await TestBed.configureTestingModule({
       imports: [Shell],

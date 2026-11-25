@@ -162,6 +162,74 @@
   background-color: var(--bs-emphasis-color);
 }
 
+/* Composer filters: a native select and a Bootstrap switch dressed as chips. */
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  color: var(--bs-secondary-color);
+  background-color: var(--bs-body-bg);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-chip.is-active {
+  border-color: var(--bs-primary-border-subtle);
+  color: var(--bs-primary-text-emphasis);
+  background-color: var(--bs-primary-bg-subtle);
+}
+
+/* The keyboard focus ring goes on the whole chip, not on the bare control inside it. */
+.filter-chip:has(:focus-visible) {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 1px;
+}
+
+.filter-select {
+  min-width: 0;
+  max-width: 11rem;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: inherit;
+  background: none;
+  font: inherit;
+  text-overflow: ellipsis;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* The open list is drawn by the browser; data-bs-theme="dark" already gives it a dark color scheme. */
+.filter-select option {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+}
+
+.filter-chevron {
+  color: var(--bs-tertiary-color);
+}
+
+.is-active .filter-chevron {
+  color: inherit;
+}
+
+.canon-filter .form-check-input {
+  cursor: pointer;
+}
+
+/* Phones: the filters share one row with the send button, so long universe names are cut short. */
+@media (max-width: 575.98px) {
+  .filter-select {
+    max-width: 7.5rem;
+  }
+}
+
 .disclaimer {
   margin: 0;
   color: var(--bs-tertiary-color);

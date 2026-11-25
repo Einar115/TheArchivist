@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChatService } from './chat-service';
-import { ChatMessage, ChatMessageStatus, Conversation } from '../models/chat.model';
+import { ChatFilters, ChatMessage, ChatMessageStatus, Conversation, NO_FILTERS } from '../models/chat.model';
 
 const TITLE_LENGTH = 48;
 
@@ -26,10 +26,10 @@ export class ConversationService {
   }
 
   /** Opens a conversation titled after its first question and returns its id. */
-  start(question: string): string {
+  start(question: string, filters: ChatFilters = NO_FILTERS): string {
     const id = newId();
     const title = question.length > TITLE_LENGTH ? `${question.slice(0, TITLE_LENGTH - 1).trimEnd()}…` : question;
-    this.store.update(conversations => [{ id, title, updatedAt: Date.now(), messages: [] }, ...conversations]);
+    this.store.update(conversations => [{ id, title, updatedAt: Date.now(), messages: [], filters }, ...conversations]);
     this.send(id, question);
     return id;
   }
@@ -48,6 +48,12 @@ export class ConversationService {
     this.streams.get(id)?.unsubscribe();
     this.streams.delete(id);
     this.patchLast(id, last => (last.status === 'streaming' ? { ...last, status: 'stopped' } : last));
+  }
+
+  setFilters(id: string, filters: ChatFilters): void {
+    // Not through update(): changing filters is not activity, so the conversation keeps its place in the list.
+    this.store.update(conversations =>
+      conversations.map(conversation => (conversation.id === id ? { ...conversation, filters } : conversation)));
   }
 
   /** Asks the last question again, replacing the answer it got. */
@@ -69,7 +75,8 @@ export class ConversationService {
   }
 
   private stream(id: string, question: string): void {
-    const subscription = this.chat.ask(question).subscribe({
+    const filters = this.find(id)?.filters ?? NO_FILTERS;
+    const subscription = this.chat.ask(question, filters).subscribe({
       next: event =>
         this.patchLast(id, last =>
           event.type === 'sources' ? { ...last, sources: event.sources } : { ...last, content: last.content + event.text }

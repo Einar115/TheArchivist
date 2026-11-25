@@ -4,6 +4,7 @@ import com.einar115.thearchivist.config.SecurityConfig;
 import com.einar115.thearchivist.dto.request.ChatRequest;
 import com.einar115.thearchivist.dto.response.ChatSourceResponse;
 import com.einar115.thearchivist.service.ChatService;
+import com.einar115.thearchivist.service.DocumentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -20,13 +21,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasKey;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,6 +45,9 @@ class ChatControllerTest {
 
     @MockitoBean
     private UserDetailsService userDetailsService;
+
+    @MockitoBean
+    private DocumentService documentService;
 
     @Test
     void streamsTheSourcesEventFollowedByTheTokensAsTheFrontendParsesThem() throws Exception {
@@ -74,6 +77,29 @@ class ChatControllerTest {
     }
 
     @Test
+    void passesTheFiltersInTheBodyToTheService() throws Exception {
+        when(chatService.ask(any(ChatRequest.class))).thenReturn(Flux.empty());
+
+        mockMvc.perform(post(URL).with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"question\": \"¿Quién es Ciri?\", \"universe\": \"The Witcher\", \"canonOnly\": true}"))
+                .andExpect(request().asyncStarted());
+
+        verify(chatService).ask(new ChatRequest("¿Quién es Ciri?", "The Witcher", true));
+    }
+
+    @Test
+    void rejectsAUniverseLongerThan100Characters() throws Exception {
+        mockMvc.perform(post(URL).with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"question\": \"¿?\", \"universe\": \"" + "a".repeat(101) + "\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.validationErrors", hasKey("universe")));
+
+        verifyNoInteractions(chatService);
+    }
+
+    @Test
     void rejectsABlankQuestion() throws Exception {
         mockMvc.perform(post(URL).with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -92,5 +118,14 @@ class ChatControllerTest {
                 .andExpect(status().isBadRequest());
 
         verifyNoInteractions(chatService);
+    }
+
+    @Test
+    void listsTheApprovedUniversesWithoutLoggingIn() throws Exception {
+        when(documentService.findApprovedUniverses()).thenReturn(List.of("Sabotage Studio Universe", "The Witcher"));
+
+        mockMvc.perform(get(URL + "/universes"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", contains("Sabotage Studio Universe", "The Witcher")));
     }
 }

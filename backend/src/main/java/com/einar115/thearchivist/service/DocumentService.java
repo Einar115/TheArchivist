@@ -14,6 +14,7 @@ public interface DocumentService {
     SubmitResponse submit(MultipartFile file, DocumentMetadataRequest metadata, Integer userId) throws IOException;
     List<DocumentSummaryResponse> list(Integer userId, boolean includeAll);
     DocumentContentResponse getContent(UUID id);
+    List<String> findApprovedUniverses();
     void approve(UUID id, Integer reviewerId);
     void reject(UUID id, String reason, Integer reviewerId);
     void delete(UUID id);

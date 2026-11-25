@@ -29,4 +29,7 @@ public interface DocumentRepository extends JpaRepository<DocumentEntity, UUID> 
     @Query("select new com.einar115.thearchivist.dto.response.DocumentContentResponse(d.id, d.content) "
             + "from DocumentEntity d where d.id = :id")
     Optional<DocumentContentResponse> findContentById(@Param("id") UUID id);
+
+    @Query("select distinct d.universe from DocumentEntity d where d.status = 'APPROVED' order by d.universe")
+    List<String> findApprovedUniverses();
 }

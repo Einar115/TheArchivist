@@ -150,6 +150,11 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
+    public List<String> findApprovedUniverses() {
+        return documentRepository.findApprovedUniverses();
+    }
+
+    @Override
     public void approve(UUID id, Integer reviewerId) {
         DocumentEntity document = documentRepository
                 .findById(id)

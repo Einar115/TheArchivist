@@ -1,9 +1,10 @@
 import { Component, ElementRef, afterNextRender, afterRenderEffect, computed, inject, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
+import { ChatService } from '../../core/services/chat-service';
 import { ConversationService } from '../../core/services/conversation-service';
-import { ChatMessage, ChatSource } from '../../core/models/chat.model';
+import { ChatFilters, ChatMessage, ChatSource, NO_FILTERS } from '../../core/models/chat.model';
 import { Canonicity } from '../../core/models/documents.model';
 import { renderMarkdown } from '../../core/utils/markdown';
 
@@ -31,6 +32,26 @@ export class Chat {
 
   readonly draft = signal('');
   readonly copiedId = signal<string | null>(null);
+
+  // The universes the selector offers. If they cannot be loaded, only "Todos los universos" is left: the chat still
+  // works, it just searches the whole archive.
+  private readonly universes = toSignal(inject(ChatService).universes().pipe(catchError(() => of<string[]>([]))), {
+    initialValue: [],
+  });
+
+  // Filters chosen before the first question, while there is no conversation yet to keep them.
+  private readonly draftFilters = signal<ChatFilters>(NO_FILTERS);
+
+  // What the composer shows and the next question uses: the open conversation's filters, or the draft ones.
+  readonly filters = computed(() => this.conversation()?.filters ?? this.draftFilters());
+
+  // A conversation may keep a universe that is no longer listed (its documents were removed); it stays selectable so
+  // the selector does not pretend the conversation searches everywhere.
+  readonly universeOptions = computed(() => {
+    const selected = this.filters().universe;
+    const listed = this.universes();
+    return selected && !listed.includes(selected) ? [selected, ...listed] : listed;
+  });
 
   // CANON is the norm, so only the other values get a tag next to the source.
   readonly canonicityTag: Partial<Record<Canonicity, string>> = {
@@ -70,7 +91,7 @@ export class Chat {
     if (current) {
       this.conversations.send(current.id, question);
     } else {
-      const id = this.conversations.start(question);
+      const id = this.conversations.start(question, this.filters());
       this.router.navigate(['/chat', id]);
     }
   }
@@ -78,6 +99,16 @@ export class Chat {
   stop(): void {
     const current = this.conversation();
     if (current) this.conversations.stop(current.id);
+  }
+
+  setUniverse(event: Event): void {
+    // The "Todos los universos" option has an empty value.
+    const universe = (event.target as HTMLSelectElement).value || null;
+    this.setFilters({ ...this.filters(), universe });
+  }
+
+  setCanonOnly(event: Event): void {
+    this.setFilters({ ...this.filters(), canonOnly: (event.target as HTMLInputElement).checked });
   }
 
   sourceSetting(source: ChatSource): string {
@@ -129,6 +160,15 @@ export class Chat {
     const element = this.thread()?.nativeElement;
     if (element) {
       this.followAnswer = element.scrollHeight - element.scrollTop - element.clientHeight < STICKY_SCROLL_THRESHOLD;
+    }
+  }
+
+  private setFilters(filters: ChatFilters): void {
+    const current = this.conversation();
+    if (current) {
+      this.conversations.setFilters(current.id, filters);
+    } else {
+      this.draftFilters.set(filters);
     }
   }
 

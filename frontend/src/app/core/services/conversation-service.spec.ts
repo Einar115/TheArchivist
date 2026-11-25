@@ -2,26 +2,30 @@ import { TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { ConversationService } from './conversation-service';
 import { ChatService } from './chat-service';
-import { ChatStreamEvent } from '../models/chat.model';
+import { ChatFilters, ChatStreamEvent, NO_FILTERS } from '../models/chat.model';
 
 const token = (text: string): ChatStreamEvent => ({ type: 'token', text });
+const ZELDA_CANON: ChatFilters = { universe: 'The Legend of Zelda', canonOnly: true };
 
 describe('ConversationService', () => {
   let answers: Subject<ChatStreamEvent>;
   let asked: string[];
+  let askedFilters: ChatFilters[];
   let service: ConversationService;
 
   const last = (id: string) => service.find(id)!.messages.at(-1)!;
 
   beforeEach(() => {
     asked = [];
+    askedFilters = [];
     TestBed.configureTestingModule({
       providers: [
         {
           provide: ChatService,
           useValue: {
-            ask: (question: string) => {
+            ask: (question: string, filters: ChatFilters) => {
               asked.push(question);
+              askedFilters.push(filters);
               answers = new Subject<ChatStreamEvent>();
               return answers;
             },
@@ -87,6 +91,62 @@ describe('ConversationService', () => {
     service.regenerate(id);
 
     expect(last(id).sources).toEqual([]);
+  });
+
+  it('keeps the filters a conversation started with and asks with them', () => {
+    const id = service.start('¿Quién es Link?', ZELDA_CANON);
+
+    expect(service.find(id)!.filters).toEqual(ZELDA_CANON);
+    expect(askedFilters).toEqual([ZELDA_CANON]);
+  });
+
+  it('searches the whole archive when a conversation starts without filters', () => {
+    const id = service.start('¿Quién es Link?');
+
+    expect(service.find(id)!.filters).toEqual(NO_FILTERS);
+    expect(askedFilters).toEqual([NO_FILTERS]);
+  });
+
+  it('asks follow-up questions with the filters of their conversation', () => {
+    const id = service.start('¿Quién es Link?', ZELDA_CANON);
+    answers.complete();
+
+    service.send(id, '¿Y Zelda?');
+
+    expect(askedFilters).toEqual([ZELDA_CANON, ZELDA_CANON]);
+  });
+
+  it('uses changed filters for the next question and for regenerating', () => {
+    const id = service.start('¿Quién es Link?');
+    answers.complete();
+
+    service.setFilters(id, ZELDA_CANON);
+    service.send(id, '¿Y Zelda?');
+    answers.complete();
+    service.regenerate(id);
+
+    expect(askedFilters).toEqual([NO_FILTERS, ZELDA_CANON, ZELDA_CANON]);
+  });
+
+  it('does not move a conversation up the list when only its filters change', () => {
+    // Fake clock: every conversation gets a different updatedAt, so a change to it would show.
+    vi.useFakeTimers();
+    try {
+      vi.setSystemTime(1_000);
+      const older = service.start('Primera');
+      answers.complete();
+      vi.setSystemTime(2_000);
+      const newer = service.start('Segunda');
+      answers.complete();
+
+      vi.setSystemTime(3_000);
+      service.setFilters(older, ZELDA_CANON);
+
+      expect(service.find(older)!.updatedAt).toBe(1_000);
+      expect(service.conversations().map(conversation => conversation.id)).toEqual([newer, older]);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('forgets every conversation on clear', () => {

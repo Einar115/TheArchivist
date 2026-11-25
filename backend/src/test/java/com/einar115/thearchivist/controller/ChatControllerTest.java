@@ -70,10 +70,11 @@ class ChatControllerTest {
 
         assertThat(body).isEqualTo(
                 "event:sources\n"
-                        + "data:[{\"number\":1,\"documentId\":\"doc-a\",\"title\":\"Crónicas de Hyrule\",\"universe\":\"The Legend of Zelda\",\"work\":null,\"canonicity\":\"CANON\"}]\n\n"
-                        + "data:Hyrule\n\n"
-                        // The token's leading space is kept and a line break becomes a second data line of the same event.
-                        + "data: cayó\ndata:- en ruinas\n\n");
+                        + "data: [{\"number\":1,\"documentId\":\"doc-a\",\"title\":\"Crónicas de Hyrule\",\"universe\":\"The Legend of Zelda\",\"work\":null,\"canonicity\":\"CANON\"}]\n\n"
+                        + "data: Hyrule\n\n"
+                        // Spring 7.1 puts one space after "data:", then the token's own leading space follows; a line
+                        // break becomes a second data line of the same event. The frontend parser drops only the first.
+                        + "data:  cayó\ndata: - en ruinas\n\n");
     }
 
     @Test

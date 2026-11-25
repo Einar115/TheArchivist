@@ -53,9 +53,9 @@ describe('ChatService', () => {
 
   it('emits the sources event parsed from JSON, then the tokens', async () => {
     respondWith(
-      'event:sources\ndata:[{"number":1,"documentId":"doc-a","title":"Crónicas de Hyrule",',
+      'event: sources\ndata: [{"number":1,"documentId":"doc-a","title":"Crónicas de Hyrule",',
       '"universe":"The Legend of Zelda","work":null,"canonicity":"CANON"}]\n\n',
-      'data:Hyrule\n\ndata: cayó\n\n'
+      'data: Hyrule\n\ndata:  cayó\n\n'
     );
 
     expect(await collect()).toEqual([
@@ -75,7 +75,7 @@ describe('ChatService', () => {
   });
 
   it('sends the chosen filters next to the question', async () => {
-    respondWith('data:ok\n\n');
+    respondWith('data: ok\n\n');
 
     await collect({ universe: 'The Legend of Zelda', canonOnly: true });
 
@@ -83,7 +83,7 @@ describe('ChatService', () => {
   });
 
   it('searches the whole archive when no filters are given', async () => {
-    respondWith('data:ok\n\n');
+    respondWith('data: ok\n\n');
 
     await collect();
 

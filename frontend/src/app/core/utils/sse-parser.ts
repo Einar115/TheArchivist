@@ -7,11 +7,12 @@ export interface SseEvent {
 /**
  * Incremental parser for the text/event-stream the chat endpoint writes.
  *
- * Spring writes each token as `data:<token>` with nothing in between, and LLM tokens usually carry their own leading
- * space (" Hyrule"). So unlike a strict EventSource, the text after `data:` is kept verbatim: trimming it, or dropping
- * the one optional space the SSE spec allows, glues the words together. A token that contains line breaks arrives as
- * several `data:` lines of the same event, which are joined back with '\n'. Named events (`event:sources`) carry their
- * name; the value after `event:` is trimmed, since it is an identifier rather than text.
+ * Spring (since Framework 7.1) writes each token as `data: <token>`, with the single space the SSE spec puts between a
+ * field and its value. LLM tokens usually carry their own leading space too (" Hyrule" arrives as `data:  Hyrule`), so
+ * exactly that one separator space is dropped, as EventSource does, and everything after it is kept: trimming would
+ * glue the words together. A token that contains line breaks arrives as several `data:` lines of the same event, which
+ * are joined back with '\n'. Named events (`event: sources`) carry their name; the value after `event:` is trimmed,
+ * since it is an identifier rather than text.
  */
 export class SseParser {
   private buffer = '';
@@ -30,7 +31,7 @@ export class SseParser {
       if (line === '') {
         this.dispatch(events);
       } else if (line.startsWith('data:')) {
-        this.data.push(line.slice('data:'.length));
+        this.data.push(fieldValue(line, 'data:'));
       } else if (line.startsWith('event:')) {
         this.event = line.slice('event:'.length).trim();
       }
@@ -51,4 +52,10 @@ export class SseParser {
     this.data = [];
     this.event = '';
   }
+}
+
+/** The value of a field line: what follows the colon, minus the one space the SSE spec allows as a separator. */
+function fieldValue(line: string, field: string): string {
+  const value = line.slice(field.length);
+  return value.startsWith(' ') ? value.slice(1) : value;
 }

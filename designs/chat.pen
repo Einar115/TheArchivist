@@ -1,5 +1,5 @@
 {
-  "version": "2.17",
+  "version": "2.25",
   "children": [
     {
       "type": "frame",
@@ -632,8 +632,7 @@
           "x": 0,
           "y": 8
         },
-        "blur": 24,
-        "spread": -6
+        "blur": 24
       },
       "layout": "vertical",
       "gap": 12,
@@ -667,30 +666,107 @@
           "children": [
             {
               "type": "frame",
-              "id": "eU9dV",
-              "name": "Hint",
-              "gap": 6,
+              "id": "ctSFQ",
+              "name": "Filters",
+              "gap": 8,
               "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "k1XF4K",
-                  "name": "Hint Icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "library",
-                  "library": "lucide",
-                  "fill": "$bs-muted"
+                  "type": "frame",
+                  "id": "RcVcI",
+                  "name": "Universe Filter",
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": 8,
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 6,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "jkymd",
+                      "name": "Universe Icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "library",
+                      "library": "lucide",
+                      "fill": "$bs-secondary-color"
+                    },
+                    {
+                      "type": "text",
+                      "id": "u2kfk",
+                      "name": "Universe Label",
+                      "fill": "$bs-secondary-color",
+                      "content": "Todos los universos",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "u5osb",
+                      "name": "Universe Chevron",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$bs-muted"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "oOixB",
-                  "name": "Hint Text",
-                  "fill": "$bs-muted",
-                  "content": "Responde con los documentos aprobados",
-                  "fontFamily": "$font-body",
-                  "fontSize": 12,
-                  "fontWeight": "normal"
+                  "type": "frame",
+                  "id": "qm8MZ",
+                  "name": "Canon Filter",
+                  "fill": "$bs-input-bg",
+                  "cornerRadius": 8,
+                  "stroke": "$bs-border",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "K7pLZD",
+                      "name": "Canon Switch",
+                      "width": 26,
+                      "height": 16,
+                      "fill": "$bs-addon-bg",
+                      "cornerRadius": 8,
+                      "stroke": "$bs-border",
+                      "strokeWidth": 1,
+                      "padding": 2,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "xdAHd",
+                          "name": "Canon Knob",
+                          "fill": "$bs-secondary-color",
+                          "width": 10,
+                          "height": 10
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "wkn1x",
+                      "name": "Canon Label",
+                      "fill": "$bs-secondary-color",
+                      "content": "Solo canon",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
                 }
               ]
             },
@@ -1781,6 +1857,35 @@
                   "name": "Composer",
                   "width": 760,
                   "descendants": {
+                    "RcVcI": {
+                      "fill": "$bs-primary-subtle",
+                      "stroke": "$bs-primary-border"
+                    },
+                    "jkymd": {
+                      "fill": "$bs-link"
+                    },
+                    "u2kfk": {
+                      "content": "Sabotage Studio Universe",
+                      "fill": "$bs-link"
+                    },
+                    "u5osb": {
+                      "fill": "$bs-link"
+                    },
+                    "qm8MZ": {
+                      "fill": "$bs-primary-subtle",
+                      "stroke": "$bs-primary-border"
+                    },
+                    "K7pLZD": {
+                      "fill": "$bs-primary",
+                      "stroke": "$bs-primary",
+                      "justifyContent": "end"
+                    },
+                    "xdAHd": {
+                      "fill": "$bs-white"
+                    },
+                    "wkn1x": {
+                      "fill": "$bs-link"
+                    },
                     "yA95v": {
                       "fill": "$bs-white"
                     },
@@ -2373,8 +2478,35 @@
               "name": "Composer",
               "width": "fill_container",
               "descendants": {
-                "eU9dV": {
+                "RcVcI": {
+                  "fill": "$bs-primary-subtle",
+                  "stroke": "$bs-primary-border"
+                },
+                "jkymd": {
+                  "fill": "$bs-link",
                   "enabled": false
+                },
+                "u2kfk": {
+                  "content": "Sabotage Studio…",
+                  "fill": "$bs-link"
+                },
+                "u5osb": {
+                  "fill": "$bs-link"
+                },
+                "qm8MZ": {
+                  "fill": "$bs-primary-subtle",
+                  "stroke": "$bs-primary-border"
+                },
+                "K7pLZD": {
+                  "fill": "$bs-primary",
+                  "stroke": "$bs-primary",
+                  "justifyContent": "end"
+                },
+                "xdAHd": {
+                  "fill": "$bs-white"
+                },
+                "wkn1x": {
+                  "fill": "$bs-link"
                 },
                 "yA95v": {
                   "fill": "$bs-white"

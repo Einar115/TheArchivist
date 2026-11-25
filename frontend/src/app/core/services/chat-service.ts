@@ -1,22 +1,28 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ChatRequest, ChatSource, ChatStreamEvent } from '../models/chat.model';
+import { ChatFilters, ChatRequest, ChatSource, ChatStreamEvent, NO_FILTERS } from '../models/chat.model';
 import { environment } from '../../../environments/environment';
 import { readCookie } from '../utils/cookie';
 import { SseEvent, SseParser } from '../utils/sse-parser';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
   private readonly apiUrl = `${environment.BACKEND_URL}/api/v1/chat`;
+  private readonly http = inject(HttpClient);
+
+  universes(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/universes`);
+  }
 
   /**
    * Streams the sources the answer is built from, then the answer token by token. Unsubscribing aborts the request,
    * which is how the UI stops an answer.
    */
-  ask(question: string): Observable<ChatStreamEvent> {
+  ask(question: string, filters: ChatFilters = NO_FILTERS): Observable<ChatStreamEvent> {
     return new Observable<ChatStreamEvent>(subscriber => {
       const controller = new AbortController();
-      const request: ChatRequest = { question };
+      const request: ChatRequest = { question, ...filters };
 
       // Angular's XSRF interceptor does not apply to fetch, so the token goes in by hand.
       const csrfToken = readCookie('XSRF-TOKEN');

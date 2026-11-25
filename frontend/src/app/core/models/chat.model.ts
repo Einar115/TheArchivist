@@ -1,6 +1,14 @@
 import { Canonicity } from './documents.model';
 
-export interface ChatRequest {
+// What the chat searches in. Kept per conversation, so its follow-up questions search the same documents.
+export interface ChatFilters {
+    universe: string | null;
+    canonOnly: boolean;
+}
+
+export const NO_FILTERS: ChatFilters = { universe: null, canonOnly: false };
+
+export interface ChatRequest extends Partial<ChatFilters> {
     question: string;
 }
 
@@ -33,4 +41,5 @@ export interface Conversation {
     title: string;
     updatedAt: number;
     messages: ChatMessage[];
+    filters: ChatFilters;
 }

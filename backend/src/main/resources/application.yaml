@@ -20,3 +20,8 @@ spring:
       qdrant:
         collection-name: archivist-lore
         initialize-schema: false
+
+    model:
+      # Spring AI 2.1 added decision models, auto-configured unless told otherwise. The app does not use them,
+      # and the OpenAI one would demand an API key even in dev.
+      decision: none

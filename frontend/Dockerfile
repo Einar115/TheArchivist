@@ -16,7 +16,7 @@ COPY src ./src
 RUN pnpm run build --configuration production
 
 ###### Run stage #######
-FROM nginx:1.29-alpine
+FROM nginx:1.30-alpine
 WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*

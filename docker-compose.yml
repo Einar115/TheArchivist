@@ -1,6 +1,7 @@
 services:
   postgres:
-    image: postgres:latest
+    # 19 is out, but a major upgrade changes the data directory format: the volume needs pg_upgrade or a dump first.
+    image: postgres:18.7
     container_name: postgres
     ports:
       - "5432:5432"
@@ -17,7 +18,7 @@ services:
       retries: 5
 
   qdrant:
-    image: qdrant/qdrant:latest
+    image: qdrant/qdrant:v1.20.2
     container_name: qdrant
     ports:
       - "6333:6333"
@@ -29,7 +30,7 @@ services:
       - QDRANT__SERVICE__GRPC_PORT=6334
 
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.40.18
     container_name: ollama
     devices:
       - nvidia.com/gpu=all
@@ -46,7 +47,8 @@ services:
   # Download the models and finish up. The backend queries /api/embed upon startup.
   # to deduce the dimensions of the vector, so they must exist beforehand.
   ollama-init:
-    image: ollama/ollama:latest
+    # Same version as the ollama service, so the client matches the server it pulls through.
+    image: ollama/ollama:0.40.18
     container_name: ollama-init
     depends_on:
       ollama:
